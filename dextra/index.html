@@ -3,34 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D-STAR Hot-Point - JI1BQW CyberHAM</title>
+<title>DEXTRA - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../index.html">&#8592; トップページへ</a></p>
-<h1>D-STAR Hot-Point</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>rtpDirの作者であるKI4LKFは，最近D-Star向けのHot-Pointというソフトウェアをリリースしました。このソフトウェアは，DVDongleとアナログ無線機を使ってD-Starネットワークにアクセスする方法を提供します。DVDongleで一般的に使うDVToolではPCのマイクとスピーカを使って交信しますが，Hot Pointはこのマイクとスピーカを無線にしているイメージです（<a href="http://darnsimple.net/wp/2009/05/digital-hot-point/">概念図</a>）。IRLPノードやEchoLinkリンク局と同じ考え方ですね。Hot-PointがDVDongleを使ってAMBE変換をします。無線機のコントロールは，EchoLinkでごく一般的なシリアルポート制御のインターフェース経由でOKです。DVToolの代替として（無線機なしの）PCのマイクとスピーカでの運用も可能です。</p><blockquote><p><span style="font-size: 0.8em;">*)ベース無線機，アクセス用無線共にD-Star無線機を使えばDVモードでもそのまま行けるとのことです。すなわちこの場合には，End-to-endでAMBEになります。</span></p>
-<p><span style="font-size: 0.8em;">**) <a href="http://w9arp.com/hotspot/">Hot Spot</a>とは異なるものです。<br/></span></p></blockquote><p>Hot-Pointのソフトウェアは，Linux向けとWindows向けの両方が用意されています。</p>
-<p>rtpDirを使えば，以前からアナログ無線機からD-Starネットワークにアクセスすることは可能です。しかし一つrtpDirではできないHot Pointユニークな機能は，テキストメッセージのやりとりができることです。D-Ratsなどと文字メッセージの交換ができるようです。送られてくるテキストを見ているとDPRSの位置情報なども流れてきます。</p>
-<p>KI4LKFはこれからもHot Pointを進化させると言っているので楽しみです。</p>
-<p>Hot-PointはゲートウェイにDplusあるいはDextraのどちらかが動いている必要がありますので，残念ながら日本ではなく海外のゲートウェイに接続しなければなりません。</p>
-<p>またHot-Pointを動作させるための準備として，構成ファイルをエディタで修正したり，バックグラウンドで dplus_client.sh あるいは dextra_client.sh といったソフトウェアを動かした後GUIである dstar_hot_point を動かしたり，ゲートウェイやリフレクタのリストを自分で作成しなければならないなど，まだ若干手間がかかったり不親切な部分があります。最初の敷居としてはDVToolより高く感じますが，ソフトウェアとしての安定性はDVToolより高いように思えますし，Javaアプリケーションでない分軽く感じます。</p>
-</div>
-</div>
-
-<footer>
-<p>JI1BQW CyberHAM | <a href="../index.html">トップページ</a></p>
-</footer>
+<p><a href="../index.html">← トップページへ</a></p>
+<h1>DEXTRA</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="../2009/06/d-star-hot_poin.html">D-STAR Hot-Point</a></li>
+</ul>
+<footer><p>JI1BQW CyberHAM | <a href="../index.html">トップページ</a></p></footer>
 </body>
 </html>
