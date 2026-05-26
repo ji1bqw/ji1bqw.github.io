@@ -3,40 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRLPのパラレルポートI/F - JI1BQW CyberHAM</title>
+<title>2008年03月 - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.month-list li { display: inline-block; margin: 0.3em; }
+.month-list a { display: inline-block; padding: 0.2em 0.7em; background: #f0f0f0; border-radius: 3px; text-decoration: none; color: #333; }
+.month-list a:hover { background: #ddd; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../../index.html">&#8592; トップページへ</a></p>
-<h1>IRLPのパラレルポートI/F</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>IRLPボードとノードPCの間は，パラレルポートによって接続されています。このI/Fは公開されていませんが，いくつか実験でわかったことを記します。</p>
-<p>まずIRLPで利用するには，パラレルポートは標準モード（SPP)で構成しなければなりません。その時，IRLPはパラレルポートの以下の信号線を利用しているようです。</p>
-<p><u>PC -&gt; IRLPボード方向</u><br/>Pin-2   PTT    H -&gt; L<br/>Pin-3    PTT     L -&gt; H<br/>Pin-4    AUX1    L -&gt; H<br/>Pin-5    AUX2    L -&gt; H<br/>Pin-6    AUX3    L -&gt; H</p>
-<p><u>IRLPボード -&gt; PC方向</u><br/>Pin-11    COS    H -&gt; L</p>
-<p>あと，これは実験していないのであくまで上記からの推測ですが，IRLPボードによってデコードされたDTMFコード（0～9，#，*，A，B，C）用には，Pin-10/12/13/15 の4つが割り当てられていそうです。（標準パラレルポートでは，Pin-10～13とPin-15の計5本がPCへの入力信号として使われるため。）</p>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="../02/index.html">« 2008年2月</a> |
-
-<a href="../../index.html">トップページ</a>
-| <a href="../04/index.html">2008年4月 »</a>
-</p>
-</div>
-<footer>
-<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
-</footer>
+<p><a href="../../index.html">← トップページへ</a></p>
+<h1>2008年03月の記事</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="irlpif_31cf.html">IRLPのパラレルポートI/F</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="thebridge096.html">thebridge-0.96</a></li>
+</ul>
+<footer><p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p></footer>
 </body>
 </html>

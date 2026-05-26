@@ -3,44 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>rtpDirのコントロール - JI1BQW CyberHAM</title>
+<title>2008年08月 - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.month-list li { display: inline-block; margin: 0.3em; }
+.month-list a { display: inline-block; padding: 0.2em 0.7em; background: #f0f0f0; border-radius: 3px; text-decoration: none; color: #333; }
+.month-list a:hover { background: #ddd; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../../index.html">&#8592; トップページへ</a></p>
-<h1>rtpDirのコントロール</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>現在当局では１PCにIRLP，rtpDir，Asteriskの3つを導入しています。rtpDirそのものはEchoLinkコンファレンスと同様に動作しますので，結局IRLP, EchoLink, Asteriskの3システムが同居していることになります（EchoIRLPではありません）。　そしてｒｔｐDirを中心に，IRLPとAsteriskがｒｔｐDirにIP接続しています。外部との接続制御はすべてｒｔｐDirが担っています。また外部との音声データのやり取りはｒｔｐDir経由で，もしコーデック変換が必要な場合には（例：EchoLink　&lt;-&gt;　IRLP），変換された上でIRLPやAsteriskに転送されます。</p>
-<p>ｒｔｐDirに対するコントロールは，以下のように可能です。</p>
-<ol><li>IRLPのDTMFコマンド：<br/>custom_decodeでDTMFコマンドを解釈して，それをｒｔｐDirのコマンドに変換しｒｔｐDirに伝えます。そのようにIRLPシステムに手を入れています。当局では今までとなるべくコマンド体系を同じにするようcustom_decodeを工夫しています。</li>
-<li>EchoLink　PCクライアントからのテキストコマンド：<br/>EchoLinkクライアントのチャット機能を使ってｒｔｐDirにコマンドを送ることができます。但し、当局では他ユーザーにはこの方法は許可していません。</li>
-<li>Linuxシェルからのコマンド：<br/>Linuxコマンドシェルから直接制御が可能です。</li>
-<li>AsteriskからのDTMFコマンド：<br/>これも可能なはずですが，まだ成功していません。</li></ol>
-<p>私は現在はテキスト版のｒｔｐDir（正確には rtpDir_tm）を使っていますが，GUI版を利用すればXwindowからコントロールが可能です。</p>
-<p>今までのIRLPユーザから見ると，コマンド体系はほぼ同じですが，IRLPシステムからのレスポンス（接続時や，接続失敗時のメッセージ）がなかったりします。ここは今後のバージョンアップに期待します。</p>
-<p>無線機は１PCに2セット（IRLP用とAsterisk用）接続されています。IRLP用無線機は通常どおりノードPCのIRLPボードとサウンドカードに接続されています。Asterisk用無線機はURI経由でノードPCに接続されています。URIはUSBサウンドデバイスですので，ノードPCではIRLP用のサウンドカードも含め，2枚のサウンドデバイスを利用可能にしています。IRLPが使うサウンドカードの方を「デフォルト」のサウンドカードにするようにLinuxを構成する必要があります。</p>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="../07/index.html">« 2008年7月</a> |
-
-<a href="../../index.html">トップページ</a>
-| <a href="../09/index.html">2008年9月 »</a>
-</p>
-</div>
-<footer>
-<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
-</footer>
+<p><a href="../../index.html">← トップページへ</a></p>
+<h1>2008年08月の記事</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="acid.html">ACID</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="rtpdir_16ab.html">rtpDirブリッジ実験成功</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="rtpdir_tm.html">rtpDir_tm</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="rtpdir_c17a.html">rtpDirのコントロール</a></li>
+</ul>
+<footer><p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p></footer>
 </body>
 </html>

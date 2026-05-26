@@ -3,71 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Some notes for installing VarAC on Raspberry Pi - JI1BQW CyberHAM</title>
+<title>2023年01月 - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.month-list li { display: inline-block; margin: 0.3em; }
+.month-list a { display: inline-block; padding: 0.2em 0.7em; background: #f0f0f0; border-radius: 3px; text-decoration: none; color: #333; }
+.month-list a:hover { background: #ddd; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../../index.html">&#8592; トップページへ</a></p>
-<h1>Some notes for installing VarAC on Raspberry Pi</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>Unlike VARA HF Modem, installing and running VarAC on Raspberry Pi is tricky.  Here are some notes I took when I successfully had it run.  From my 10+ different attempts, this is the most reliable way to install VarAC and get it running.</p>
-<p>That being said, it should be taken as nothing more than an experiment.  I must admit I use Linux Mint for daily operations.</p>
-<p><strong><u>Prerequisites</u></strong></p>
-<ul>
-<li>RPi 4B with Raspberry Pi OS 32bit.  <a href="https://github.com/km4ack/pi-build" target="_top">KM4ACK's "build-a-pi"</a><span> </span>is a very good option to consider for a Ham purpose.</li>
+<p><a href="../../index.html">← トップページへ</a></p>
+<h1>2023年01月の記事</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="post-0666d2.html">Some notes for installing VarAC on Raspberry Pi</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="post-e4270d.html">VarAC on Raspberry Pi</a></li>
 </ul>
-<p>Raspberry Pi OS 64bit may work, but I have yet to confirm it.</p>
-<p><strong><u>Run WheezyE's install script with vara_only option</u></strong></p>
-<p><a href="https://github.com/WheezyE/Winelink" rel="noopener noreferrer nofollow ugc" rev="en_rl_none" target="_top"><u>https://github.com/WheezyE/Winelink</u></a></p>
-<p><span>This will install box86, wine, winetricks, VARA HF and FM Modems and winklink-related components.  </span> If you only need VARA but no other winlink-related components, specify the vara_only option when you run the install script.</p>
-<p style="padding-left: 30px;"><em>$ curl -O https://raw.githubusercontent.com/WheezyE/Winelink/main/install_winelink.sh &amp;&amp; bash install_winelink.sh<span> </span><strong>vara_only</strong></em></p>
-<p><strong><u>Replace PDH (Performance Data Helper) in the wine prefix</u></strong></p>
-<p style="padding-left: 30px;"><em>$ cd $HOME/Downloads</em></p>
-<p style="padding-left: 30px;"><em>$ wget http://files.k6eta.com/pdh.dll.zip</em></p>
-<p style="padding-left: 30px;"><em>$ unzip pdh.dll.zip</em></p>
-<p style="padding-left: 30px;"><em>$ rm pdh.dll.zip</em></p>
-<p style="padding-left: 30px;"><em>$ mv pdh.dll $HOME/.wine/drive_c/windows/system32</em></p>
-<p>By now, you should be able to run VARA Modem standalone.</p>
-<p><strong><u>Install wine-mono</u></strong></p>
-<p style="padding-left: 30px;"><em>$ wget -q -P ~/.cache/wine https://dl.winehq.org/wine/wine-mono/7.2.0/wine-mono-7.2.0-x86.msi</em></p>
-<p style="padding-left: 30px;"><em>$ wine msiexec /i ~/.cache/wine/wine-mono-7.2.0-x86.msi</em></p>
-<p>Now winecfg shows something like below.</p>
-<p><img src="https://cdn-bio.qrz.com/w/ji1bqw/_.png?p=a2b3a9f10210e5ceb4bf37278c23f86a"/></p>
-<p><strong><u>Install VarAC</u></strong></p>
-<p>Unzip VarAC.zip under "~/.wine/drive_c/"</p>
-<p>It is highly recommended that VarAC.ini be copied from another working environment or carefully created by hand. This could reduce the likelihood of failures at startup.</p>
-<p>Don't forget to set "LinuxCompatibleMode=ON" in VarAC.ini.</p>
-<p><strong><u>Run VarAC.exe</u></strong></p>
-<p style="padding-left: 30px;"><em>$ wineserver -k</em></p>
-<p style="padding-left: 30px;"><em>$ wine VarAC.exe</em></p>
-<p>You will see tons of errors and warning messages, but let it go.</p>
-<p>After VarAC and VARA Modem are launched, in many cases TCP LED of VARA Modem stays red. Repeat "DISCONNECT MODEM"/"CONNECT MODEM" on VarAC UI until the LED turns green.</p>
-<p>Just in case, let's run "wineserver -k" to kill all wine related processes before launching VarAC.</p>
-<div data-en-clipboard="true" data-pm-slice="1 1 []"><strong><span style="text-decoration: underline;">Turn off Narrator on VarAC Settings</span></strong></div>
-<div>"Setting" -&gt; "Appearance and Sounds" -&gt; Uncheck all options at "Narrator (Text-to-Speech)"</div>
-<div></div>
-<div>This is important.  If you don't disable this, VarAC is most likely to freeze or crash when it narrates (e.g. when received a CQ call).</div>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="../../2013/07/index.html">« 2013年7月</a> |
-
-<a href="../../index.html">トップページ</a>
-</p>
-</div>
-<footer>
-<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
-</footer>
+<footer><p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p></footer>
 </body>
 </html>

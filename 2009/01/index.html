@@ -3,106 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRLPとのクロスリンクを停止しました - JI1BQW CyberHAM</title>
+<title>2009年01月 - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.month-list li { display: inline-block; margin: 0.3em; }
+.month-list a { display: inline-block; padding: 0.2em 0.7em; background: #f0f0f0; border-radius: 3px; text-decoration: none; color: #333; }
+.month-list a:hover { background: #ddd; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../../index.html">&#8592; トップページへ</a></p>
-<h1>IRLPとのクロスリンクを停止しました</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>最近のrtpDirやAsterisk/app_rptの出現により複数VoIPシステムのクロスリンクが可能となってきている状況を鑑み、Dave Cameron (VE7LTD)から改めてIRLPのポリシーについて下記のようなアナウンスがありました。</p>
-<p>当局でもこのポリシーに準拠するため、他VoIPとIRLP間でのクロスリンクができないようrtpDirの設定をいたしました。IRLP（ノード、リフレクター）と他VoIPが当局のrtpDirに接続されている場合、他VoIPからの送信データはIRLP（ノード、リフレクター共に）にリレーされません。（例えば、当局のノードがIRLPに接続されている状態で、他VoIPから送信してくることはポリシー違反になり、そのような状況を避けるためです。）</p>
-<p>IRLPノード(stn8437)としては、通常のIRLPノードのように動作します。</p>
-<p>=====<br/>(Date: Wed, 28 Jan 2009 17:50:12 -0000)</p>
-<p>The Internet Radio Linking Project (IRLP) is a radio to radio linking 
-<br/>network. In order to maintain this, certain guidelines must be <br/>followed 
-to ensure the network stays secure for all IRLP nodes.</p>
-<p>Certain technical 
-advances in software have been created that allow <br/>single radios/repeaters to 
-be connected to more than one voice over <br/>IP (VoIP) system. These systems 
-include Echolink, Asterisk (app_rpt), <br/>rtpDir, D-STAR, and EQSO (and possibly 
-others). Most of these <br/>advances challenge the security of IRLP when used in 
-a manner that is <br/>contrary to the IRLP guidelines.</p>
-<p>The guidelines that 
-must be followed to ensure the security of the <br/>IRLP system are:</p>
-<p>1) 
-All IRLP traffic must originate from a locally received RF signal. <br/>This is 
-the original principle design criteria of the IRLP system. <br/>This is due to 
-third party regulations in some countries where IRLP <br/>is used that require 
-that the originating voice signal must be from <br/>another amateur. It prevents 
-non-amateur operators from transmitting <br/>over amateur frequencies. It also 
-promotes the use of radio in <br/>Amateur Radio, hence our motto "Keeping the 
-Radio in Amateur Radio".</p>
-<p>2) Any crosslink traffic into IRLP must not 
-masquerade behind another <br/>IRLP node. In other words, an IRLP node that 
-allows other VoIP <br/>systems to access it must not allow users from the other 
-VoIP systems <br/>to dial into another IRLP node at the same time.</p>
-<p>3) Any 
-non-IRLP software must not cause problems to any IRLP node, <br/>IRLP reflector, 
-or IRLP server. </p>
-<p>4) Any crosslinks between networks must be voluntarily 
-dialed into by <br/>all IRLP participants. In other words, all IRLP participants 
-in the <br/>crosslink must dial into the crosslink. The participants can not be 
-<br/>remotely called into the crosslink.</p>
-<p>5) IRLP PGP keys are only 
-assigned to users that support IRLP, either <br/>by purchasing IRLP hardware or 
-by making a donation to the project. <br/>Donations need not be financial, but 
-should benefit the network as a <br/>whole, not just a small group of 
-users.</p>
-<p>Scenario Example - If there are a series of nodes that are 
-maintained <br/>as a separate "mini-network" through a reflector or other 
-bridging <br/>system, those nodes can run in any way you want, as long as your 
-<br/>modifications do not affect other nodes in the IRLP system, and the 
-<br/>intentions of the mini-network are known. An example of this is a <br/>system 
-where a published reflector channel supports Echolink, <br/>asterisk, and IRLP. 
-As long as non-participating nodes can not be <br/>remotely and involuntarily 
-dialed into the system, there is no breach <br/>of the 
-guidelines.</p>
-<p>Scenario Example - A large net is being run on an IRLP 
-reflector for <br/>the Space Shuttle launch. An IRLP node (not the conference 
-reflector) <br/>sets up a system, using specialized software, which allows people 
-<br/>from Echolink to dial in and talk on the net. This is an example of a 
-<br/>crosslink, and is a breach of the guidelines.</p>
-<p>IRLP systems 
-authenticate using a public/private key pair. This pair <br/>of keys allows a 
-secure method of determining the identity of a node <br/>you are calling. These 
-keys are registered with the IRLP servers, and <br/>without the keys, there is no 
-communication between two IRLP nodes.</p>
-<p>If a node is setup in a way that 
-intentionally ignores the <br/>guidelines, or if a PGP key is determined to be 
-obtained through <br/>fraudulent means, the PGP key will be removed, which will 
-remove your <br/>IRLP node from the system. This prevents non-compliant systems 
-from <br/>accessing the IRLP system.</p>
-<p>Sidenote - The IRLP system is 
-supported by volunteers. Any problems <br/>that come about because of installing 
-additional software to your <br/>node are difficult for the volunteers to 
-support. Volunteers will <br/>help out where they can, but they can not help out 
-in most cases. <br/>Also, volunteers contribute their time and services with the 
-<br/>expectation that the nodes they are assisting are not closed to the <br/>rest 
-of the network.</p>
-<p>David Cameron<br/>IRLP System Designer<br/>VE7LTD<br/>=====</p>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="../../2008/11/index.html">« 2008年11月</a> |
-
-<a href="../../index.html">トップページ</a>
-| <a href="../02/index.html">2009年2月 »</a>
-</p>
-</div>
-<footer>
-<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
-</footer>
+<p><a href="../../index.html">← トップページへ</a></p>
+<h1>2009年01月の記事</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="linuxecholink-e.html">LinuxでEchoLink</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="irlp-c80a.html">IRLPとのクロスリンクを停止しました</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="d-star-xrf001-1.html">D-STARリフレクター XRF001への接続</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="irlpirlp-e446.html">IRLPボードなしでIRLP</a></li>
+</ul>
+<footer><p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p></footer>
 </body>
 </html>

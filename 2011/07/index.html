@@ -3,58 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRLPネイティブのIDプログラム - JI1BQW CyberHAM</title>
+<title>2011年07月 - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.month-list li { display: inline-block; margin: 0.3em; }
+.month-list a { display: inline-block; padding: 0.2em 0.7em; background: #f0f0f0; border-radius: 3px; text-decoration: none; color: #333; }
+.month-list a:hover { background: #ddd; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../../index.html">&#8592; トップページへ</a></p>
-<h1>IRLPネイティブのIDプログラム</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>2011年6月中旬から，IRLPシステムそのものにIDを送信する（CWや音声等で自ノードコールサインを自動送信する）プログラムが追加されました。IRLPの自動アップデート機能により，世界中の全てのノードに追加されているはずです。</p>
-<p>IDプログラムは何年も前から最も要望の多かったプログラムで，過去にも色々な局がアドオンプログラムを開発してきました。まぁ，やっとIRLPシステムに入ったか，という若干時期はずれの感もありますね。私自身はKK7AV開発の<a href="http://irlp.kk7av.com/component/content/article/1-general-info/62-cwider-for-simplex-irlp-nodes">cwtimer</a>というプログラムが気に入って使っています。</p>
-<p>さて，今回ネィティブで追加されたIDプログラムですが，プログラム自体は</p><blockquote dir="ltr"><p>$SCRIPT/interval_id</p></blockquote><p>です。IDの種類は，自動生成のCWと，自由なwavファイルを選べます。</p>
-<p>使う前に，$CUSTOM/rc.irlpファイルと$CUSTOM/environmentファイルを以下のように編集します。（両ファイルともに，rootで編集する必要があります。）</p>
-<p><u>$CUSTOM/rc.irlp</u></p><blockquote dir="ltr"><p>以下を追加。ファイル中のどこでも良いですが，一番最後が良いでしょう。</p><blockquote dir="ltr"><p>if [ "$USE_INTERVAL_ID" = "YES" ] ; then<br/>echo -n "Starting the Interval ID script... "<br/>killall interval_id &gt;/dev/null 2&gt;&amp;1<br/>sleep 3<br/>/bin/su - -c "$SCRIPT/interval_id" repeater &gt;&amp;/dev/null 2&gt;&amp;1 &amp;<br/>echo "(put in background) done!"<br/>fi</p></blockquote><p dir="ltr">上を追加することで，$CUSTOM/environmentファイルの中で，USE_INTERVAL_ID=YESとすると，ノード起動時にinterval_idプログラムをバックグラウンドで自動実行します。</p></blockquote><p dir="ltr"><u>$CUSTOM/environment</u></p><blockquote dir="ltr"><p dir="ltr">以下を追加。ファイルのどこでも良いですが，<br/>　　#==== you should not have to edit anything below =============<br/>の直前（上）が良いでしょう。</p><blockquote dir="ltr"><p dir="ltr">export USE_INTERVAL_ID=YES<br/>export VOICE_ID_FILE="/home/irlp/custom/voice_id.wav"<br/>export ID_PTT=AUX1<br/>export ID_INTERVAL=600<br/>export ID_MIX=YES<br/>export MORSE_TEXT="VE7LTD"<br/>export MORSE_SPEED=FAST<br/>export MORSE_PITCH=800<br/>export MORSE_VOLUME=30</p></blockquote></blockquote><ul dir="ltr"><li><div>USE_INTERVAL_ID=YESにすると，このIDプログラムを使用します。NOなら使用しません。</div></li>
-<li><div>VOICE_ID_FILEに，実際に存在するwavファイルを指定すると，そのファイルを再生します。ここにファイルが指定されていても，実在しなければCWが自動生成になります。</div></li>
-<li><div>ID_PTTには，PTTオンの為にPTT端子を使うか，AUX1端子を使うかを指定します。お勧めはAUX1端子です。しかしAUX1端子を使う場合には，PTT端子をAUX1端子が電気的にショートされていなければなりません。</div></li>
-<li><div>ID_INTERVALは，ID間隔を秒で指定します。</div></li>
-<li><div>ID_MIX=YESは，ノード無線機が何か送信している時でも，その信号に重ねてIDを送出します。サウンドカードがmixer機能をサポートしていなければなりません。もし，サウンドカードがmixer機能をサポートしていないにもかかわらず，YESにするとID送出時に"/dev/dsp: Device or resource busy"のようなエラーが出ます。その場合にはNOにします。</div></li>
-<li><div>MORSE_TEXTには，CWで送出するコールサインを指定します。ここに指定が無い場合には，環境変数の$CALLSIGNが使われます。</div></li>
-<li><div>MORSE_SPEEDにはCW送出速度を，SLOW (5wpm), MEDIUM(8wpm), FAST(15wpm), FASTEST (30wpm)から指定します。指定が無い場合，指定が無効の場合にはFASTになります。</div></li>
-<li><div>MORSE_PITCHには，CWトーン周波数を300～3000Hzの範囲で指定します。指定無い場合，指定が無効の場合には800が使われます。</div></li>
-<li><div>MORSE_VOLUMEには，CW音量を1～100%の範囲で指定します。指定無い場合，指定が無効の場合には，30が使われます。</div></li></ul>
-<p>ID_PTTについて補足します。お勧めはAUX1ですが，DB9コネクタ内でPTT端子とAUX1端子を電気的にショートする必要があります。隣同士のピンをショートするだけで簡単にできますから，もしAUX1を他の用途に使っていなければお勧めです。このプログラムだけでなく，多くのIDプログラムでもAUX1を使うことが推奨されています。</p>
-<p>それでは，なぜPTT端子ではなくAUX1端子が良いのでしょうか。</p>
-<p>PTT端子とAUX1端子を電気的にショートすることによって，プログラムはPTT端子オン（keyコマンド）だけではなく，AUX1端子をオンにする（aux1onコマンド）ことで無線機をkeyupすることができます。</p>
-<p>PTT端子はIRLPシステムそのものが無線機をkey/unkeyするために使っています。もしIDプログラムも同じPTT端子を使ってID送出したらどうなるでしょうか。</p>
-<p>ノードが他ノードにコネクトされており，自ノードが送信中の場合を考えます。その時IRLPは前述のようにPTT端子を使って無線機を送信状態にしています。そこでIDのタイミングが来てIDが送出されるとします。ID送出のためにPTT端子オンにしても，すでにオンになっています。これは問題ありません。しかし，</p>
-<ol><li>ID送出中に，コネクト先の相手が話すのをやめ受信に移った。（IRLPシステムがPTTオフ）</li>
-<li>コネクト先の相手がまだ話しをしているのに，ID送出が終了した。（IDプログラムがPTTオフ）</li></ol>
-<p>いずれの場合もPTTはオフになり，無線機は送信をやめてしまいます。1.の場合には，IDが途中で終了してしまいますし，2.の場合には相手の話が途中で切られてしまいます。</p>
-<p>つまり，2つのプログラムが一つのPTTを勝手にオン，オフしまうことで不都合が生じてしまうわけです。</p>
-<p>そこでPTT端子はIRLPシステムがコントロール，AUX1端子は他のアドオンプログラムがコントロールするようにすることで Wired ORとなり，両方がオフの時のみ無線機PTTがオフにできます。このようにすることで，上記のような他方によってもう片方が切られてしまうような状況を回避できるわけです。</p>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="../06/index.html">« 2011年6月</a> |
-
-<a href="../../index.html">トップページ</a>
-| <a href="../08/index.html">2011年8月 »</a>
-</p>
-</div>
-<footer>
-<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
-</footer>
+<p><a href="../../index.html">← トップページへ</a></p>
+<h1>2011年07月の記事</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="post-2351.html">ジとヂ，ズとヅ</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="vibroplex-01cc.html">Vibroplexバグキーの調整方法</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="post-c390.html">バイブロのつまみ</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="irlp-8c29.html">IRLPノード構築のお手伝い</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="irlpid-3608.html">IRLPネイティブのIDプログラム</a></li>
+</ul>
+<footer><p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p></footer>
 </body>
 </html>

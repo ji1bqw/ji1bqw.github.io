@@ -3,47 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PiRLPノードのSDカードバックアップ - JI1BQW CyberHAM</title>
+<title>2013年07月 - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.month-list li { display: inline-block; margin: 0.3em; }
+.month-list a { display: inline-block; padding: 0.2em 0.7em; background: #f0f0f0; border-radius: 3px; text-decoration: none; color: #333; }
+.month-list a:hover { background: #ddd; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../../index.html">&#8592; トップページへ</a></p>
-<h1>PiRLPノードのSDカードバックアップ</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>Raspberry Piは，SDカードをHDDの代わりに使用していますので，以前のPCベースのIRLPノードのように backup_for_reinstall をしなくても，SDカードそのもののクローンを作っておけば，それを差し替えるだけで全く同じように動作します。万が一の場合のノード復旧が大幅に簡略化されますので，おすすめです。</p>
-<p>SDカードのクローンは，Windows PCでは Win32 Disk Imager，Linux であれば dd コマンドを使って簡単に作ることができます。（Raspberry Pi以外の別PCで行います。もちろんSDカードスロット付きPCか，無ければUSBアダプターを用意する必要あります。）</p>
-<p>ただし注意点が一点。</p>
-<p>SDカードはたとえ同じメーカー，同じ容量のもので揃えたとしても，個々に微妙な容量の差があるようです。もし，オリジナルのSDカードの容量が，クローン用のSDより微妙に大きい場合，上記ツールだけではうまくクローンを作れません。コピー先容量不足のエラーが出ます。特に，Raspeberry Piインストール後，raspi_configを使ってSDカードの容量をフルに使うような設定をした場合，こうなる可能性が高くなります。</p>
-<p>このような場合には，クローンを一サイズ上のSDカードに作るか（4GBなら8GB，8GBなら16GB)，あるいはオリジナルSDカード上のlinuxファイルシステムとそのパーティションを少し縮小する必要が出てきます。</p>
-<p>後者のlinuxファイルシステムとパーティションの縮小は，<a href="http://gparted.sourceforge.net/index.php">GParted</a>というフリーツールで簡単に行う事ができます。Live CDを利用すれば，このCDからブートしますので，どのPCでも利用可能。しかし，後述の理由から，別PCはLinuxを使った方が良いと思います。</p>
-<p>RaspbianのSDカード上には，FAT16の小さめのブートパーティションと，ext4の大きいlinuxパーティションの2つが作られています。(以下は fdisk の出力。）</p><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="font-size: 0.8em;color: #333333;"><span style="line-height: 19.234375px;">Number  Start      End       Size      Type     File system  Flags</span></span></p></blockquote><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="font-size: 0.8em;color: #333333;"><span style="line-height: 19.234375px;"> 1        4194kB  62.9MB  58.7MB  primary   fat16             lba</span></span></p></blockquote><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="font-size: 0.8em;color: #333333;"><span style="line-height: 19.234375px;"> 2        62.9MB  3806MB 3743MB  primary   ext4</span></span></p></blockquote><div></div>
-<p></p>
-<p>GPartedを使って，ブートパーティションの方は一切触らずに，linuxパーティションだけを少々（例えば200MB位。）減らしてあげます。その際，linuxパーティションの始めのfree spaceはいじらず（スタート位置はそのままに），後ろのfree spaceが増えるように（後ろから減らすように），全体サイズを減らします。Gpartedは，ファイルシステムとパーティションの両方を同時に減らしてくれますので，これだけでOK。</p>
-<p>その後，Linux上で dd コマンドを使ってクローンを作ります。</p><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="color: #333333;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19.234375px; background-color: rgb(252, 252, 252);">dd bs=1M if=/dev/sd<em>x</em> of=/tmp/sdcard.img　（オリジナルSDイメージをPCにコピー。その後SDカードを入れ替えます。）</span></span></p>
-<p><span style="color: #333333;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19.234375px; background-color: rgb(252, 252, 252);">dd bs=1M if=/tmp/sdcard.img of=/dev/sd<em>x</em>　（上でコピーしたオリジナルイメージをクローンにコピー。）</span></span></p></blockquote><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="color: #333333;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19.234375px; background-color: rgb(252, 252, 252);">(sd<em>x</em>の<em>x</em>は，使うPC環境で変わります。）</span></span></p></blockquote><p>2番目のddで（クローンに書込む時に）やはり容量不足のエラーが出るかも知れませんが，それは無視して最後まで続行します。エラーが出たときには，必要な部分は全てコピーが済んでいます。残念ながらWindows上のWin32 Disk Imagerではエラーが生じた時点でコピーが停止してしまってうまく行かないようです。</p>
-<p></p>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="../06/index.html">« 2013年6月</a> |
-
-<a href="../../index.html">トップページ</a>
-| <a href="../../2023/01/index.html">2023年1月 »</a>
-</p>
-</div>
-<footer>
-<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
-</footer>
+<p><a href="../../index.html">← トップページへ</a></p>
+<h1>2013年07月の記事</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="raspberry-pisd-.html">PiRLPノードのSDカードバックアップ</a></li>
+</ul>
+<footer><p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p></footer>
 </body>
 </html>

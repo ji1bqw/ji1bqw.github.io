@@ -3,39 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ステータスページ - JI1BQW CyberHAM</title>
+<title>2007年05月 - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.month-list li { display: inline-block; margin: 0.3em; }
+.month-list a { display: inline-block; padding: 0.2em 0.7em; background: #f0f0f0; border-radius: 3px; text-decoration: none; color: #333; }
+.month-list a:hover { background: #ddd; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../../index.html">&#8592; トップページへ</a></p>
-<h1>ステータスページ</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>自ノードや他ノードが今どこにコネクトしているか、リフレクターにはどのノードが入っているかなどを調べるのに、<a href="http://status.irlp.net/">ステータスページ</a>を良く参照しますね。それでは、どのように自ノードのステータスをサーバーに知らせているのでしょうか。</p>
-<p>自ノードのステータスを調べ、サーバーに伝えているのは、$SCRIPT/statupdate というスクリプトです。以前「<a href="../01/post_5d47.html">ノードのリアルタイムステータス</a>」にも書いたように、その時々の自ノードの状況は$LOCAL/enable、$LOCAL/disableを見るとわかります。statupdateスクリプトはこれらのファイルを調べて、http://status-update.irlp.netというURLに得られた状況情報を付加し、wgetすることで当サーバーにステータス情報を伝達しています。</p>
-<p>statupdateスクリプトは、以下のような他のスクリプトから呼ばれます。<br/>    connect_to_reflector<br/>    disable<br/>    enable<br/>    on<br/>    off<br/>    on_to_remote<br/>すなわち、ステートを変化させるスクリプトですね。これらから直接呼ばれることにより、ステートがかわると、ほぼリアルタイムでステータスページ上でもノードの状況変化が反映されます。</p>
-<p>ステートの変化を起こさせる上記のようなスクリプトから直接呼ばれる以外に、cronによって20分（+α秒）ごとにも呼ばれます。crontab に定義されている statupdate_cron が statupdate を呼んでいます。</p>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="../04/index.html">« 2007年4月</a> |
-
-<a href="../../index.html">トップページ</a>
-| <a href="../06/index.html">2007年6月 »</a>
-</p>
-</div>
-<footer>
-<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
-</footer>
+<p><a href="../../index.html">← トップページへ</a></p>
+<h1>2007年05月の記事</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="post_2d45.html">ステータスページ</a></li>
+</ul>
+<footer><p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p></footer>
 </body>
 </html>

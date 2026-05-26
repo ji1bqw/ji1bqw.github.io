@@ -3,40 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>aprs_status使用時の注意 - JI1BQW CyberHAM</title>
+<title>2008年07月 - JI1BQW CyberHAM</title>
 <link rel="stylesheet" href="../../styles.css" type="text/css" />
+
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.5em; border-bottom: 2px solid #444; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.month-list li { display: inline-block; margin: 0.3em; }
+.month-list a { display: inline-block; padding: 0.2em 0.7em; background: #f0f0f0; border-radius: 3px; text-decoration: none; color: #333; }
+.month-list a:hover { background: #ddd; }
 footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
 </style>
+
 </head>
 <body>
-<p><a href="../../index.html">&#8592; トップページへ</a></p>
-<h1>aprs_status使用時の注意</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>IRLPノードの位置情報をAPRSに通知するために、aprs_status スクリプトを利用しておられる局も多いと思います。最近IRLPノード局からAPRS T2サーバー向けの位置情報通知のためのコネクションが切断されず、一つのノードから複数のサーバーへコネクションが張られたままになっている場合がある、という指摘がありました。これではAPRS T2サーバーもIRLPノードもリソースの無駄遣いになりますね。</p>
-<p>aprs_statusを利用している全てのIRLPノード局がそうなっている訳でもありませんが、ご自分のノードがそうなっていないか、チェックしてみても良いかもしれません。</p>
-<p>aprs_statusスクリプトは、自位置情報を nc (netcat)コマンドを使ってT2サーバーに送ります。本来ncコマンドは位置情報送信後、即終了します（終了と共に接続が切断されます）。しかし、上記の問題が起きている場合には nc プロセスが残ったままになっていると思います。したがって、repeaterユーザで、</p><blockquote><p>$ ps -ef | grep nc</p></blockquote><p>と打って、もし</p><blockquote><p> /usr/bin/nc -w 10 rotate.aprs2.net 14580</p></blockquote><p>のようなプロセスがいくつか残っているとしたら、この問題が発生しています。</p><blockquote><p>$ killall nc </p></blockquote><p>ですべてkillしてしまいましょう。</p>
-<p>さらに一時的な防止策としては、aprs_statusスクリプトを編集して、最後の行の</p><blockquote><p>$NC -w 10 rotate.aprs2.net 14580</p></blockquote><p>の部分の rotate.aprs2.net を<a href="http://www.aprs2.net/">http://www.aprs2.net/</a>に掲示されているT2サーバーのうちどれか一つに変更し、T2サーバーを一つ明示的に指定することが提案されています。</p>
-<p>rotate.aprs2.netは、負荷分散のため実際の複数のT2サーバーの一つに接続を振り分けています。つまり接続毎に接続されるサーバーが異なります。よって上記問題が何度か起きてしまうと、複数のサーバーに接続が張りっぱなしになってしまうことになります。</p>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="../06/index.html">« 2008年6月</a> |
-
-<a href="../../index.html">トップページ</a>
-| <a href="../08/index.html">2008年8月 »</a>
-</p>
-</div>
-<footer>
-<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
-</footer>
+<p><a href="../../index.html">← トップページへ</a></p>
+<h1>2008年07月の記事</h1>
+<ul><li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="aprs_status_f66b.html">aprs_status使用時の注意</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="asteriskirlp_ec_def0.html">asteriskとIRLP, EchoLinkのブリッジ</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="uncomp_9cb9.html">UNCOMPベータ</a></li>
+</ul>
+<footer><p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p></footer>
 </body>
 </html>
