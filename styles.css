@@ -4,7 +4,7 @@ body {
 	padding: 0;
 		background-color: #FFFFFF;
 	
-        	text-align: center;
+        	text-align: left;
         
 	}
 
@@ -65,7 +65,7 @@ h1, h2, h3 {
 	font-family: 'MS PGothic', 'Hiragino Kaku Gothic Pro W3', Osaka, sans-serif;
 	color: #FFFFFF;
 	background-color: #BBBBBB;
-	text-align: center;
+	text-align: left;
 	padding: 15px;
 	border: 0;
 	}
@@ -200,7 +200,7 @@ textarea#comment-text {
 	
 	
   	padding: 2px;
-	text-align: center;
+	text-align: left;
 	margin-bottom: 30px;
 	}
 
@@ -225,12 +225,12 @@ textarea#comment-text {
 	}
 
 #calendar th {
-	text-align: center;
+	text-align: left;
 	font-weight: normal;
 	}
 
 #calendar td {
-	text-align: center;
+	text-align: left;
 	}
 
 .sidebar h2 {
@@ -270,7 +270,7 @@ textarea#comment-text {
 	}
 
 #photo {
-	text-align: center;
+	text-align: left;
 	margin-bottom: 20px;
 	}
 
@@ -326,7 +326,7 @@ textarea[id="comment-text"] {
 	font-family: 'MS PGothic', 'Hiragino Kaku Gothic Pro W3', Osaka, sans-serif;
 	font-size: x-small;
 	line-height: 150%;
-	text-align: center;
+	text-align: left;
 }
 
 .content h3 a {
