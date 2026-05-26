@@ -3,69 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Some notes for installing VarAC on Raspberry Pi - JI1BQW CyberHAM</title>
-<link rel="stylesheet" href="./styles.css" type="text/css" />
+<title>JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="styles.css" type="text/css" />
 <style>
-body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
-h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
-.date { color: #666; font-size: 0.9em; }
-.entry-body { margin: 1em 0; line-height: 1.8; }
-.entry-nav { margin: 1em 0; font-size: 0.9em; }
-footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+body { font-family: sans-serif; max-width: 860px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.8em; border-bottom: 3px solid #444; margin-bottom: 0.2em; }
+h2 { font-size: 1.2em; border-left: 4px solid #666; padding-left: 0.5em; margin-top: 1.5em; }
+.subtitle { color: #666; margin-bottom: 1.5em; }
+ul { list-style: none; padding: 0; }
+li { padding: 0.3em 0; border-bottom: 1px solid #eee; }
+.date { color: #888; font-size: 0.85em; margin-right: 0.5em; }
+.cat-list li, .year-list li { display: inline-block; margin: 0.3em; }
+.cat-list a, .year-list a {
+  display: inline-block;
+  padding: 0.2em 0.7em;
+  background: #f0f0f0;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #333;
+}
+.cat-list a:hover, .year-list a:hover { background: #ddd; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; padding-top: 0.5em; }
 </style>
 </head>
 <body>
-<p><a href="./index.html">&#8592; トップページへ</a></p>
-<h1>Some notes for installing VarAC on Raspberry Pi</h1>
-<p class="date">--- Internet Linked Radio Amateur ---</p>
-<div class="entry-body">
-<div class="entry-body-text">
-<p>Unlike VARA HF Modem, installing and running VarAC on Raspberry Pi is tricky.  Here are some notes I took when I successfully had it run.  From my 10+ different attempts, this is the most reliable way to install VarAC and get it running.</p>
-<p>That being said, it should be taken as nothing more than an experiment.  I must admit I use Linux Mint for daily operations.</p>
-<p><strong><u>Prerequisites</u></strong></p>
-<ul>
-<li>RPi 4B with Raspberry Pi OS 32bit.  <a href="https://github.com/km4ack/pi-build" target="_top">KM4ACK's "build-a-pi"</a><span> </span>is a very good option to consider for a Ham purpose.</li>
+<h1>JI1BQW CyberHAM</h1>
+<p class="subtitle">--- Internet Linked Radio Amateur --- アマチュア無線関連ブログアーカイブ (2007-2023)</p>
+
+<h2>カテゴリ</h2>
+<ul class="cat-list">
+<li><a href="dstar/index.html">D-STAR</a></li>
+<li><a href="echoirlp/index.html">EchoIRLP</a></li>
+<li><a href="dextra/index.html">DEXTRA</a></li>
+<li><a href="asterisk_app_rpt/index.html">Asterisk/app_rpt</a></li>
+<li><a href="rtpdir/index.html">rtpDir</a></li>
+<li><a href="cat24376443/index.html">VARA/VarAC</a></li>
+<li><a href="cat6856981/index.html">IRLP構築日記</a></li>
+<li><a href="cat6858662/index.html">IRLP #8437 ノード情報</a></li>
+<li><a href="cat21348361/index.html">備忘録</a></li>
+<li><a href="off_the_topic/index.html">アマチュア無線一般</a></li>
+<li><a href="cat6857067/index.html">お知らせ</a></li>
 </ul>
-<p>Raspberry Pi OS 64bit may work, but I have yet to confirm it.</p>
-<p><strong><u>Run WheezyE's install script with vara_only option</u></strong></p>
-<p><a href="https://github.com/WheezyE/Winelink" rel="noopener noreferrer nofollow ugc" rev="en_rl_none" target="_top"><u>https://github.com/WheezyE/Winelink</u></a></p>
-<p><span>This will install box86, wine, winetricks, VARA HF and FM Modems and winklink-related components.  </span> If you only need VARA but no other winlink-related components, specify the vara_only option when you run the install script.</p>
-<p style="padding-left: 30px;"><em>$ curl -O https://raw.githubusercontent.com/WheezyE/Winelink/main/install_winelink.sh &amp;&amp; bash install_winelink.sh<span> </span><strong>vara_only</strong></em></p>
-<p><strong><u>Replace PDH (Performance Data Helper) in the wine prefix</u></strong></p>
-<p style="padding-left: 30px;"><em>$ cd $HOME/Downloads</em></p>
-<p style="padding-left: 30px;"><em>$ wget http://files.k6eta.com/pdh.dll.zip</em></p>
-<p style="padding-left: 30px;"><em>$ unzip pdh.dll.zip</em></p>
-<p style="padding-left: 30px;"><em>$ rm pdh.dll.zip</em></p>
-<p style="padding-left: 30px;"><em>$ mv pdh.dll $HOME/.wine/drive_c/windows/system32</em></p>
-<p>By now, you should be able to run VARA Modem standalone.</p>
-<p><strong><u>Install wine-mono</u></strong></p>
-<p style="padding-left: 30px;"><em>$ wget -q -P ~/.cache/wine https://dl.winehq.org/wine/wine-mono/7.2.0/wine-mono-7.2.0-x86.msi</em></p>
-<p style="padding-left: 30px;"><em>$ wine msiexec /i ~/.cache/wine/wine-mono-7.2.0-x86.msi</em></p>
-<p>Now winecfg shows something like below.</p>
-<p><img src="https://cdn-bio.qrz.com/w/ji1bqw/_.png?p=a2b3a9f10210e5ceb4bf37278c23f86a"/></p>
-<p><strong><u>Install VarAC</u></strong></p>
-<p>Unzip VarAC.zip under "~/.wine/drive_c/"</p>
-<p>It is highly recommended that VarAC.ini be copied from another working environment or carefully created by hand. This could reduce the likelihood of failures at startup.</p>
-<p>Don't forget to set "LinuxCompatibleMode=ON" in VarAC.ini.</p>
-<p><strong><u>Run VarAC.exe</u></strong></p>
-<p style="padding-left: 30px;"><em>$ wineserver -k</em></p>
-<p style="padding-left: 30px;"><em>$ wine VarAC.exe</em></p>
-<p>You will see tons of errors and warning messages, but let it go.</p>
-<p>After VarAC and VARA Modem are launched, in many cases TCP LED of VARA Modem stays red. Repeat "DISCONNECT MODEM"/"CONNECT MODEM" on VarAC UI until the LED turns green.</p>
-<p>Just in case, let's run "wineserver -k" to kill all wine related processes before launching VarAC.</p>
-<div data-en-clipboard="true" data-pm-slice="1 1 []"><strong><span style="text-decoration: underline;">Turn off Narrator on VarAC Settings</span></strong></div>
-<div>"Setting" -&gt; "Appearance and Sounds" -&gt; Uncheck all options at "Narrator (Text-to-Speech)"</div>
-<div></div>
-<div>This is important.  If you don't disable this, VarAC is most likely to freeze or crash when it narrates (e.g. when received a CQ call).</div>
-</div>
-</div>
-<div class="entry-nav">
-<p align="right">
-<a href="2011/08/irlpme.html">«IRLP*Me</a>
-</p>
-</div>
+
+<h2>バックナンバー</h2>
+<ul class="year-list">
+<li><a href="2023/index.html">2023年</a></li>
+<li><a href="2013/index.html">2013年</a></li>
+<li><a href="2012/index.html">2012年</a></li>
+<li><a href="2011/index.html">2011年</a></li>
+<li><a href="2010/index.html">2010年</a></li>
+<li><a href="2009/index.html">2009年</a></li>
+<li><a href="2008/index.html">2008年</a></li>
+<li><a href="2007/index.html">2007年</a></li>
+</ul>
+
+<h2>最新記事</h2>
+<ul>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2010/12/post-b3ea.html">高い!</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2007/02/post_c5bc.html">通信関係のプログラム</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2010/04/post-b6e2.html">複式キー入手！</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2010/03/post-160f.html">複式キーいいな</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2011/05/post-7aff.html">節電効果</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2007/01/post_ab3d.html">直せない!?</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2007/02/post_ddf5.html">状況チェック関係</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2007/02/post_8837.html">無線機の送信をコントロールするコマンド</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2009/09/gw-c273.html">海外局が日本を呼び出した場合</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2009/05/rpt2-eff3.html">海外とのRPT2指定方法の違い</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2009/05/callsign-routin.html">海外から日本へのCallsign Routingについて</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2010/04/d-star-29cc.html">海外D-STARの動きと思うこと</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2010/12/post-3494.html">気になる</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2011/01/post-eb6e.html">明けましておめでとうございます</a></li>
+<li><span class="date">--- Internet Linked Radio Amateur ---</span> <a href="2009/09/irlp-d282.html">旧LinuxベースのIRLPノードでのエラー</a></li>
+</ul>
+
 <footer>
-<p>JI1BQW CyberHAM | <a href="./index.html">トップページ</a></p>
+<p>JI1BQW CyberHAM | アマチュア無線局 JI1BQW のブログアーカイブ</p>
 </footer>
 </body>
 </html>
