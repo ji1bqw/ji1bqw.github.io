@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVBベースでAsterisk/app_rpt+rtpDirを構築する際の注意 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>EVBベースでAsterisk/app_rpt+rtpDirを構築する際の注意</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>EVB(EasyVoxBox)ベースでAsterisk/app_rptを構築する場合、<a href="http://www.xelatec.com/xipar/install">インストラクション</a>に従えばスムーズにビルド&amp;インストールすることができます。さらにapp_rptがアップデートされた場合には、<a href="http://www.xelatec.com/xipar/updaterpt">Updates for app_rpt</a>にあるように、/usr/local/bin/svn_rpt_updateを実行するだけでOKです。</p>
+<p>Asterisk/app_rptノードとして使うだけなら上記だけで十分なのですが、ここにrtpDirをインストールするとなると一つ注意が必要です。その理由は、rtpDirがrtpDir用に修正されたAsteriskソースコードを必要とするからです。それらの修正されたソースコードは<a href="http://tech.groups.yahoo.com/group/rtpDir/">rtpDir yahoo groupのFilesセクション</a>に常に最新のものがアップされています。（現時点では、修正されたapp_rpt.c, chan_rtpdir.cが必要）</p>
+<p>rtpDirを使うためにはまず、これらのソースコードをAsteriskのソースディレクトリにコピーします。<br/>app_rpt.c  --&gt;  /usr/src/asterisk/apps<br/>chan_rtpdir.c  --&gt;  /usr/src/asterisk/channels<br/>（これらのディレクトリにはオリジナルのファイルがシンボリックリンクで存在しますので、コピーの前にそれらを削除する必要があります。）</p>
+<p>そして /usr/src/asterisk で ./configure, make, make install をすれば rtpDir対応のAsterisk/app_rptがビルド&amp;インストールできます。</p>
+<p>さて、注意点というのは、その後何らかの理由でsvn_rpt_updateを実行してしまった場合です。このディストリビューションは使用するソースコードを厳密に管理しており、ビルドする際大元のsubversionソースリポジトリからソースをコピーしてきますので、後からコピーした rtpDir向け修正版app_rpt.cやchan_rtpdir.cを上書き・消去してしまいます。よって、またrtpDir非対応のAsterisk/app_rptになってしまいます。</p>
+<p>ですから、svn_rpt_updateを使ってapp_rptをアップデートしたら、再度rtpDir用修正版ソースコードをコピーして、手作業でビルドをしなおさなくてはいけません。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="chan_echolink.html">« chan_echolink</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="asteriskapp_rpt.html">Asterisk/app_rptのネットワークインストール »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

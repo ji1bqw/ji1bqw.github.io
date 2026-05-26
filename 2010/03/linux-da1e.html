@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linuxサウンドで一苦労 （続き） - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>Linuxサウンドで一苦労 （続き）</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>無事録音できるようになり，こちらの声が向こうに届くようになったのでこれで大丈夫かと思いきや，まだ問題がありました。</p>
+<p>アクセス用無線機からIRLPに対してDTMFコマンドを発行すると，その後また録音ができなくなるのです。</p>
+<p>DTMFコマンドを出すと，ノードPCで走っているdtmfデーモンがその頭部分を検知して，入力（録音）デバイスを一時的にCDに変更します。これによって，DTMFトーンをミュートしネットワークに流すことを抑えています。さらにDTMFコマンドが終了すると，また入力（録音）デバイスを元のMicなりLineInなりに戻します。</p>
+<p>問題は，DTMFコマンド終了後，入力デバイスが元のデバイスに戻らず，また別の入力デバイスに設定されてしまうことにありました。</p>
+<p>aumix を良く見ていると，存在しない入力デバイスがリストされており，DTMFコマンド終了後はこの不明デバイスに戻ってしまっているようです。</p>
+<p>どうも，aumixと今使っているサウンドブラスター(CA0106)の相性が悪いようです。IRLPはaumixコマンドを使って，入力デバイスを動的に変更しています。（よって，IRLPにaumixは必須です。）</p>
+<p>さて，ここで試してみたいのは，</p>
+<ol><li>aumixの最新版をビルドして使ってみる</li>
+<li>サウンドカードを換えてみる</li></ol>
+<p>まず 1. は，<a href="http://www.jpj.net/~trevor/aumix.html">aumix のHP</a>から最新2.8のソースコードをダウンロードし，ビルドします。しかし，結果は同じでした。</p>
+<p>結論から言うと，2.で直りました。SoundBlasterではなく，オンボードの音声チップを使うことで，aumix も正しく動作し，入力デバイスも正しく変更され，さらに元に戻るようになりました。</p>
+<p>これからはIRLP用にはオンボードのサウンドを使うので，/etc/modprobe.conf を修正してこちらが最初に認識されるようにします。その結果以下のように正しくオンボードが card#0 になりました。</p><blockquote><p>[root@optiplex ~]# cat /proc/asound/cards<br/> 0 [I82801DBICH4   ]: ICH4 - Intel 82801DB-ICH4<br/>                      Intel 82801DB-ICH4 with AD1981A at 0xffa00800, irq 201<br/> 1 [CA0106         ]: CA0106 - CA0106<br/>                      Audigy SE [SB0570] at 0xece0 irq 177<br/> 2 [default        ]: USB-Audio - C-Media USB Headphone Set<br/>                      C-Media USB Headphone Set   at usb-0000:00:1d.1-1, full speed</p></blockquote>
+<p>しかし，このSoundBlasterでここ１～２年はずっと動いていたのです。何が変わってしまったんでしょうね。これはわからず仕舞いです。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="alsa-ca51.html">« 【備忘録】 alsaのビルド</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="aumix-6fc6.html">【備忘録】 aumixのビルド »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ノードPCのパフォーマンス - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>ノードPCのパフォーマンス</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>約1年半ほど前に1万円弱で中古購入した，Pentium-4/2.26GHz/512MBのPCをノードPCとして使っています。OSはCentOSです。これだけのスペックを持っているとVoIPノードPCとしてはかなり強力で，rtpDir，IRLP，EchoLink，Asterisk/app_rpt，D-Starストリーミング配信，Webサーバーなどを同時に動かしています。さらに，X-Window，VNCなどが動いています。</p>
+<p>EchoLink，IRLP，Asteriskが接続状態でのメモリーとCPUの使用状況を見てみました。</p>
+<p>topコマンドの出力です。</p>
+<p></p>
+<p><a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2009/10/19/top_output_6.gif" onclick="window.open(this.href, '_blank', 'width=657,height=491,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img alt="Top_output_6" border="0" height="224" src="../../images/2009/10/19/top_output_6.gif" title="Top_output_6" width="300"/></a>
+</p>
+<p>メモリもCPU平均負荷も全く問題なさそうです。念のためfreeコマンドでも見てみます。</p>
+<p></p>
+<p><a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2009/10/19/free_output_3.gif" onclick="window.open(this.href, '_blank', 'width=657,height=491,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img alt="Free_output_3" border="0" height="224" src="../../images/2009/10/19/free_output_3.gif" title="Free_output_3" width="300"/></a>
+</p>
+<p>512MBメモリー中，300MBも空いています。168KBほどスワップにいるようです。</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p>vmstatの出力です。</p>
+<p></p>
+<p><a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2009/10/19/vmstat_output_3.gif" onclick="window.open(this.href, '_blank', 'width=657,height=491,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img alt="Vmstat_output_3" border="0" height="224" src="../../images/2009/10/19/vmstat_output_3.gif" title="Vmstat_output_3" width="300"/></a>
+</p>
+<p>スワップは行われていませんので問題ないようです。スワップ内の168KBは何か不活性領域がどこかのタイミングで追い出されたのでしょう。静的な物なので無視出来るでしょう。</p>
+<p>まだまだ，色々なアプリを動かせそうですが，もともとVoIP無線ノード用にはこんなハイスペックなPCは不要ということですね・・・。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../09/irlp-common-fun.html">« 【備忘録】 /dev/snd ファイルのパーミッション変更</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="d-star-internat.html">D-STAR International Coordination Council »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

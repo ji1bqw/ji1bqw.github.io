@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTMF関係のプログラム - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>DTMF関係のプログラム</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>$BINの中のDTMF関連のプログラムは以下の２つです。</p>
+<p>dtmf:<br/>    これは以前にも書きましたが、IRLPボードによってハード的にデコードされたDTMFコードをパラメータにしてdecodeコマンドを呼ぶデーモンです。</p>
+<p>    もう一つの役割は、timeoutの管理です。接続時間タイマーは dtmfデーモンで管理されています。</p>
+<p>    ところで、基本的にDTMFコマンドはローカル局がノードをコントロールするためのものですので、DTMF信号はネットワークを越えて相手局に届かせる必要はありません。世界中でDTMF信号を再生する必要は全くありません。では、IRLPではどうやってDTMF信号をミュートしているのでしょうか。それは、このdtmfデーモンが、まずDTMF信号の頭を検知すると即座にオーディオ入力デバイスを今までの（例えばMIC-In や Line-In）から、CD入力に切り替えることで実現しています。相手ノードでは、DTMFの頭の一瞬だけ聞こえますが、その後はオーディオ入力がなくなるので聞こえません。DTMF信号が無くなった後、条件によって1秒あるいは2秒後に入力デバイスを元に戻します。</p>
+<p>dial:<br/>    DTMFを発生します。無線機をkeyupしてから、このコマンドを呼ぶことでノード無線機からDTMFを送信することができます。<br/>    $SCRIPT/dtmfdial　や　$SCRIPT/dtmfregen スクリプトを参照してみてください。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="aux_83bf.html">« AUX端子をコントロールするコマンド</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="post_a27f.html">ブラックリスト »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

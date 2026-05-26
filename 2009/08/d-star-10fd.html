@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【備忘録】 D-STAR ライブストリーミング配信 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>【備忘録】 D-STAR ライブストリーミング配信</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>D-Star交信をMP3ストリーミング配信する。CentOS5を使う。</p>
+<p>利用するHW</p>
+<ul><li>DV Dongle</li></ul>
+<p>利用するSW</p>
+<ul><li>dplus_streamer あるいは dextra_streamer （以下は dplus_streamerを想定）</li>
+<li>lame-3.97-1</li>
+<li>ezstreamer-0.5.5</li>
+<li>icecast-2.3.2</li>
+<li>httpd</li>
+<li>Windows Media Player（MP3 クライアントソフトウェア）</li></ul>
+<p>dplus_streamerの設定は<u>dplus_streamer_conf.txt</u>で行う。ただし，</p>
+<ul><li>SILENCE=Y　を指定する。Nだと無入力（無交信)の時Windows Media Playerがうまく動かない。</li></ul>
+<p>接続先レピーターあるいはリフレクターは，そのIPアドレスを<u>dplus_streamer_connect.txt</u>に記述する。</p>
+<ul><li>REF001 66.151.17.198 C</li></ul>
+<p>配信のためのコマンド</p><blockquote><p>/root/dplus/dplus_streamer | lame -x -r -s 8 --bitwidth 16 --signed --little-endian -m m -f -b 32 - - | ezstream -c ezstream_dstar.xml</p></blockquote><p>dplus_streamerからstdoutに出力される16ビット，Signed Little-Endian，non-stereo，8 KHzのraw PCMオーディオ信号をlameでMP3化し，さらにezstreamでicecastサーバーに送る。</p>
+<p><u>/usr/local/etc/icecast.xml</u>の留意点</p><blockquote><p><span style="font-size: 0.8em;"> &lt;limits&gt;<br/>        &lt;clients&gt;</span><span style="font-size: 0.8em;color: #0000ff;"><strong>10</strong></span><span style="font-size: 0.8em;">&lt;/clients&gt;<br/>        .....<br/>&lt;/limits&gt;<br/>&lt;authentication&gt;<br/>        &lt;source-password&gt;<strong><span style="color: #0000ff;">xxxxxx</span></strong>&lt;/source-password&gt;<br/>        &lt;relay-password&gt;<strong><span style="color: #0000ff;">xxxxxx</span></strong>&lt;/relay-password&gt;<br/>        &lt;admin-user&gt;</span><span style="font-size: 0.8em;color: #0000ff;"><strong>xxxxxx</strong></span><span style="font-size: 0.8em;">&lt;/admin-user&gt;<br/>        &lt;admin-password&gt;<strong><span style="color: #0000ff;">xxxxxx</span></strong>&lt;/admin-password&gt;<br/>&lt;/authentication&gt;<br/>&lt;hostname&gt;<strong><span style="color: #0000ff;">ji1bqw.com</span></strong>&lt;/hostname&gt;<br/>&lt;shoutcast-mount&gt;<strong><span style="color: #0000ff;">/stream</span></strong>&lt;/shoutcast-mount&gt;<br/>&lt;basedir&gt;<strong><span style="color: #0000ff;">/usr/local/share/icecast</span></strong>&lt;/basedir&gt;<br/>&lt;webroot&gt;<strong><span style="color: #0000ff;">/usr/local/share/icecast/web</span></strong>&lt;/webroot&gt;<br/> &lt;security&gt;<br/>     &lt;chroot&gt;</span><span style="font-size: 0.8em;color: #0000ff;"><strong>0</strong></span><span style="font-size: 0.8em;">&lt;/chroot&gt;<br/>     &lt;changeowner&gt;<br/>         &lt;user&gt;</span><span style="font-size: 0.8em;color: #0000ff;"><strong>nobody</strong></span><span style="font-size: 0.8em;">&lt;/user&gt;<br/>         &lt;group&gt;</span><span style="font-size: 0.8em;color: #0000ff;"><strong>nobody</strong></span><span style="font-size: 0.8em;">&lt;/group&gt;<br/>     &lt;/changeowner&gt;<br/> &lt;/security&gt;</span></p></blockquote><p><u>/root/dplus/ezstream_dstar.xml</u>の留意点</p><blockquote><p><span style="font-size: 0.8em;"> &lt;url&gt;<strong><span style="color: #0000ff;">http://ji1bqw.com:8000/stream</span></strong>&lt;/url&gt;</span><br/><span style="font-size: 0.8em;">    &lt;sourcepassword&gt;<strong><span style="color: #0000ff;">xxxxxx</span></strong>&lt;/sourcepassword&gt; --&gt; icecast.xmlのsource-passwordに一致させる</span><br/><span style="font-size: 0.8em;">    &lt;format&gt;<strong><span style="color: #0000ff;">MP3</span></strong>&lt;/format&gt;</span><br/><span style="font-size: 0.8em;">    &lt;filename&gt;<strong><span style="color: #0000ff;">stdin</span></strong>&lt;/filename&gt;</span><br/><span style="font-size: 0.8em;">    &lt;stream_once&gt;<strong><span style="color: #0000ff;">1</span></strong>&lt;/stream_once&gt;</span></p></blockquote><p><u>/usr/local/share/icecast/web/dstar_stream.asx</u>を作成</p><blockquote><p><span style="font-size: 0.8em;">&lt;ASX version="3"&gt;</span><br/><span style="font-size: 0.8em;">   &lt;Entry&gt;</span><br/><span style="font-size: 0.8em;">      &lt;ref HREF="http://ji1bqw.com:8000/stream"/&gt;</span><br/><span style="font-size: 0.8em;">   &lt;/Entry&gt;</span><br/><span style="font-size: 0.8em;">&lt;/ASX&gt;</span></p></blockquote><p>ブラウザあるいはMP3クライアントから，<a href="http://ji1bqw.com:8000/dstar_stream.asx"><u>http://ji1bqw.com:8000/dstar_stream.asx</u></a>をアクセス。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post-7e1a.html">« クローニングソフトウェアの改善要望点</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="d-star-a194.html">D-STAR ライブストリーミングの実験 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EchoIRLPインストール時の注意点 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>EchoIRLPインストール時の注意点</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>EchoIRLPをインストールする際の注意点は、EchoLinkに登録済みのパスワードを<span style="color: #ff0000;">大文字</span>で入力しなければならない点です。つい、小文字で書いてしまうことがあるので注意しましょう。このパスワードは、インストール後$ECHO_CUSTOM/tbd.confに記述されています。</p>
+<p>    ; ConferencePass - EchoLink password. Required.<br/>    ConferencePass = XXXXX</p>
+<p>XXXXXがEchoLinkパスワードで、大文字で書く必要があります。もし小文字なら大文字に書き換えましょう。</p>
+<p>また、同じディレクトリに userdata.txt というファイルが存在しますが、この中に記述されている一番上と一番下の値は、それぞれ tbd.conf の ConferenceCallとConferencePassの値と一致している必要があります。</p>
+<p>これらの変更をおこなったら、rootで$CUSTOM/rc.irlpを実行して、変更を有効にしましょう。</p>
+<p>もう一つ大変重要な注意点があります。これは、インストール前に判断すべきことですが、<span style="color: #0000ff;">EchoIRLPをインストールすると、IRLPのボランティアサポートチーム(IRLP install team)からのサポートは受けられなくなります。</span><span style="color: #000000;">すなわちEchoIRLPだけではなく，純粋なIRLP機能に関しても全て自己責任で問題を解決しなければなりません。一応その覚悟を決めてからインストールしましょう。</span></p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="echoirlp_1b9c.html">« EchoIRLPでの問題</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="voip_f803.html">VoIPノード形態と特徴 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

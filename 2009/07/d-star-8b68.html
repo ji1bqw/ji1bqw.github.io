@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-STAR海外接続に進展 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>D-STAR海外接続に進展</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>JARLのブログ上でD-Star海外接続が容易になったとの<a href="http://blog.goo.ne.jp/jarl_lab/e/016c891cb94ca08ff870207d63a57114">アナウンス</a>がありました。いわゆるCallsign Routingが海外局との間で可能になったということです。このブログには，日本からの呼び出しに関する具体例しか載っていませんが，JARLに確認したところ海外から日本局へのCallsign Routingも可能とのことです。すばらしい進展だと思います。すでに両方向で，実際に動作が多く確認されているようです。</p>
+<p>これをどのように実現したかの具体情報はありませんのであくまで想像ですが，JARLは2008年にJARL管理サーバーとUSトラストサーバー間でゲートウェイ情報を交換することで，Gateway Routingにより海外との接続を可能としました。今回は，その拡張として個々の局のコールサインとその局がどこのレピーター傘下にいるかという位置情報をUSトラストサーバーとの間で交換を始めたのではないかと思っています。</p>
+<p>そこでいくつかの実験をしてみました。</p>
+<p>まず，米国内のある2つのゲートウェイ（ここではUSGW-X と　USGW-Yとします）のDBを覗いてみると，それこそたくさんの日本局のコールサインが入っていました。その中から私の情報がどのようになっているかを見てみますと，</p><blockquote><p>USGW-X: JI1BQW JP1YJX-A<br/>USGW-Y: JI1BQW JP1YJX-A</p></blockquote><p>となっていました。JP1YJXは海老名レピーターで，この直前まで私が国内交信に利用していたものです。ということは海外GWに私の位置情報が正しく伝わっていますね。海外から私向けにCallsign Routing ができるはずです。</p>
+<p>さて今度は，藤沢レピーター(JP1YJV-A)から，USGW-Xのレピーターにカーチャンクをしてみました。UR?が返ってきたところで，再度両レピータのDBの中身を覗いてみると，</p><blockquote><p>USGW-X: JI1BQW <span style="color: #0000ff;"><strong>JP1YJV-A</strong></span><br/>USGW-Y: JI1BQW JP1YJX-A</p></blockquote><p>となり，藤沢レピーターから直接アクセスしたUSGW-XのローカルDB情報は即時に更新されています。ローカルDBは即時更新され，若干（15分から30分程度）遅れて他GWが更新されるというのはG2ゲートウェイの動作です。さて問題は，USGW-Yに私の新しい藤沢レピーターの情報がいつ反映されるかです。</p>
+<p>結論から言うと，30分では更新されず，約1時間かかりました。（タイミングにもよると思います。これが最小値なのか最大値なのかは不明。）</p>
+<p>USトラストサーバー傘下のGW同士では，これらの同期には15分から30分程度かかると言われています。その時の動きとしては，発信元レピーター(RPT1)が，USトラストサーバーを更新し，さらにUSトラストサーバーが他GWの情報を更新するようになっているようです。それにかかる時間が30分くらい。一方，日本からの場合には，日本のGWが直接USトラストサーバーを更新できません。従ってJARL管理サーバー経由になると思われます（ここが今回改良された部分だと思われます）ので，そのための時間差がさらに増えているのではないかと想像しています。</p>
+<p>この点は覚えておいても良いかもしれません。お互いに聞こえた時に One-Touch で応答するのは問題なくできる（ローカルGWは即時反映される）はずですが，相手が聞こえず，またどこのレピーター傘下にいるのかわからない状態でCallsing Routingを利用した時，タイミングによっては違うレピーター（相手が数十分前に使っていたレピーター）で呼び出してしまうこともあり得るわけです。</p>
+<p>実際JARL管理サーバーがどれくらいの頻度でUSトラストサーバーと同期を取っているのかは興味のあるところです。</p>
+<p>ちょっと話が変わります。今回の相互接続改善で米国GWに登録済みの既存のDV Dongleユーザーに影響がないかと懸念を持ちましたが，大きな影響はないようです。向こうのGWの中身を見てみると，DV Dongleのために米国GWに登録したコールサイン情報は，日本からの情報で上書きされています。ということは逆に今後DV Dongleを購入しても，別途米国GWに登録する必要は無いと思われます（登録済みになって，登録できないのではないかと思います）。実際に，私は自分のコールサインを米国GWから登録削除しましたが，DV Dongleは引き続き利用可能です。但しこれは，あくまでD-Star無線機を使って国内レピーターにアクセスをしたことがある場合です。以前の私がそうでしたが，D-Star無線機は持たずにDVDongleだけを使おうと思った場合には，引き続き海外GWへの登録が必要になるでしょう。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="d-star-contest.html">« D-STAR Contest</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="ascpseriald-23c.html">ascpserialdモニター »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

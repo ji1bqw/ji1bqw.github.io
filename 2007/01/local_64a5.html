@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$LOCALの他のファイル - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>$LOCALの他のファイル</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>$LOCALにはノードのリアルタイム状況を知るのに便利なファイルが作成されることは、昨日書きました。しかし、このディレクトリには他にも色々なファイルが見つかります。</p>
+<p>serverip:<br/>    IRLPサーバーのIPアドレスが記述されています。$SCRIPT/find_best_server というスクリプトが作成します。</p>
+<p>hosts:<br/>    すべてのIRLPノードおよびリフレクターのIPアドレスが記述されています。ノードが接続に行く前に、相手のIPアドレスはまずIRLPサーバーから都度入手しますが、もしその時にサーバーがダウンしていた場合など、このファイルから得たIPアドレスを利用します。適宜、update hosts によって更新されます。全く同じファイルが$CUSTOMにも存在します。</p>
+<p>last_ipupdate:<br/>
+    最も最近IRLPサーバーに自ノードのIPアドレスを通知した時間が記述されています。以前書いたように、自ノードのIPアドレスは15分毎に、cron によってチェックされ、異なるとIRLPサーバーに通知されます。IRLPをインストールしてから、一度もIPアドレスが変わっていなければ、このファイルは存在しません。<br/>
+</p>
+<p>last_ip_address:<br/>    最も最近IRLPサーバーに通知した自ノードのIPアドレスです。このファイルはcronがチェックする15分毎に更新されます。</p>
+<p>statupd_PID:<br/>    IRLPサーバーに対し、ステータスアップデートを通知するためのプロセスのIDが記述されています。
+
+</p>
+<p>timeout:<br/>    接続の時間制限をするかどうかを決めます。このファイルが存在すると、接続はタイムアウトが有効になり、存在しなければ無効です。このファイルを削除してコネクトすると、call <em>nnnn </em>notimeout　や connect_to_reflector <em>nnnn</em> notimeoutと同じことになります。ファイルの中身は空です。</p>
+<p>cwid:<br/>    これはモールスIDではなく、call waiting id です。すなわち、自ノードが接続中に他からコネクトがあった場合、そのノードのノード番号が記述されます。ファイル作成時間が、そのコネクトがあった時間です。あとからこちらから再コネクトするのに便利です。</p>
+<p>call_waiting ディレクトリ:<br/>    自ノード接続中の call waiting を処理するための作業用ディレクトリです。</p>
+<p>lost+found:<br/>    これはIRLPとは関係ない、UNIX/LINUXのファイルシステムには必ずある，迷子になったファイルを置いておくディレクトリです。</p>
+<p>さらに、コネクト状態では以下のファイルが作成されます。<br/>codec:<br/>    接続に使用されている音声コーデック(GSM, ADPCM, UNCOMPなど）が記述されます。</p>
+<p>udp_port:<br/>    接続に使用されているUDPポート番号が記述されます。</p>
+<p>nomute:<br/>    full duplexモードでの接続のときに作成されます。このファイルを見ることはないでしょう。</p>
+<p>以上のファイルは、cwidを除いて、主にIRLPシステムが動的に使用するためのファイルですので、ユーザーにとってはあまり使い道はないかも知れません。あえてその使い道を考えるのもまた一興かもしれません。また、EchoIRLPをインストールしていると、さらに他のファイルが作成されます。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post_5d47.html">« ノードのリアルタイムステータス</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="bin_03d4.html">$BINディレクトリー »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

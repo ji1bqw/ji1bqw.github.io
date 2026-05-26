@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$CUSTOM/environment - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>$CUSTOM/environment</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>$CUSTOM/environmentファイルには、IRLPが動作するときの環境変数が定義されています。ファイル属性は 644/root.rootですので、スーパーユーザでないと編集はできません。</p>
+<p>さて、このファイルで定義されている環境変数の多くは既定、あるいはインストール時のQ&amp;Aで答えた（コールサインなど）ノード独自の内容になっており、変更することはさほどないと思います。それでも、場合によって変えることのありそうなものは以下のとおりです。</p>
+<p>DEFAULTCODEC=ADPCM<br/>    デフォルトの音声コーデックを定義します。デフォルトではADPCMで、回線速度が遅い環境ではGSMも可能です。また将来UNCOMPなど別のコーデックが可能になった時に変更します。</p>
+<p>REFLECT_TIMEOUT_VALUE=1200<br/>    リフレクター接続時のタイムアウトです。0にすることで無制限になります。</p>
+<p>DTMFPREFIX=123<br/>    デフォルトでは、コメントアウトされています。DTMFコマンドのプリフィックスを定義します。123にすると、例えば9004に接続する時には、1239004とDTMFを打たなければなりません。</p>
+<p>TXDELAY=500000<br/>    ノード無線機をkeyupしてから、PCスピーカー端子に音声出力するまでの待ち時間をマイクロ秒で定義します。頭切れを起こしている場合にはこの数値を増やします。デフォルトではコメントアウトされており、$HOME/.bash_profileで定義されている方が活きていますが、$CUSTOM/environmentで定義するとこちらの方が優先されます。</p>
+<p>PLAY_CUSTOM_IDS=NO<br/>    ノード接続・切断時の各ノード独自のカスタムアナウンスを再生するかどうかを定義します。デフォルトでコメントアウトされていますが、これをNOにすると、カスタム音声ファイルのダウンロードや再生を停止し、既定のアナウンスになります。</p>
+<p>このファイルの最後の方にある、説明なしの定義は変えてはいけません。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post_a27f.html">« ブラックリスト</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="custom_3075.html">$CUSTOMディレクトリー »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

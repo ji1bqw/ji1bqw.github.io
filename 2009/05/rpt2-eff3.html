@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外とのRPT2指定方法の違い - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>海外とのRPT2指定方法の違い</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>dstar_digitalメーリングリストにおいて，また一つ新しい学びがありました。日本と海外の違いについてです。</p>
+<p>日本では，レピータエリア内（山掛け）CQをする時には以下のように設定することが勧められています：<br/>　UR=CQCQCQ<br/>　RPT1=そのレピーターコールサイン　(JP1xxx）<br/>　<strong>RPT2=NOT USE</strong>　（指定無し）</p>
+<p>ところが，海外では<br/>　UR=CQCQCQ<br/>　RPT1=そのレピーターコールサイン　(W1xxx)<br/>　<strong>RPT2=そのレピーターのゲートウェイ</strong>　(W1xxx G)<br/>と設定することが勧められています。</p>
+<p>日本でUR=CQCQCQと共にRPT2にゲートウェイを設定すると，そのレピーターから<br/>RPT?が返ってきて動作しません。</p>
+<p>ではなぜ海外でこのような設定が推奨されているかというと，まず大きな理由として海外のゲートウェイソフトウェアがG2と呼ばれる日本よりバージョンが進んだゲートウェイだからです。そしてさらにG2では，それと連携して動作するアドオンアプリケーションが存在するためです。その具体例は：</p>
+<ol><li><strong>DVDongle</strong> -- DVDongleはゲートウェイに接続します。</li>
+<li><strong>Dplus Reflector </strong>-- Dplus Reflectorへの接続は以下のように行うようです。<br/>　リンク：<br/>　　UR=REF001AL　（Lは8文字目）<br/>　　RPT1=レピーターコールサイン<br/>　　RPT2=そのレピーターのゲートウェイ<br/>　交信：<br/>　　UR=CQCQCQ<br/>　　RPT1=レピーターコールサイン<br/>　　RPT2=そのレピーターのゲートウェイ<br/>　アンリンク：<br/>　　UR=________U　（_はブランク，Uは8文字目）<br/>　　RPT1=レピーターコールサイン<br/>　　RPT2=そのレピーターのゲートウェイ</li>
+<li><strong>DPRS </strong>-- RPT2にゲートウェイコールサインを指定して自分の位置情報を流すことで，そのゲートウェイと連携しているDPRSソフトウェアがAPRSに情報を中継してくれます。</li></ol><blockquote><p><span style="font-size: 0.8em;">日本のDPRS I-Gateは，レピーターとは別にD-Star無線機とパソコンを用意して，無線機で受信した位置データをDPRSInterfaceやD2APRSというソフトウェアに食わせることでAPRS網に送り出すような方法がとられています。海外ではもう一つの選択肢として，このようにゲートウェイのアドオンソフトウェアにやらせることができるようです。</span></p></blockquote><p>すなわち，RPT2にゲートウェイを指定しないと自分の声やデータがこれらのアプリケーションまで届かないのですね。</p>
+<p>このような理由で，海外でUR=CQCQCQの場合には「常に」RPT2にはゲートウェイを指定しておくことが推奨されているようです。（重複しますが，この指定方法は日本では動作しません。）</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="id-80-c73f.html">« ID-80　パワーセーブ機能</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="eh-0993.html">EHアンテナ（続き） »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>txfan - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>txfan</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>当局のノード無線機にはジャンク品の電動PCファンを括りつけています。今までは24時間回しっぱなしだったのですが，今回 <a href="http://irlp.jimsoffice.org/scripts.php">txfan</a> というスクリプトを使って必要な時に回すことにしました。</p>
+<p>txfanは，PTTがある一定時間以上 on を続けると，AUX端子を on にします。そして同様にPTTがある一定時間以上 off を続けると，AUX端子を off にします。どのAUX端子を使うか，またon/offの時間はもちろん設定可能です。デフォルトでは，AUX3，PTT on 連続15秒でAUXを on ，PTT off 連続120秒でAUXを off です。</p><blockquote><p><span style="font-size: 0.8em;">注）　あくまでIRLPシステムのPTTフラグを監視していますので，AUX端子を使って送信している場合には動作しません。</span></p></blockquote>
+<p>ファンとAUX端子との接続ですが，当局で使っている電動ファンの消費電流は運転時に50mA程度でしたので，外部回路無しにそのままAUX端子に電流を流すことが出来ます。したがって，電源＋端子 --&gt; ファン --&gt; AUX端子 という単純な接続だけです。</p>
+<blockquote><p><span style="font-size: 0.8em;">注）　AUX端子には0.5Aまで流し込むことができます。これ以上の電流が流れる場合には， 外部回路を入れましょう。</span></p></blockquote>
+<p>これで勝手にファンが動いたり，止まったりするようになりました。もちろん，手動でも aux3on/aux3off コマンドでファンをon/offできます。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="cwtimer_80c0.html">« cwtimer （続き）</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="irlpvmon.html">IRLPvMon »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

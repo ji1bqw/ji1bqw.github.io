@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRLPでの cron の使い方 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>IRLPでの cron の使い方</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>スケジュールされたnetに毎回自動接続させたいときなど，ある決まった時間に何かを実行させたいときは，Linuxの機能である cron を使うと便利です。しかし，IRLPの場合には一般のLinuxとは異なるIRLP独自の設定方法があります。ただし，設定方法が異なるだけで，crontabの書式は同じです。</p>
+<ol><li>repeater ユーザーで作業します。</li>
+<li>repeaterユーザーのcrontab は，crontab -e コマンドではなく，$CUSTOM/custom.cronsファイルを通常のcrontab書式で編集します。custom.cronsが無い場合には新規作成します。ファイル属性は 750/repeater.repeaterです。<br/>なぜcrontab -eではなくcustom.cronsを使うかというと， crontabもbackup_for_reinstallのバックアップ対象とし，再インストールした時自動的に元の設定を復元させるためです。もし，一時的な実験のためなど永続的なものでない場合には，crontab -e で設定してもOKです。</li>
+<li>custom.cronsファイルを編集後，update files コマンドで実際のcrontab に反映させます。</li>
+<li>また，crontab からIRLPコマンドを実行させる場合には必ず，<br/><blockquote><p>. /home/custom/environment </p></blockquote>をIRLPコマンドの前に実行するようにします。environmentファイルには，IRLPを動作させるために必要な様々な環境変数が記述されています。一般のコマンドシェルからIRLPコマンドを実行する場合には，すでにシェル自体に環境設定されているのでその必要はないのですが，cronから実行させる場合にはこのファイルを事前に source する必要があります。<br/><br/>具体的には，（例：　毎日 12:00 にリフレクター9990に接続する場合）<br/><blockquote><div>00 12 * * * ( <span style="color: #0000cc;">. /home/irlp/custom/environment ;</span> 
+/home/irlp/scripts/connect_to_reflector ref9990 $&gt;/dev/null)</div></blockquote>のようにします。標準Linuxコマンドなど，IRLP以外のコマンドを実行する場合には不要です。<br/><div></div></li></ol>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../../2009/12/irlpusb-bcef.html">« IRLPでUSBメモリースティックサポート</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../02/dvap.html">DVAP »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

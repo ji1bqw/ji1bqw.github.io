@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cron for IRLP - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>cron for IRLP</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>IRLPがデフォルトで定義している cron は以下のとおりです。</p>
+<p>0 0 1 * * (/home/irlp/scripts/rotatelog &gt; /dev/null 2&gt;&amp;1)<br/>　-&gt;毎月1日00:00にそれまでの$HOME/log/messages ファイルをrenameして，新しいログファイルを作ります。</p>
+<p>0 3 * * * (/home/irlp/scripts/update_files_cron &gt; /dev/null 2&gt;&amp;1)<br/>　-&gt;毎日03:00にIRLPの重要なファイルをアップデートします。</p>
+<p>0 * * * * (/home/irlp/scripts/process_check &gt; /dev/null 2&gt;&amp;1)<br/>　-&gt;毎時00分にIRLP版 inetd（ポートリスナー） である mynetd を再起動します。</p>
+<p>*/15 * * * * (/home/irlp/scripts/ipupdate_cron &gt; /dev/null 2&gt;&amp;1)<br/>　-&gt;15分毎に自分のIPアドレスを調べ，変化があればIRLPサーバーに通知します。</p>
+<p>*/20 * * * * (/home/irlp/scripts/statupdate_cron &gt; /dev/null 2&gt;&amp;1)<br/>　-&gt;20分毎に自分の接続状況を調べ，IRLPサーバーに通知します。<br/><br/>さらに自分で cron を定義する場合には，$CUSTOM/custom.crons を編集して，さらに update files を実行することで crontab に反映されます。ちなみに私の custom.cron には以下が入っています。</p>
+<p>0 1 * * * (/home/EchoIRLP/scripts/echo_end &amp;&gt;/dev/null )<br/>　-&gt;毎日01:00に接続を切断します。（EchoIRLPが入っているので，echo_endにしています。）</p>
+<p>0 * * * * (/home/irlp/custom/idscript &amp;&gt; /dev/null)<br/>　-&gt;毎時00分にIDを送出しています。</p>
+<p>06 12 * * * (/home/EchoIRLP/scripts/echo_update files &amp;&gt;/dev/null)<br/>　-&gt;毎日12:06に，EchoIRLPのファイルをアップデートします。EchoIRLPインストールすると自動的に入ります。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="daily_update_81a1.html">« daily updateについて</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="post_733e.html">接続・切断時のアナウンス »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

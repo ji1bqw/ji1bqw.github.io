@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EchoIRLPでの問題 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>EchoIRLPでの問題</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>最近，EchoIRLPをインストールしたが動かないというお問合わせをいただきました。</p>
+<p>【問題 1】<br/>rc.irlp実行時に，tbd の立ち上げで失敗する。<br/>【解決案】<br/>以前より，EchoIRLPを正しくインストールしたにもかかわらず，$ECHO_CUSTOM/tbd.confが空になってしまうという問題が報告されています。まずインストールスクリプトにより tbd.conf が内容も含めて正しく作成されているかを確認し，もし空であれば thebridge パッケージより tbd.conf.sample を取り出して，これに対して手作業で作成します。</p>
+<p>なお，rc.irlp実行時，tbd で2回[Failed]になることがありますが，これはrc.irlpがtbdをrestart（再起動）させるからです。すなわち，まずtbdを終了させ，さらに起動します。最初 tbd を終了させようとしているにもかかわらず，動作しているtbdが無いのでFail してしまう訳です。さらに実際にtbdを動作させようとして，何かしらのエラーで動作できないことを示しています。</p>
+<p>【問題 2】<br/>相手EchoLinkからはコネクトできるのに，自分から他EchoLinkノードにコネクトしようとするとエラーになる。<br/>【解決案 2-1】<br/>EchoIRLPは，incoming callとoutgoing callをそれぞれ以下のように処理します。<br/>-incoming call:　tbd経由のコネクトイベントを，まず$ECHO_SCRIPT/echoirlp-statusというスクリプトが受取り，さらにイベント毎のハンドラーを呼び出して処理します。<br/>-outgoing call:　EchoIRLPのコネクト命令は，tbdcmdのコネクト命令に変換されて，tbdに対してコネクト要求を出します｡</p>
+<p>よって，outgoing call のみうまく動かないのであれば，まず真っ先に/usr/local/bin/tbdcmd<br/>が正しく存在し，動作するかを確認します。このファイルはシンボリックリンクになっており実体は，/home/EchoIRLP/tbd/tbdcmd です。</p>
+<p>【解決案 2-2】<br/>outgoing callが動かないもう一つの原因となりやすいのは，$CUSTOM/custom_decodeです。EchoIRLPをインストールすると，インストーラがEchoLinkノードへの接続のためにcustom_decodeを変更します。この中でエラーを起こしたり，DTMFコマンドに矛盾が生じるとコネクトができなくなる可能性があります。正しいロジックになっているか確認しましょう。</p>
+<p>【解決案 2-3】<br/>また本問題の原因として実際にあったもう一つの例は，EchoLinkノードへ接続するためのDTMFプリフィックスをアルファベット小文字で定義していた，というものです。インストール時にプリフィックスを何にするか訊かれますので半角大文字で答えてください。また，$CUSTOM/custom_decodeの中で"#"を表す"P"や，"*"を表す"S"は<span style="color: #0000ff;">半角大文字</span>で定義してください。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post_641a.html">« モニターモード　（続き）</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="echoirlp_e49a.html">EchoIRLPインストール時の注意点 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旧LinuxベースのIRLPノードでのエラー - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>旧LinuxベースのIRLPノードでのエラー</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>もしかしたら国内で今でもいらっしゃるかも知れません。Redhat 6.2, Redhat 7.3, or Redhat 9 ベースのIRLPノードで，最近~/log/messagesに以下のようなエラーが書き出されている可能性があります。</p><blockquote><p>FAIL - nc (netcat) is not available<br/>FAIL - rsync is not available<br/>FAIL - wget is not available<br/>FAIL - play  is not available<br/>FAIL - record or rec is not available</p></blockquote><p>結論から言うと心配は無用です。動作には影響せず，単なるメッセージ上の問題です。</p>
+<p>この原因は最近のIRLPシステム上での変更です。IRLPノードが動作する上で必要なコマンドに<br/>nc, rsync, wget, play, record があります。これらはLinux for IRLP CDに入って配布されています。Linux for IRLPをインストールすると自動的に /home/irlp/bin の下にインストールされます。</p>
+<p>これらのコマンドはIRLP専用コマンドではなく純粋なLinuxコマンドなのですが，古いLinuxディストリビューションではデフォルトで入っておらず，ユーザーが別途インストールする必要があったようです。IRLPでは，ノードオーナーがわざわざ別途入手しインストールする手間を省くため，独自にLinux for IRLPインストールCDに入れて配布していました。それがつい最近まで続いていました。</p>
+<p>しかし，これらのコマンドはGPLになっており，ライセンス上バイナリ再配布の際にはソースコードも配布する必要があります。VE7LTDはそのソースコード再配布義務から免れるため（と思われる），今後のLinux for IRLP　CDではこれらの独自インストールをしないようにしました。ただし，最近のFedora やCentOSの場合には，OS側そのものにこれらのコマンドが入っているので，結局はLinux for IRLPでもインストールされ，今後はそちらを使うようになります。</p><blockquote><p><span style="font-size: 0.8em;">今までは，最近のFCやCentOSベースのLinux for IRLPでインストールすると，これらのコマンドはOSが配布するものと，IRLPが配布するものの2種類がインストールされていました。両者はインストールされるディレクトリが異なります。</span></p></blockquote><p>そのため，最近IRLPシステムにアップデートが入り，OSが配布している方のコマンドを使うように，そしてそれらが見つからない場合にエラーメッセージを出すようになりました。</p>
+<p>前述のように，古いLinuxディストリビューションではこれらのコマンドをOSが配布していないため，エラーメッセージが出るのです。しかしたとえエラーが出ても，以前にインストールしたIRLPであれば，IRLPが独自のものが/home/irlp/bin下に既にインストールされていますから，そちらを使うよう設定され動作上は問題ありません。</p>
+<p>もし旧Linux＋今までのIRLPで動作はするけれども，（問題無いとは言え）エラーメッセージが出るのは嫌だ，という場合の解決方法は2つです：</p>
+<ol><li>最新のLinux for IRLPを再インストールする。</li>
+<li>VE7LTDからIRLP Yahoo Groupに投稿 (Subject: [irlp] How to stop the error messages on RedHat nodes - the right way) されている指示に従い，これらのコマンドをインストールする。</li></ol>
+<p>実際にノードが動作しないという問題が起こりうるケースは，かなり稀だとは思いますが，今後わざわざ古いRedHat系のOSを使って，その上に最近のIRLPを再インストールした場合です。この場合には，どこにもこれらのコマンドが無いため，IRLPは動作しないでしょう。</p>
+<p>参考：<a href="http://www.irlp.net/not_updating.html">http://www.irlp.net/not_updating.html</a></p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="irlp-ver3-1090.html">« IRLP Ver3 ボードの消費電流</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="irlp-common-fun.html">【備忘録】 /dev/snd ファイルのパーミッション変更 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DV Dongleの本来の(?)使い方 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>DV Dongleの本来の(?)使い方</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>先日DV Dongleを入手しましたが、クロスリンクのXRFリフレクターへ接続するためにrtpDirと共に使っています。一方、多くの局の使い方、すなわち一般のゲートウェイやREFリフレクターに接続するという（本来の?）使い方をしていません。主流の方をやっていないのは大きな片手落ちですね。何事も経験ということで手持ちのWindows Vista PCで試してみました。</p>
+<p>ソフトウェアのインストールは、<a href="http://www.dvdongle.com/DV_Dongle/Installation.html">DV Dongle Installation</a>を見て行います。<br/>まず私のWindows Vista PCではDV Dongleを接続すると、勝手に新しいドライバのインストールを始めます。これは、DV Dongleで使われているUSB-UART変換デバイス用のドライバのようですね。特に何もすることもなく、ただ見ているだけで問題なくインストールは終了しました。</p>
+<p>次に、DVToolアプリケーションを同じホームページからダウンロードしてきます。ダウンロードしてきたファイルはZIPファイルです。特にインストールという手順はなく、このZIPファイルをどこかに解凍するだけです。そしてその中のDVTool.jarがDVDongleを使うための実行ファイルです。Javaアプリであるため実行にはJRE6が必要ですが、私のWindows Vistaでは互換性の問題もなくすぐに動き出しました。</p>
+<p>DVToolの使い方は、<a href="http://www.dvdongle.com/DV_Dongle/Using_the_DV_Dongle.html">Using the DV Dongle</a>に書かれてあるとおりでとても簡単です。私の場合Audio Input/Audio Outputに表示されるデバイス名が日本語のためDVTool上では文字化けしましたが、見た目の問題だけで動作に支障はありませんでした。</p>
+<p>Audio Loopbackも、AMBE/Audio Loopbackも問題なく動作します。AMBE/Audio Loopbackの場合にはDV Dongleで音声が処理されているのでしょうね、ドングル内のLEDが点滅します。この状態でどこかのゲートウェイに接続すると、そこでの交信をモニターできます。しかし、PTT Rxボタンがグレイアウトされており送信ができません。</p>
+<p>PC+DV Dongleから送信可能とするためには、どこか（日本以外の）ゲートウェイに自分のコールサインを登録する必要があります。日本でDV Dongleを使う時の第1の壁がDV Dongle自体の入手だとすると、このゲートウェイ登録が第2の壁でしょうか。</p>
+<p>本来なら自分の一番近くのゲートウェイに登録するということのようですが、日本の場合には登録できるゲートウェイがありません。すべて海外になります。世界中に数多く存在するD-Starゲートウェイのどれに登録するかを決め、そして一つのみに登録しなければなりません。私にはどれを選ぶか見当もつきませんでしたので、まず<a href="http://www.dstarusers.org/">D-Starusers.org</a>のRepeater Directoryを見て、Gateway Registration URLの記載があり、そしてEメールで連絡がつきそうなレピータを候補として選びました。そのGateway Registration URLから、まずはNew userで登録を試みます。この登録用Webインターフェースはどのゲートウェイも共通です。New user登録直後、念のためそのゲートウェイの管理者にEメールを送り承認を依頼しました。時差も丁度良かったのでしょう、ものの5分も経たずに返信メールがあり、その中に承認された旨と登録のための第2ステップが記述されていました。その記述に従い、さらにいくつか（自分のPersonal Information）をWeb上で登録すれば終了です。登録作業完了後さらに5分ほど経って、ゲートウェイにも登録情報が反映されたのでしょう、DVTool上でグレイアウトされていたPTT Rxボタンが押せるようになりました。</p>
+<p><a class="mb" href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2009/05/10/dstar_g2_gateway.jpg"><a class="mb" href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2009/05/10/dstar_g2_gateway_2.jpg"><img alt="Dstar_g2_gateway_2" border="0" height="260" src="../../images/2009/05/10/dstar_g2_gateway_2.jpg" style="margin: 0px 5px 5px 0px; float: left;" title="Dstar_g2_gateway_2" width="300"/></a>
+<br/></a>
+</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="rtpdir-4ebc.html">« rtpDirにおけるイベントハンドリング</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="dvtool-1104-d28.html">DVTool 1.10β4 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

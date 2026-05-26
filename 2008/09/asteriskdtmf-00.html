@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asterisk経由のDTMFコントロール - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>Asterisk経由のDTMFコントロール</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>Asteriskに接続されている方の無線機からrtpDir_tmをDTMFコントロールできなかった問題は、バグだったようです。</p>
+<p>Asteriskにはchan_rtpdirというrtpDir_tmと接続するためのチャネルドライバがあるのですが、このモジュールがデコートされたDTMFのA, B, C, Dの各文字を小文字でrtpDir_tmに送っていました。一方rtpDir_tmは大文字を期待していたため、うまくコミュニケーションが取れていなかったという単純なバグだったようです。</p>
+<p>chan_rtpdirの修正ソースコードが出ましたので、それを使ってAsteriskを再ビルドすることで、Asterisk無線機から問題なくコントロールができるようになりました。</p>
+<p>使い勝手はというと、IRLPの方がDTMFコマンドがシンプルで、かつカスタマイズできるので良いです。またIRLPの方はIRLPボード上のハードウェアでDTMFをデコートしますので比較的安定しています。</p>
+<p>一方、Asteriskからコントロールする場合には、まずはAsteriskノードをコマンドモードにするためのDTMFコマンドを送り、その上でさらにrtpDir_tmに対するDTMFコマンドを送るという二段階の手順を踏む必要があるため若干面倒です。DTMFコマンド自体もIRLPと比較すると文字数が多いため送り難く感じます。</p>
+<p>DTMF接続コマンドの比較：</p><blockquote><p>IRLPにアクセスする無線機から：</p><blockquote><ul><li>IRLP 9004に接続する場合： 9004</li>
+<li>Asterisk 2000に接続する場合： A2000</li>
+<li>EchoLink 313817に接続する場合： #313817</li></ul></blockquote><p>Asteriskにアクセスする無線機から：</p><blockquote><ul><li>Asterisk 2000に接続する場合： *32000</li>
+<li>IRLP 9004に接続する場合：</li></ul><blockquote><p>Asteriskノード2234をコマンドモードにする： *42234<br/>IRLP 9004に接続する： 059990A<br/>Asteriskノード2234のコマンドモードから抜ける： #</p></blockquote><ul><li>EchoLink 313817に接続する場合：</li></ul><blockquote><p>Asteriskノード2234をコマンドモードにする： *42234<br/>EchoLink 313817に接続する： 01313817A<br/>Asteriskノード2234のコマンドモードから抜ける： #</p></blockquote></blockquote></blockquote>
+<p>上記のような使い勝手の違いはありますが、IRLP用無線機からもAsterisk用無線機からも自由にIRLP/Asterisk/EchoLinkを接続することができるようになりました。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../08/rtpdir_c17a.html">« rtpDirのコントロール</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="echolinkji1bqw-.html">rtpDirノード番号をJI1BQW-L（84377)に »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

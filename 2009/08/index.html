@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ID-80/880とDPLUS - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>ID-80/880とDPLUS</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>日本ではあまり関係のない話です。（将来はあるかも）</p>
+<p>海外のD-Starゲートウェイの多くには，DPlusというICOMとは全く関係の無い個人作成のアドオンソフトウェアがインストールされており，リフレクターや，DV Dongle接続，DPRSなどに利用されています。海外レピーターでは，標準装備の感があります。</p>
+<p>ここで，自分の無線機から送信した信号をDPlusに届かせるためには，URの設定内容にかかわらず，RPT2に必ずそのゲートウェイを RPT2=W1RPT_G のように設定しなければなりません。特にリフレクターで交信をする場合には，すでにレピーターがレフレクターにリンクされているとして，</p><blockquote><p>UR: CQCQCQ<br/>RPT1: W1RPT_C<br/>RPT2: W1RPT_G</p></blockquote><p>のように，UR=CQCQCQをRPT2=W1RPT_Gと共に設定するように推奨されています。</p>
+<p>一方，ICOMのID-80にはD-Star操作を容易にする目的で，DRモードが導入されています。私も重宝しているのですが，海外ではこれが逆に仇になってしまっている部分もあるようです。これらのリグのDRモードでは，UR=CQCQCQに設定すると，RPT2の設定が効かなくなる（自動的にNOT USEになる）のです。よって日本では全く問題ないのですが，海外ではDRモードでDPlusが使えない問題が出ているようです。（恐らくID-880も同じだと思われます。）</p>
+<p>今後誰がどのように解決していくのか私にはまだわかりませんが，ICOMも自社とは無関係とは言え，現実これだけ普及しているDPlusを考慮しなかったというのはどうでしょうね。</p><blockquote><p><span style="font-size: 0.8em;">先日のDayton Ham Vention 2009でのD-Star Forumでは，DPlus側がUR=/DR_CQで対応するという話もあったようですが，その後どうなったか不明です。</span></p></blockquote><p>繰り返しますが，DPlusの無い日本では問題ありません。</p>
+<p>==補足==<br/>CQCQCQをあらかじめ相手局コールサインメモリーに登録しておき，DRモード設定後URをこのメモリーから（GRP CQからではなく，GRP URから）CQCQCQを選択するようにすれば，同時にRPT2=自分のゲートウェイに設定されるようです。</p>
+<p></p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../07/index.html">« 2009年7月</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../09/index.html">2009年9月 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

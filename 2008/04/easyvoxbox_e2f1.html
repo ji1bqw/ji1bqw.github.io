@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EasyVoxBoxのインストール - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>EasyVoxBoxのインストール</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>EasyVoxBoxは、CentOSとAsterisk、そして管理ツールなどのユーティリティが入ったパッケージです。<a href="http://easyvoxbox.org">EasyVoxBoxのHP</a>から iso イメージをダウンロードできます（実体はSourceForge.netにあります）。現時点での最新は、バージョン0.011です。</p>
+<p>この iso イメージをダウンロードして、CDに焼きます。このCDはブート可能なもので、ブート後、Asteriskおよびその他のインストールが始まります。</p>
+<p>インストールの手順は、<a href="http://asteriskradio.net/wp/">Asterisk Radio Network</a> にあります。</p>
+<p>Asterisk/app_rptを動作させる場合には、PCの最低スペックとして Pentium III 800MHz, 256MB メモリ、2.5GB HDDが、特にURIを使う場合には1.2GHｚ以上のCPUが推奨されていますが、今回はソフトウェアインストールの実験目的でしたので、手持ちの古いIBM ThinkPad 130 (Celeron 600MHz, 192MBメモリ）で試してみました。</p>
+<p>CDブートから、インストールまでは順調に行きます。インストールプロセスの途中Asteriskとその他ユーティリティのビルドが行われますが、このスペックのPCでは、1時間以上かかりました。</p>
+<p>CentOSとAsteriskその他のインストールが終わると、一度再起動をして、今度はapp_rptのインストールに移ります。ここでは上記インストール手順資料に記述されている手作業が入ります（と言っても、あるHPからevbphase2というパッケージをwgetして、それを実行するだけです）。</p>
+<p>この手順でも、app_rptのビルドに一時間以上かかりましたが、無事インストールできました。</p>
+<p>app_rptのインストール途中に、各種設定情報、例えばAllstar Link のノード番号などが訊かれますが、今は適当に選んでおけばOK。ノード番号など未定の場合にはEnterでOKです。情報がわかった後にconfファイルを修正することで対応が可能です。</p>
+<p>ちなみにネットワークとしては、グローバルIPが必要です。静的である必要はありませんが、外から自ノードの名前解決ができる必要があります。インストール中にドメイン名を訊かれます。必要に応じてDynamic DNSサービスを利用しましょう。またノードPCがLAN上にある場合には、ルータでポート4569をノードPCにフォワードしなければいけません。</p>
+<p>以上でEasyVoxBoxとapp_rptのインストールの手順が確認できました。少なくとも、ここまででさほど難しいところはありませんでした。これからですね。</p>
+<p>現在、<a href="http://www.dmkeng.com/">DMK Engineering</a>に注文したURIの到着と、<a href="http://allstarlink.org/">AllStar Link</a>にリクエストしたノード番号を待っているところです。</p>
+<p>まだまだわからないところが多いのですが、2年ほど前に初めてIRLPの存在を知って、やってみようと思ったその時と同じワクワク感を感じています。これからがとても楽しみです。</p>
+<p>これから構築状況をぼちぼち書いていきます。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="tiara_technolog.html">« TIARA Technology</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="allstar_link_d4c2.html">AllStar Link ノード番号 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

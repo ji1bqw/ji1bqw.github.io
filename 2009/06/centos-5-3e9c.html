@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【備忘録】 CentOS 5の日本語入力 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>【備忘録】 CentOS 5の日本語入力</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>EVBにはGUI環境もましてや日本語環境もない。まず日本語入出力環境を導入し，さらにアプリケーションとして，ターミナル，ブラウザ，メーラ，openofficeまでを導入してみる。ここではGNOMEやKDEなどのDesktop環境は導入しない。</p>
+<p>X Windows のインストール</p><blockquote><p>yum groupinstall "X Window System"</p></blockquote><p>リモートPCからVNCでアクセスするため，X11サーバーではなく，vncserverを動かす。</p><blockquote><p>yum install vnc-server.i386<br/>chkconfig vnc-server on</p></blockquote><p>VNCサーバーの設定は /etc/sysconfig/vnc</p><blockquote><p>VNCSERVERS="0:repeater"　（repeaterユーザーで起動）</p></blockquote><p>日本語パッケージをインストール</p><blockquote><p>yum groupinstall "Japanese Support"</p></blockquote><p>anthy, scim, scim-anthyをインストール</p><blockquote><p>$ yum install anthy scim scim-anthy</p></blockquote><p>scim設定(scim-setupコマンド)のホットキー，開始/終了で，Alt+Kanjiを追加すれば，MS Windows と同じAlt+半角キーでIMを日本語入力モードにできる。</p>
+<p>VNC環境なので，（~/.xinitrcではなく）~/.vnc/xstartup　に以下を追加する。</p><blockquote><p>export LANG="ja_JP.UTF-8"<br/>export XMODIFIERS="@im=scim"<br/>export GTK_IM_MODULE="scim"<br/>export QT_IM_MODULE="scim"<br/>export XIM_PROGRAM=/usr/bin/scm<br/>export SAL_USE_VCLPLUGIN=gtk<br/>xhost +</p></blockquote>
+<p>さらに，各ユーザーの ~/.bash_profileにも</p><blockquote><p>export XMODIFIERS="@im=scim"<br/>
+export GTK_IM_MODULE="scim"<br/>
+export QT_IM_MODULE="scim"<br/>export XIM_PROGRAM=/usr/bin/scm<br/>export SAL_USE_VCLPLUGIN=gtk</p></blockquote><p>を入れておくことで，vncログインユーザー以外も日本語が使用可能となる。</p>
+<p>/etc/sysconfig/i18n で以下のように修正</p><blockquote><p>LANG="ja_JP.UTF-8"</p></blockquote><p>VNCサーバーを再起動する。</p><blockquote><p>service vncserver restart</p></blockquote><p>man で日本語を表示するには，/etc/man.config で以下のように修正</p><blockquote><p>PAGER　　/usr/bin/lv -i</p></blockquote>
+<p>mltermのインストール</p><blockquote><p><a href="http://mlterm.sourceforge.net/" target="_blank">http://mlterm.sourceforge.net/</a>からダウンロード，展開<br/>./configure --enable-anti-alias --enable-scim --with-scrollbars<br/>make<br/>make install</p></blockquote><p>この状態で，ユーザーroot，repeaterともに，mlterm，firefox，sylpheed，openoffice3.1.0で日本語入力が可能となった。</p>
+<p>openoffice3.1.0でscimが立ち上がらなかった問題は，</p><blockquote><p>export OOO_FORCE_DESKTOP=gnome</p>
+<p>あるいは</p>
+<p>export SAL_USE_VCLPLUGIN=gtk</p></blockquote><p>のどちらかを指定することで解決した。gnomeセッションを立ち上げる必要はない。</p>
+<blockquote><p></p></blockquote>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="dv-dongle-351a.html">« DV Dongle リモートアクセス</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../07/in-sync.html">in sync »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

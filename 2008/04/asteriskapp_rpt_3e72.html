@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asterisk/app_rptノード構築状況 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>Asterisk/app_rptノード構築状況</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>ノードのソフトウェアは無事動き出しました。<a href="http://stats.allstarlink.org./">AllStar Link</a>にも無事参加できています。<br/><a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2008/04/18/allstarlinkactivenodeslist.gif" onclick="window.open(this.href, '_blank', 'width=1021,height=739,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img alt="Allstarlinkactivenodeslist" border="0" height="72" src="../../images/2008/04/18/allstarlinkactivenodeslist.gif" style="margin: 0px 5px 5px 0px; float: left;" title="Allstarlinkactivenodeslist" width="100"/></a>
+</p>
+<p>下のほうに、#2132 JI1BQW が見えるでしょうか。</p>
+<p>無線機にも無事接続することができました。使った信号線は5本（COS, PTT, Audio-In, Audio-out, GND)です。接続ケーブルは、PS2マウス/キーボード延長ケーブルを使って、片方をURI用にDSUB25オスコネクタに付け替えて使いました。</p>
+<p>URIとそのドライバを使うと、無線機からの受信信号に重畳されているCTCSS信号をノードPCの信号処理を使って認識することができます。すなわちトーンSQLをソフトウェア的に実現しています。これの良いところは、古い無線機でトーンSQLが無かったり、あるいはCOS信号とトーンSQLが連動していない無線機でも使えることです。</p><blockquote><p><span style="font-size: 0.8em;">私はKenwoodのTM-833という、COS信号がトーンSQLと連動していない無線機を使っているので、これは重宝します。</span></p></blockquote><p>さらにはトーンSQLだけではなく、COSさえも設定によってソフトウェアで実現できます。これを使えば、PTTとAudio-In/Outだけを配線するだけで良い訳ですので、どんな無線機でも使えます。</p><blockquote><p><span style="font-size: 0.8em;">一方、ソフトウェア信号処理を行うための設定が若干複雑です。</span></p></blockquote>
+<p>Asterisk/app_rptでは、管理はすべてDTMFトーンで行います。デフォルト設定では、</p>
+<p>*3<em>nnnn </em>: ノードnnnnへ接続<br/>*1<em>nnnn</em> : ノードnnnnとの接続の切断<br/>*5 : ノード状況</p>
+<p>等です。/etc/asterisk/rpt.conf という設定ファイルを変更することで、DTMFコマンドを変更することができます。</p>
+<p>IRLPのように、PC上のコマンド入力で操作することも可能ですが、asterisk -r で asterisk のコマンドラインインターフェース CLI&gt; に入って、さらに引数をいくつか取るような、IRLPと比較するとちょっと使いにくいコマンドになっています。</p>
+<p>今後は、送信音声レベルの調整などを行ったのち、初QSOに臨みたいと思います。<br/>またノード構築の仕方などなどは、追々整理していこうと思います。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="allstar_link_d4c2.html">« AllStar Link ノード番号</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="allstar_link_qs_ed52.html">AllStar Link でのファーストQSO »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

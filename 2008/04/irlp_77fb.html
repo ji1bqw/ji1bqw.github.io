@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRLPの認証方式 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>IRLPの認証方式</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>IRLPの接続においては、接続毎に両ノード双方向で認証が行われます。よって、正しく登録されたノードとノード、ノードとリフレクター間以外の接続は拒否されます。その認証にはPGPを使ったチャレンジ・レスポンス方式が使われています。</p>
+<p>PGPに使われる2つの鍵（公開鍵と秘密鍵）は、IRLPソフトウェアを初めてインストールした時に生成されます。（インストール手順で、ランダムにキーボードを押す時がそうです。）　これらの鍵は$HOME/.pgpディレクトリに保管されています。特に、秘密鍵束である secring.pgp は別メディアに大切に保管しておきましょう。何かしらの理由でノードPCを再インストールした時に必要になります。（backup_for_reinstallをしていればOK）</p>
+<p>$HOME/.pgp/pubring.pgpは公開鍵束ですが、シンボリックリンクになっており、実体は$HOME/pubring.pgpです。この中に全てのIRLPノードの公開鍵が入っています。相手を認証する時には、相手から送られてきた認証用メッセージとこの中に入っている相手の公開鍵を使って認証するのですね。逆にいうと、相手のノード（あるいはリフレクター）のpubring.pgpに自分の公開鍵が入っていなければ、相手と接続できません。</p>
+<p>自分の公開鍵はIRLPソフトウェアをインストールした時、自動的にIRLPサーバーへ送信されています。サーバーへ届いた鍵は、IRLPサーバー管理者によってIRLPボードの購入記録やコールサイン、Eメールアドレスなどを検証された後、既存の公開鍵束に追加され、一日一回、午前3時に全てのIRLPノードへ配信されています。（正確には各ノードが cron で自らアップデートしている。）　全く新しいノードを作った場合、他のノードに自分の公開鍵が配信され接続できるようになるまで、若干時間がかかることになります。</p>
+<p>この認証プロセスは、ユーザが接続コマンドを出してから、実際に接続されるまでのちょっとした時間の間に行われています。ユーザに見えることはありません（認証エラーが出た場合は除いて）。</p>
+<p>以上のような認証の仕組みを経て、IRLPは正規のIRLPボードを入手したアマチュア局のみが利用できることになります。</p>
+<p>ただし、エコーリフレクター(999x)のみは相手ノードを認証していないようです。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../03/irlpif_31cf.html">« IRLPのパラレルポートI/F</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="aprs_1754.html">APRSに対する誤解 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

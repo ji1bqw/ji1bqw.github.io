@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【備忘録】 ネットワーク設定変更 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>【備忘録】 ネットワーク設定変更</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>DHCPサーバーからのIPアドレス割り振りを止め，固定IPを指定する。</p>
+<p>/etc/sysconfig/network-scripts/ifcfg-eth0<br/>BOOTPROTO=static<br/>IPADDR=192.xxx.xxx.xxx　（固定したいIPアドレス）</p>
+<p>service network restart</p>
+<p>ネームサーバーを，ルーターではなく外のDNSを直接参照するようにしてみる。</p>
+<p>/etc/resolv.conf<br/>nameserver xxx.xxx.xxx.xxx （外のDNSのアドレス1）<br/>nameserver xxx.xxx.xxx.xxx （外のDNSのアドレス2）</p>
+<p>service network restart</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../06/index.html">« 2009年6月</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../08/index.html">2009年8月 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

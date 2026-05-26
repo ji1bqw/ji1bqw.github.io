@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asterisk/app_rptとrtpDirについて (1) - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>Asterisk/app_rptとrtpDirについて (1)</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>Asterisk/app_rptとrtpDirは，両者とも似たようなことができるのですが，根本的には別物です。似たことが出来ることと，両者の統合が可能なので，誤解もあるようです。</p>
+<p><strong>Asterisk/app_rpt</strong><br/><a href="http://app-rpt.qrvc.com/">Asterisk/app_rpt</a>は，オープンソースPBXシステムであるAsteriskにアマチュア無線用の追加機能である app_rpt を追加したものです。Asterisk/app_rptを<a href="http://tiaratechnology.org/">TIARA Technology</a>とも呼んでいます。</p>
+<p>ベースのAsteriskはLinux上で動作するIPベースの構内電話交換機システムで，いわゆる有線電話系におけるインターネットVoIPシステムです。オープンソースであることから，今では多くの企業が社内電話システムに利用していますね。自宅用に自分で構築，利用されている猛者も多くおられるようです。端末電話機としては，最近のIPフォーンやあるいは一般家庭用アナログ電話機も利用可能です（利用電話機の種類に応じてハードウェアインターフェースが必要です）。交換機としては当たり前ですが一つのPCに複数の電話機をぶら下げることも可能です。このように，Asteriskが導入されたLinuxPCと電話機（複数可）の組み合わせをあちこちに作り，それらをインターネットで接続することで独自の大きな電話網を作ることが出来ます。</p>
+<p>ここまでで，ピンと来る方も多いと思います。末端の電話機をノード無線機に変え，HTからアクセスしたらどうなる？そうですね，IRLP/EchoLink/WiRESなどと同様のVoIPアマチュア無線が構築できそうですね。それを実現しているのが，Asterisk上のアドオンモジュールとして開発されたapp_rptです。実体はただのCソースコードで，Asteriskと一緒にビルドして組み込みます。</p><blockquote><p><span style="font-size: 0.8em;">PBXとしての電話機能はそのまま利用できますので，例えば業務用無線機と一緒に使えば，社内にいる社員はオフィス電話，外出中の社員は無線機でお互い通話するような業務システムが構築できるでしょう。</span></p></blockquote><p>比較的簡単にVoIPアマチュア無線網を構築できるとは言え，システムの構築だけでは運用はできず，さらにノード番号（電話システムでの電話番号）の割当て（ナンバリング）や，ノード番号とIPアドレスとの対応，あるいは各ノードの状況把握・表示等，という運用上の仕組みが必要です。この運用上の仕組みを作り，一つの大きなAsterisk/app_rptベースのアマチュア無線VoIPネットワークとして構築されたのが<a href="http://allstarlink.org/">AllStar Link</a>という訳です。このような運用の仕組みを別に作れば，AllStar Link以外の独自ネットワークも簡単にできます。</p>
+<p>IRLP/EchoLink/WiRESと比べた時の一番大きな特徴は，いわゆるリフレクター，カンファレンス，ルームと呼ばれるような複数ノードが集まるための特別な仕組みはなく，どのノードでも，他の複数のノードと接続ができます。つまりノード=リフレクターです。これは，元々電話会議ができるように考えられているからでしょうね。Allstar Linkの<a href="http://stats.allstarlink.org./graphic-status.html">Graphical Status</a>を見ると，現時点でのノード（楕円）どうしの接続状況がわかります。</p>
+<p>Asteriskには，チャネルインターフェースという概念があります。これは，元々電話システムで利用されている様々な物理インターフェース（アナログ電話，ISDN，IP電話など）やセッション制御プロトコル(SIP，H323，IAXなど）に対応するために追加可能なように作られた個別モジュールです。アマチュア無線機との物理インターフェースとしてはCM108ベースのUSBドングルが主に利用されているのですが，このために chan_usbradio というチャネルインターフェースが用意されています。</p>
+<p>このチャネルインターフェースの仲間として，chan_echolink，chan_irlp，chan_dstarというものがそれぞれ開発されています。その名の通り，これらのモジュールを組み込むことで，Asterisk/app_rptシステムとEchoLink，IRLP，D-Starシステムをインターフェースすることが可能になっています。すなわち，Asterisk/app_rptに接続された無線機からこれらのVoIPネットワークへ乗り入れることができます。</p>
+<p>一台のAsteriskシステムには複数のチャネルを持たせることができます。さらに一つのチャネルは，一つのノードと対応し，ノード番号を割り当てます。すなわち，一台のAsterisk/app_rptシステムには，同時に複数の電話機や無線機だけではなく，chan_echolink，chan_irlp，chan_dstarを使ったノードを同時に複数持たせることが可能です。</p>
+<p>一方，前述のように一つのノードは複数の他ノードと接続が可能ですので，結果として異種VoIPが同時に接続でき，実質ブリッジソフトウェアのように動作します。</p>
+<p>ここが元々異種VoIP間ブリッジソフトウェアを意図して開発されたrtpDirとの違いであり，混同しやすい部分です。Asterisk/app_rptの場合には，Asteriskに元々あった電話会議システム機能の結果としてブリッジになっているだけで，ブリッジソフトウェアとして意図，設計されている訳ではありません。</p>
+<p>さらに混乱しやすいのは，chan_rtpdirというチャネルインターフェースがあり，rtpDirとの統合が可能になっていることです。この場合には異種VoIPブリッジとしての役割はrtpDirが受け持ち，Asterisk/app_rptはあくまでAsterisk/app_rptのみのノードとして動作します（つまりchan_rtpdirと，chan_irlp，chan_echolink，chan_dstarとは排他的に利用することになります）。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post-811a.html">« プライベートノードに移行</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="post-7eb4.html">アンテナ整備 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

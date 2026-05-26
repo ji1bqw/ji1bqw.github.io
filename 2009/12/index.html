@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRLPでUSBメモリースティックサポート - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>IRLPでUSBメモリースティックサポート</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>今までIRLPノードのバックアップを保存したり，接続・切断時の音声メッセージをサーバーにアップロードする際にフロッピーディスクが用いられてきました。しかしフロッピーが過去の遺物になりつつある現在，IRLPではフロッピーのサポートがなくなりました。今後はフロッピーの代わりにUSBメモリースティックが使われます。</p>
+<p>旧フロッピーを使うコマンドは具体的に，</p><blockquote><p>backup_for_reinstall<br/>send_wave_files</p></blockquote><p>です。</p>
+<p>フロッピーの時と同様，何かしらの方法（手動でフロッピーをマウントして，あるいは他マシンからｆｔｐなど）で対象ファイル/tmp ディレクトリーにコピーできれば，USBメモリースティックの代わりにそちらを使うこともできます。</p>
+<p>注意点としては，バックアップから再インストールする irlp-reinstall もすでに修正されていますので，get-irlp-filesでirlp-reinstallをダウンロードしてから再インストールしようとすると，既にあるフロッピーからの再インストールはできません。以前のirlp-reinstallスクリプトが別に保存されていれば，それを使うことで既存フロッピーから再インストール可能です。</p>
+<p>/tmpにコピーできれば，メディアを気にする必要がないので一番簡単でしょう。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../11/index.html">« 2009年11月</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../../2010/01/index.html">2010年1月 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

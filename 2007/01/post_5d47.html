@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ノードのリアルタイムステータス - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>ノードのリアルタイムステータス</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>自分のノードが今どのようなステータスになっているのかを把握できると、ホームページ上などでリアルタイムでお知らせできて良いですね。それには、$HOME/localディレクトリーの中を見るとわかります。このディレクトリには、その時々のノードの状況に応じて以下のファイルが作られたり、削除されたりします。</p>
+<p>enable:<br/>    ノードがエネーブルされると、このファイルが作られます。中身は空です。スクリプトから if [ -f $LOCAL/enable ] ; then でエネーブル時の処理を書くことが出来ます。ノードがディスエーブルされると消去されます。</p>
+<p>active:<br/>    ノードが接続されると、このファイルが作られ、ファイル中に接続相手のノード番号が記述されます。enableと同様にスクリプトから if [ -f $LOCAL/active ] ; then で、コネクト中かどうかを判断でき、さらに cat $LOCAL/active で接続相手先ノード番号を入手できます。ノードがディスコネクトされると消去されます。</p>
+<p>calledip:<br/>    こちらから接続した場合に、このファイルが作成され、ファイルの中身に相手のIPアドレスが記述されます。ノードがディスコネクトされると消去されます。</p>
+<p>connectedip:<br/>    相手から接続された場合に、このファイルが作成され、ファイルの中身に相手のIPアドレスが記述されます。ノードがディスコネクトされると消去されます。</p>
+<p>mountコマンドを実行してみるとわかるのですが、$LOCAL ディレクトリはRAMドライブになっています。</p>
+<p>/dev/ram0 on /home/irlp/local type ext2 (rw)</p>
+<p>すなわち、このディレクトリは読み書きの速度は十分速いのですが、ストレージには保存されません。逆に保存する必要の無い、ノードステータスのような動的な情報がここに置かれます。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post_3c78.html">« 実験</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="local_64a5.html">$LOCALの他のファイル »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

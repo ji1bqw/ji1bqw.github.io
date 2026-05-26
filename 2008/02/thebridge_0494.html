@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>thebridgeのアップデートの仕方 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>thebridgeのアップデートの仕方</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>tbdは時々バージョンアップします。しかしEchoIRLPがうまく動いていれば，必ずしもアップデートする必要はありません。</p>
+<p>アップデートする場合，次の2通りの方法があります。</p>
+<ol><li>EchoIRLP自体を再インストールする。新しいthebridgeができると，EchoIRLPインストーラも新しいthebridgeを使うよう変更されます。（但し，新しいthebridgeの公開と，EchoIRLPインストーラの変更に時間差があるので注意）</li>
+<li>新しいthebridgeを自分でビルドして，tbdとtbdcmdを置き換えます。</li></ol>
+<p>２．の方法は以下の手順で行います。0.89を例にとります。</p>
+<ol><li>rootでログイン。<a href="http://cqinet.sf.net">http://cqinet.sf.net</a>からthebridge-0.89.tgz をダウンロードします。/rootか/tmpに置きます。</li>
+<li>tar zxvf thebridge-0.89.tgz<br/>　　解凍します。</li>
+<li>cd thebridge-0.89</li>
+<li>./configure --without-readline　<br/>　　普通は--without-readlineオプションは不要なのですが，たまたま0.89ではこのオプション無しでは configure がエラーになるので，このオプションが必要です。いずれ0.89でも修正されるかもしれません。</li>
+<li>make<br/>　　コンパイル，ビルドします。</li>
+<li>service tbd stop<br/>　　今動いているtbdを止めます。</li>
+<li>mv /home/EchoIRLP/tbd/tbd /home/EchoIRLP/tbd/tbd.old<br/>　　既存のtbdを，念のためtbd.oldとしてバックアップします。</li>
+<li>mv /home/EchoIRLP/tbd/tbdcmd /home/EchoIRLP/tbd/tbdcmd.old<br/>　　既存のtbdcmdを，念のためtbdcmd.oldとしてバックアップします。</li>
+<li>cp ./src/tbd /home/EchoIRLP/tbd/tbd<br/>　　新しいtbdをコピーします。</li>
+<li>cp ./tbdcmd/tbdcmd /home/EchoIRLP/tbd/tbdcmd<br/>　　新しいtbdcmdをコピーします。</li>
+<li>chown repeater.repeater /home/EchoIRLP/tbd/tbd*<br/>　　tbd, tbdcmdのownerとgroupをrepeaterに変更します。</li>
+<li>/sbin/service tbd start<br/>　　tbdを再起動します。<br/><br/>もし，何か不具合あるようでしたら，バックアップした tbd.old, tbdcmd.oldを元に戻しましょう。</li></ol>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="thebridge089.html">« thebridge-0.89</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="usb_radio_inter.html">USB Radio Interface »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

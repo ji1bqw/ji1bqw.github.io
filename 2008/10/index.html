@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNCOMP正式リリース - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>UNCOMP正式リリース</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>しばらくベータテスト期間であったUNCOMPモードが正式にリリースされ、いくつかの他のバグ修正と共に今日から各IRLPノードに自動配布されます。（毎日午前3時の自動更新でアップデートされます）</p><blockquote><p><span style="font-size: 0.8em;">（但し、UNCOMPと言っていますが正確には8-bit uLawコーデックのようです。）</span></p></blockquote>
+<p>あるいは、$SCRIPTS/update files を実行することで、自動更新を待たずに手動でアップデートすることができます。</p>
+<p>更新されるファイルは$HOME以下の次のファイルです：</p><blockquote><p>bin/imike<br/>bin/ispeaker<br/>scripts/call<br/>scripts/connect_to_reflector<br/>scripts/nobackup.list<br/>scripts/off<br/>scripts/on<br/>scripts/on_to_remote<br/>scripts/ref-x-reference<br/>scripts/sfswrapper</p></blockquote><p>デフォルトをUNCOMPモードにするには、＄CUSTOM/environmentファイルの中の DEFAULTCODEC環境変数をUNCOMPに変更します。</p><blockquote><p>export DEFAULTCODEC=UNCOMP</p></blockquote><p>environmentファイルはroot権限で修正する必要があります。またこのファイルを修正した後は、</p><blockquote><p>$CUSTOM/rc.irlp</p></blockquote><p>を実行して、一度IRLPをリセットする必要があります。</p>
+<p>音質のよいことで評判のIRLPが、さらによい音質になります。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../09/index.html">« 2008年9月</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../11/index.html">2008年11月 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

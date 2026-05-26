@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRLP 10月のアップデート - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>IRLP 10月のアップデート</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>久しぶりにIRLPの話題です。</p>
+<p>今朝方，VE7LTDからIRLPメーリングリスト宛にメールが流れていました。</p><blockquote dir="ltr"><p>日時：2010年10月20日 5:41:43 (JST)<br/>標題：[irlp] A number of nodes have not updated their software, and will fail to work ...</p></blockquote><p dir="ltr">最近IRLPの自動実行やステータスアップデートの仕組みに変更があったが，自動アップデートできていないノードがたくさんあるので，自分でアップデートして欲しいという内容です。もし自分のノードがこのメールにリストされていたら，</p>
+<ul dir="ltr"><li><div>マニュアルアップデートをする　(update filesを実行)</div></li>
+<li><div>リフレクターにずっと接続しっぱなしだったら，一度切断する。（<u>接続中は自動アップデートがかかりませんが，切断と同時にアップデートがかかります。</u>）</div></li></ul>
+<p>をしましょう。</p>
+<p>さて，どんなアップデートがかかったのか興味のあるところです。そこで，$HOME/scripts内のファイル変更日時を調べてみます。</p>
+<p dir="ltr"><tt><span style="font-size: 0.8em;">[repeater]$ ls -l $SCRIPT | grep Oct<br/>-rwxr-x--- 1 repeater repeater  3195 Oct 24  2009 ipupdate<br/>-rwxr-x--- 1 repeater repeater   219 <strong>Oct 15 02:42 ipupdate_cron</strong><br/>-rwxr-x--- 1 repeater repeater   438 <strong>Oct 15 05:17 irlp.crons</strong><br/>-rwxr-x--- 1 repeater repeater  1533 Oct 31  2008 on_to_remote<br/>-rwxr-x--- 1 repeater repeater 18382 Oct 13  2004 pulsecheck<br/>-rwxr-x--- 1 repeater repeater  1224 Oct 31  2008 sfswrapper<br/>-rwxr-x--- 1 repeater repeater  3717 <strong>Oct 13 06:56 statupdate</strong><br/>-rwxr-x--- 1 repeater repeater   246 <strong>Oct 15 05:18 statupdate_cron</strong><br/>[repeater]$</span></tt></p>
+<p dir="ltr">メールに書いてあったように，10月13日と15日に，システムアップデート関係のスクリプトに変更が入ったようです。</p>
+<p dir="ltr">それではさらに，それぞれ以前の内容と比べてみます。</p>
+<p dir="ltr"><strong><u>ipupdate_cron:</u></strong></p>
+<p dir="ltr"><tt><span style="font-size: 0.8em;">[repeater]$ diff $SCRIPT/ipupdate_cron /home/irlp.old/scripts/ipupdate_cron<br/>3a4<br/>&gt;  source $SCRIPT/common-functions.sh<br/>5c6<br/>&lt; source $SCRIPT/common-functions.sh<br/>---<br/>&gt; STATIONNUM=${CONVERTED_STATIONID#*stn}<br/>7,9c8<br/>&lt; # Randomizes over 15 minutes to spread out the load<br/>&lt;<br/>&lt; NUM=`expr $RANDOM % 900`<br/>---<br/>&gt; let "NUM=$STATIONNUM % 600"<br/>[repeater]$</span></tt></p>
+<p dir="ltr">ipupdate_cronは，repeaterユーザーのcronから15分毎に呼ばれ，さらにその中から$SCRIPT/ipupdateを呼び，自ノードのIPアドレスが変更されていれば，新しいIPアドレスをIRLPサーバーに伝えます。その際，世界中のIRLPノードからのアップデートリクエストの集中を避けるため，各ノードは毎時0分，15分，30分，45分から，若干分遅らせてリクエストしています。その遅らせるタイミングをノード番号によって決まった値(<span style="font-size: 0.8em;">$STATIONNUM % 600)</span>から，0～14分の乱数に変更したようです。</p>
+<p dir="ltr"><strong><u>irlp.crons:</u></strong></p>
+<p dir="ltr"><tt><span style="font-size: 0.8em;">[repeater]$ diff $SCRIPT/irlp.crons /home/irlp.old/scripts/irlp.crons<br/>9c9<br/>&lt; 0 */6 * * * (/home/irlp/scripts/statupdate_cron &gt; /dev/null 2&gt;&amp;1)<br/>---<br/>&gt; */20 * * * * (/home/irlp/scripts/statupdate_cron &gt; /dev/null 2&gt;&amp;1)<br/>[repeater]$</span></tt></p>
+<p dir="ltr">irlp.cronsは，IRLPがノードPC上でスタートする時に $HOME/custom/rc.irlp によって，repeaterユーザーのcrontabに必要なcron jobを登録するために利用されます。</p>
+<p dir="ltr">今回のアップデートでは，cronから$SCRIPT/statupdate_cron を呼ぶタイミングを，20分毎から6時間毎に変更したようです。</p>
+<p dir="ltr"><strong><u>statupdate_cron:</u></strong></p>
+<p dir="ltr"><tt><span style="font-size: 0.8em;">[repeater]$ diff $SCRIPT/statupdate_cron /home/irlp.old/scripts/statupdate_cron<br/>7,8c7,9<br/>&lt; #Picks a random number from 0 to 3600 to spread the load out over the hour<br/>&lt; NUM=`expr $RANDOM % 21600`<br/>---<br/>&gt; STATIONNUM=${CONVERTED_STATIONID#*stn}<br/>&gt;<br/>&gt; let "NUM=$STATIONNUM % 600"<br/>11a13<br/>&gt;<br/>[repeater]$</span></tt></p>
+<p dir="ltr">statupdate_cronは，repeaterユーザーのcronから定期的に呼ばれ，さらにその中から$SCRIPT/statupdateを呼び，自ノードの接続状況をIRLPステータスサーバーに伝えます。</p>
+<p dir="ltr">irlp.cronsの変更（上記）によって，cronから呼ばれる頻度が20分毎から6時間毎の実行に変更されましたが，さらにipupdateと同様にサーバーへのリクエスト集中を避けるため，0分～359分の乱数を追加したようです。</p>
+<p dir="ltr">今回のirlp.cronsとstatupdate_cronの変更により，ステータスサーバーへの状況通知間隔が最大で12時間と大きくなります。しかし，基本的にノードのステータスを変更するようなコマンドからは直接sstatupdateが呼ばれ，ほぼリアルタイムにステータスは変更通知されるので，この間隔が大きくなっても問題はないのでしょう。</p>
+<p dir="ltr"><strong><u>statupdate:</u></strong></p>
+<p dir="ltr"><span face="Courier New">実際にノード状況をステータスサーバへ通知するプログラムです。diffを取ると大きくなってしまうので省略しますが，大きな変更はステータスサーバーのIPアドレスが変わったことと，ステータスを通知するのに使っているwgetコマンドへのパラメータの書き方に変更が入りました。これが今回のアップデートの本質的な部分ですね。</span></p>
+<p dir="ltr"></p>
+<p dir="ltr"><span face="Courier New">万が一今回の変更が入らなくても，ある程度backward compatibility は持っているようですので普通はステータス変更は行われると思いますが，何らかの理由でDNSが使えず名前解決ができないような場合，ステータスサーバーのIPアドレスが変わっていますので，うまくステータス変更ができないことになるでしょう。</span></p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post-0cf7.html">« コールサイン情報</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="allstar-link-ne.html">AllStar Link Network 発展している »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>モニターモード - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>モニターモード</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>今日は小さな、しかし結構便利な機能がDave C. によって追加されました。</p>
+<p>それは monitor only mode と呼ばれています。その名のとおりモニターのみ、すなわち、こちら側ではネットワークの向こう側にいる接続相手局あるいはリフレクターからの音声を送信するだけで、こちら側のローカル局が送信してもデータ送出されず相手にはこちらの音声は届きません。</p>
+<p>この機能は imike を別のモード（-h フラグをつけて実行し、PCのスペースバーを押すことで送信するモード）で実行することで、今までも実現できていました。しかし、一度接続した後、imikeプロセスをKillして、コマンドラインから -h フラグと相手のIPアドレスを指定してimikeを再起動する必要がありました。</p>
+<p>これを今回、$LOCAL/monitor_onlyというファイルが存在する時には、IRLPのプログラムが自動的に imike に　-h フラグを付けて接続してくれるように変更が加えられました。</p>
+<p>よって、monitor only mode にするには、<br/>    touch $LOCAL/monitor_only<br/>を実行してから接続に行けばOKです。</p>
+<p>その接続が切断されると、自動的に$LOCAL/monitor_onlyファイルは削除されますので、次の接続は monitor only mode にはなりません。</p><blockquote>
+<p><span style="font-size: 0.8em;">###それでは、ずっと monitor only mode にしておきたいときは、どうしますか。IRLPの機能を使う、Linuxの機能を使うなどいくつかやり方はありそうですね。</span></p></blockquote><p>ローカルの音声が相手に届かないと言っても、imikeの機能でそうしているだけですので、DTMFは引き続き機能します。したがって、DTMFから monitor only mode に切り替えることも可能です。</p>
+<p>IRLP自動アップデートがかかっていれば、すでに更新されているはずです。どのファイルが、どのように変更されているかを見るのも楽しいものです。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../02/centos_aec3.html">« CentOS続報</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="post_641a.html">モニターモード　（続き） »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

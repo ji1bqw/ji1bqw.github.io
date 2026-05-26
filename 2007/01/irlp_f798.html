@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRLPのプロセス - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>IRLPのプロセス</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>IRLP関連のプロセスを見てみましょう。<br/>まずはアイドル状態時，repeater ユーザーで ps -x を実行してみます。関連するプロセスは以下の５つですね。</p>
+<p><span style="font-size: 0.8em;">1. /home/irlp/bin/mynetd 15425 /home/irlp/bin/irlpd</span><br/><span style="font-size: 0.8em;">2. dtmf</span><br/><span style="font-size: 0.8em;">3. tbd</span><br/><span style="font-size: 0.8em;">4. /usr/sbin/httpd　（これは複数あると思います。）</span><br/><span style="font-size: 0.8em;">5. /home/irlp/bin/mynetd 15428 /home/irlp/bin/remote_admin_server</span>
+</p>
+<p>１．mynetdデーモンは，ポート15425を監視し，接続があると irlpd を呼びます。irlpdはまずTCPの制御通信路を確立し，その後音声通信用に必要なプロセスを立ち上げます。<br/>２．dtmfデーモンは，ノード無線機からのDTMF信号をデコードし，それを引数にして$SCRIPT/decode スクリプトを呼び出します。よくコマンドラインで，decode nnnn とやるのは，まさにこのdtmfデーモンの代わりを手でやっています。DTMFを使わなかったり，いたずらがうるさい場合には，kill してもOK。<br/>３．tbdは，EchoIRLP用のEchoLinkで使用されるTheBridgeと呼ばれるデーモンです。EchoIRLPをインストールしているときのみ動作しています。<br/>４．httpdは，Webサーバー用のデーモンで，リモート管理コンソールをインストールすると追加されます。<br/>５．これは，リモート管理コンソール用のindex.phpが発するコマンドの受け口です。Web上での操作を index.php がIRLPコマンドに変換し，このポート15428に投げます。受け取ったremote_admin_console プロセスはそのコマンドを引数にして$SCRIPT/remote_adminを呼び，それを実行させます。</p>
+<p>さらに，コネクト状態にすると，あらたに以下のプロセスが立ち上がります。</p>
+<p><span style="font-size: 0.8em;">6. /home/irlp/scripts/sfswrapper</span><br/><span style="font-size: 0.8em;">7. /home/irlp/bin/ispeaker -f64.114.130.131 -p2074</span><br/><span style="font-size: 0.8em;">8. /home/irlp/bin/imike -f 64.114.130.131 2074</span>
+</p>
+<p>６．sfswrapperは，ノードが接続中ispeakerプロセスを確実に動作させるラッパースクリプトの実行プロセスです。<br/>７．ispeakerは，speakfreelyのin-comingデータを処理するプロセスです。UDPで相手のimikeと通信し，実際の音声パケットを受信します。上の例では，Ref9990 (64.114.130.131)とUDPポート2074（チャネル0）で通信しています。<br/>８．imikeは，ispeakerとは逆のout-goingデータを処理するプロセスです。UDPで相手のispeakerと通信し，実際の音声パケットを送ります。上の例では，Ref9990 (64.114.130.131)とUDPポート2074（チャネル0）で通信しています。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post_733e.html">« 接続・切断時のアナウンス</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="post_3c78.html">実験 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

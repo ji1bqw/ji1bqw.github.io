@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>無線機の送信をコントロールするコマンド - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>無線機の送信をコントロールするコマンド</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>ノード無線機のPTTをコマンドで on/off できます。</p>
+<p>key:<br/>    PTTをonします。5分でPTTLOCKタイマーが働き，自動的にoffになります。普段の交信の時には，IRLP内部ではこのコマンドが使われています。</p>
+<p>unkey:<br/>    keyでonにしたPTTをoffにします。普段の交信の時には，IRLP内部ではこのコマンドが使われています。</p>
+<p>forcekey:<br/>    keyと同様にPTTをonにします。keyとの違いは，5分のPTTLOCKタイマーが働かないことと，そして，このコマンドでonになったPTTはunkeyではoffにできないことです。このコマンドでonにした後は，<span style="color: #ff0000;">必ずforceunkeyでPTTを落とさなければなりません。</span>これはとても重要です。これに伴うforceunkeyがないと，無線機が溶けて壊れるまで送信を続けます。</p>
+<p>    それでは，なぜこのコマンドがあるかと言うと，2つ理由があります。</p>
+<ol><li>普段の交信での送信中に，ID送信など別のプログラムが重ねてPTTをonにする場合があります。このとき，ID送信中に交信が終わってPTTをunkeyしてしまうと，ID送信も途中でunkeyされてしまいます。そのため，unkeyコマンドではunkeyできない方法が望まれたこと。</li>
+<li>海外では，アマチュア無線ニュースや，天気予報などがIRLPノードから送信されている場合があります。これらの情報は比較的長く，5分のPTTLOCKタイマーを敢えて避けたい場合があること。</li></ol>
+<p>    forcekeyでPTT onした場合，readinputには，FORCE KEY BIT SETに続いてPTT ACTIVEが表示されます。    </p>
+<p>    使用には注意しましょう。</p>
+<p>forceunkey:<br/>    forcekeyでonにされたPTTをoffにします。forcekeyには必ずforceunkeyが伴わなければなりません。forcekeyでPTT offした場合，readinputには，FORCE KEY BIT RESETに続いてPTT INACTIVEが表示されます。    </p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post_ddf5.html">« 状況チェック関係</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="aux_83bf.html">AUX端子をコントロールするコマンド »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

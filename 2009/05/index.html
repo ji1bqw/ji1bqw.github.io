@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-STAR Uncovered - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>D-STAR Uncovered</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>D-Starの仕様について調べてみようと思いインターネットを検索していましたら，とても有用な資料を発見しました。<a href="http://www.aprs-is.net/downloads/DStar/DSTARUncovered.pdf"><span style="text-decoration: underline;">D-Star Uncovered</span></a> by Peter Loveall, AE5PL です。12ページの短い英文資料ですが，D-Starの仕様が簡潔に，かつわかりやすく書かれています。この内容はARRLとTAPR主催の2008 Data Communication Conference で発表されたようです。</p>
+<p>資料の前半はJARLから公開されている<a href="http://www.jarl.com/d-star/shiryou/STD4_3C.pdf">技術仕様</a>のポイントを補足しながら説明しています。しかし私にとって最も有益な情報だったのは，後半にある "Icom Enhancements"の部分です。つまり，JARLが規定していないDVモードのData Frameをアイコムがどのように使っているかの説明でした。</p>
+<p>DVモードの無線部ヘッダーに続くデータ部は，Voice Frame 72ビットとData Frame 24ビットが交互に送られます。Data Frameのバンド幅は1200bps(=4800*24/96)と言われていますが，細かく見ると実際には21回に一回同期信号が入るので，実質1200*20/21=1142bpsです。ここまではJARL仕様の通りです。</p>
+<p>アイコムはこの3バイト（24ビット）のData Frameのうち，最初の1バイトをControlバイトとして残りの2バイトをどのように利用するかを示すために使っているようです。そのためアプリケーションが使えるバンド幅としては，1142*2/3=761bpsになります。この残り2バイトの利用目的は3つあって：</p>
+<ol><li>無線部ヘッダーを繰り返す。</li>
+<li>ユーザーが設定したメッセージを（繰り返し）送る。</li>
+<li>無線機のシリアルポート経由のデータ通信。典型的な例としてGPS。</li></ol>
+<p>JARLの仕様と，アイコム独自の拡張仕様が明確になったことは，大きな収穫でした。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../04/index.html">« 2009年4月</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../06/index.html">2009年6月 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

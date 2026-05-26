@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRLP Experimental Node - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>IRLP Experimental Node</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>IRLP開発者であるDave CameronはExperimental Nodeという設定を開始しました。これはノード番号0000-0999の間を実験用ノードと位置づけ、</p>
+<ul><li>PGP認証キーを必要としない</li>
+<li>クロスリンクその他自由</li>
+<li>エンドポイントが無線という制限はない</li>
+<li>IRLPサポートチームからのサポートはない</li>
+<li>$CUSTOM/environmentファイルにおいて、<br/>　　export ALLOW_EXPERIMENTAL_NODES=YES<br/>を設定したノードのみが接続可能</li>
+<li>将来にわたって存在する保証はない（いつでも無条件に停止される可能性あり）</li></ul>
+<p>という条件の下で実験運用ができます。すなわち、一般のIRLPネットワークからは完全に隔離された環境を提供するから、サポートなしで色々な実験に使ってくれという考え方です。</p>
+<p>一般IRLPからは接続できませんが、あるグループ内などクローズドな環境で（メンバーはALLOW_EXPERIMENTAL_NODES=YESを設定）、他VoIPとのクロスリンクをしたい場合などに使えます。rtpDirをIRLPリフレクターモードで使用すればクロスリンクリフレクターが簡単にできます。</p>
+<p>ALLOW_EXPERIMENTAL_NODES=YESを解除すれば、一般IRLPノードに戻ります。</p>
+<p>私も早速experimental node割当のリクエストを出し、exp0021が割り当てられました。とは言え、いつもは通常IRLPノードとして他VoIPシステムとは排他的に運用しています。</p>
+<p>Experimental nodeのリストは、$SCRIPT/exp-x-referenceにあります。</p>
+<p>ちなみに、一般IRLPネットワーク上での他VoIPとのクロスリンクは、リフレクターでのみで許可されます。一般ノードが他VoIPとクロスリンクすることはポリシー違反となり、それが見つかるとPGP認証キーが削除される可能性があります。そうなるとエコーリフレクターとExperimental node以外の一般IRLPノード・リフレクターには接続不可になります。このようなことが今回改めて明記されました。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post-85be.html">« クロスリンクについてのその後</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="rtpdir-4ebc.html">rtpDirにおけるイベントハンドリング »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

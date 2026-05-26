@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSTARレピーターソフトウェアの実験 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>DSTARレピーターソフトウェアの実験</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>ノードPCのサウンド関係の不具合で一時中断したフリーのDSTARレピーターソフトウェアの実験ですが，再開することができました。今のところ，EchoIRLPとも問題無く併存できています。</p>
+<p>現在までの進捗は，Parrot Controllerで自分の送信した音声が返ってくること，そしてXRFリフレクターに接続し，そこでのQSOをワッチできるところまでです。</p>
+<p>構成としては，</p>
+<blockquote><p>ID-80  --&gt;  DR-420D  --&gt;  DSTAR Repeater  --&gt; Parrot Controller<br/>ID-80  &lt;--  DR-420D  &lt;--  DSTAR Repeater  &lt;-- Parrot Controller</p></blockquote>
+<p>のように，今回の実際ではレピーターではなくシンプレックス構成です。DSTAR RepeaterとParrot Controllerは，同じPC上で動作しています。Parrot Controllerは，ノードPC上でDSTARレピーターソフトと一緒に動かすことで，レピーターが受信した信号をオウム返ししてくれるソフトです（IRLPの Echo Reflector, EchoLinkのECHOTESTと同じようなツールです）。レピーターソフトから見ると，Parrot ControllerはD-STARゲートウェイに見えます。ID-80から普通に話しをすると，自分の声が無事返ってきます。</p>
+<p>さらにParrot Controller を，DSTARレピーターとゲートウェイを接続するためのR2G2というソフトウェアに入れ替え，さらにあるリフレクターに接続することで，そこでの交信を聞くことが出来ます。送信して実際に交信することもできるはずですが，まだその機会がありません。（ちなみに，R2G2とはRepeater-to-G2 Gatewayのことのようですが，D-STARでのR2D2に掛けているところが憎いネーミングですね。）</p><blockquote><p>ID-80  --&gt;  DR-420D  --&gt; DSTAR Repeater  --&gt;  R2G2  --&gt;  
+Reflector<br/>ID-80  &lt;--  DR-420D  &lt;-- DSTAR Repeater  &lt;--  R2G2  &lt;--  Reflector</p></blockquote><p>ID-80からリフレクターへ接続コマンドを出すこともできます。その方法はD-PLUSと同じで，</p><blockquote><p>UR: XRF010BL　（リフレクタ＋モジュール＋8桁目にL）<br/>RPT1: JI1BQW B<br/>RPT2: JI1BQW G<br/>MY: JI1BQW</p></blockquote><p>です。その後交信する場合には URをCQCQCQに設定，切断は，UR:_______U （8桁目にU)です。</p>
+<blockquote><p><span style="font-size: 0.8em;">ID-80でこの実験ノードやHot-Spotなどのシンプレックスノードにアクセスする時は，単にその周波数をセットして，モードをDVにするだけではなく，さらにDUPにしてシフト周波数を０（ゼロ）にセットする必要があります。そうしないとRPT1とRPT2を指定することができません。</span></p></blockquote><p>この構成はシンプレックスですので，DV Dongle/DVToolと同じようにゲートウェイに直接接続した，いわゆる Hot-SpotやDVAP と同じです。</p><blockquote><p><span style="font-size: 0.8em;">Hot-Pointとの違いは，こちらでは途中でDV Dongleを使わない，つまりEnd-to-EndでAMBEで，かつPCでGMSKのソフトウェア変復調をしています。ノード（レピーター）無線機はアナログFMで良いのですが，アクセスにはD-STARのDVモードを使います。</span></p>
+<p><span style="font-size: 0.8em;">一方，Hot-Pointは，アクセス無線機からノード無線機を経由してPCまでの間はアナログ信号で，ノードPCに接続されたDV DongleでAMBE変換をしています。GMSK部分はありません。ノード（レピーター）無線機もアクセス無線機も通常のFMです。</span></p></blockquote>
+<p>上記構成をベースに，RF部分をレピーター構成に変更，Open G2 DSTAR Gatewayをインストール（現在ソースコードやバイナリは公開されておらず，作者にリモートインストールを依頼しなければなりません），そしてXTRUSTにレピーター登録すれば，DSTARレピーターを作ることが出来ます。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="dr-420d-1282.html">« アルインコ DR-420D ディスクリミネーター出力</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="dstarrepeater-a.html">【備忘録】 dstarrepeater »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

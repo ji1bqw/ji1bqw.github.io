@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【備忘録】 alsaのビルド - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>【備忘録】 alsaのビルド</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p><a href="http://www.alsa-project.org">ALSA Project</a> からパッケージをダウンロード</p>
+<p>alsa-driver1.0.12を全てのカードに対してビルド，インストールする：</p><blockquote><pre>bunzip2 alsa-driver-1.0.12.tar.bz2<br/>tar -xf alsa-driver-1.0.12.tar<br/>cd alsa-driver-1.0.12<br/>./configure --with-cards=all --with-sequencer=yes<br/>make<br/>make install</pre>
+<p>CA0106だけの場合には，--with-cards=ca01016<br/>複数ドライバの場合には，--with-cards=xxx,yyy,zzz のようにカンマで区切る<br/><br/>アンインストールは，make uninstall</p></blockquote><p>alsa-lib 1.0.14をビルド，インストールする：</p><blockquote><pre>bunzip2 alsa-lib-1.0.14.tar.bz2<br/>tar -xf alsa-lib-1.0.14.tar<br/>cd alsa-lib-1.0.14<br/>./configure<br/>make<br/>make install</pre></blockquote><p>alsa-utils 1.0.14をビルド，インストールする：</p><blockquote><pre>bunzip2 alsa-utils-1.0.14.tar.bz2<br/>tar -xf alsa-utils-1.0.14.tar<br/>cd alsa-utils-1.0.14<br/>./configure<br/>make<br/>make install</pre></blockquote><pre>/etc/modprobe.conf</pre><blockquote><p>alias eth0 e1000<br/>alias snd-card-0 snd-ca0106<br/>options snd-ca0106 index=0<br/>options snd-card-0 index=0<br/>options snd-intel8x0 index=1<br/>options snd-usb-audio index=2<br/>remove snd-intel8x0 { /usr/sbin/alsactl store 0 &gt;/dev/null 2&gt;&amp;1 || : ; }; /sbin/modprobe -r --ignore-remove snd-intel8x0</p>
+<p>IRLPで使うサウンドカードは，常にデフォルトサウンドカードとして最初に認識させなければならない。そのため，options snd-ca0106 index=0　とする。</p></blockquote><pre></pre>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="linux-40df.html">« Linuxサウンドで一苦労</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="linux-da1e.html">Linuxサウンドで一苦労 （続き） »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

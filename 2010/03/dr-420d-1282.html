@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アルインコ DR-420D ディスクリミネーター出力 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>アルインコ DR-420D ディスクリミネーター出力</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>IRLPシンプレックスノード用に，アルインコのDR-420Dという430MHｚシングルバンドのリグを使っています。安価で，使い方もシンプル，データ端子とナローFM付きで，大変気に入っています。データ端子が他の無線機で一般的なminiDIN 6pinではなくD-Sub 9pinなので，簡単な変換アダプタを作っています。</p>
+<p>アナログのVoIPの場合には，無線機からPCへ入力するオーディオ信号は，1200bpsのパケット出力端子を使います。この端子から出る信号は，FM受信機のディスクリミネーターからさらにde-emphasis回路を通っており，人が聞いて自然な周波数特性の信号になっています。</p><blockquote><p><span style="font-size: 0.8em;">FMの場合には，その特性上変調時に劣化する高音域のS/N比を向上させるため，送信側では音声信号の高域を強調するpre-emphasis処理が行われています。受信側でそのまま復調して聞くと高音域が強調されたままですので，その逆の処理，つまり高域を弱めるde-emphasisを行って自然な音声として聞こえるようにしています。</span></p></blockquote><p>一方，今実験しているDSTARレピーターの場合には，受信機からはde-emphasisを通らない（素の）信号をPCに入力しなければなりません。これは，一般的には9600bpsパケット出力信号として取り出すことが出来ます。</p>
+<p>ところが，DR-420DをDSTARレピーターに使おうとマニュアルを見てみると1200bpsの出力信号は出ているのですが，9600bpsの記述がない。1200bps出力で試してみても，やはりD-STARは復調できません。そこで，ディスクリミネーター出力を直接取り出そうと（DR-420ではなく，姉妹機のDR-435の）回路図を見ていたら，幸運にもDR-420Dのマニュアルでは空きピンになっている端子に，ディスクリミネーターから出た後，de-emphasisを迂回してオペアンプを通った信号がでていることが分かりました。これを使うことで，無事復調ができました。何ら改造せずに済みました。</p>
+<p>実際のD-Sub 9pinは，以下のようになっています。</p>
+<ol><li>SQL</li>
+<li><strong>9600bpsパケット信号出力</strong></li>
+<li><strong>9600bpsパケット信号入力</strong></li>
+<li>1200bpsパケット信号出力</li>
+<li>Ground</li>
+<li>No Connection</li>
+<li>PTT</li>
+<li>5.0V出力</li>
+<li>1200bpsパケット信号入力</li></ol>
+<p>Pin 2と3が，マニュアルでは空きになっていました。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="aumix-6fc6.html">« 【備忘録】 aumixのビルド</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="d-star-e4bf.html">DSTARレピーターソフトウェアの実験 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

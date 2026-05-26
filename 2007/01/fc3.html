@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC3 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>FC3</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>ノードOSをFC3にしました。ボードを買ったとき付いてきたものです。最近ではFC5が付いてくるようですが，過去のFC3やRH9もhttp://www.irlp.net/new-install/dl-mirror.html　からでもISOイメージをダウンロードできます。</p>
+<p>最近のMLでは，FC5でやはりコネクト中にOSがロックアップする事例が報告されています。レピーター接続で広範囲にサービスしている海外のIRLPノードでは敢えてRH9やFC3といった安定したOSを敢えて使っている例が多いようです。</p>
+<p>私の場合，すぐにカーネルアップデートをかけましたので，今は，</p>
+<p>[repeater@ji1bqw]$ rpm -q kernel<br/>kernel-2.6.11-1.27_FC3　　　　　&lt;--- CDに入っているバージョン<br/>kernel-2.6.12-1.1381_FC3　　　&lt;--- Remote Adminインストール後<br/>kernel-2.6.12-2.3.legacy_FC3　　&lt;--- マニュアルでのカーネルアップデート後</p>
+<p>になっています。実は過去，legacy_FC3でもいくつかのノードでロックアップの問題が報告されており，その場合 1381 で安定しているようです。今のところ legacy で問題起きていないのでこのままにしておきますが，念のため1381 も敢えてキープしておきます。</p>
+<p>この一週間で，OSからのフレッシュインストールを3回もやってしまいました。最初にインストールした時によくわからなかったことも，今やってみると理解できることも多いです。</p>
+<p>さらに，EchoIRLPをインストールしました。これもしかりで，インストール時に訊かれる質問も最初と違って理解でき，自信を持ってインストールを進めることができました。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post_07f6.html">« ハングアップ</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="9004_e21f.html">9004復活 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

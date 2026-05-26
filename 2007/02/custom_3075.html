@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$CUSTOMディレクトリー - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>$CUSTOMディレクトリー</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>前回 $CUSTOM/environment ファイルについて書きました。同じディレクトリーにいくつか知っておくと便利なファイルがありますので、それらを紹介します。ちなみに、$CUSTOMは$SCRIPTとは異なり、自分で作ったプログラム/スクリプトや、ダウンロードしてきたプログラム、その他いじることの多い設定ファイルなどを置いておくディレクトリーです。</p>
+<p>callcounter:<br/>    ノードをインストールしてからの接続総回数が記録されています。</p>
+<p>custom.crons:<br/>    IRLP用のcronを定義します。これを変更したら、update files を実行してcrontabに登録します。</p>
+<p>custom_decode:<br/>    DTMFコマンドを実行する decode コマンドからまず最初に呼ばれるスクリプトです。自分用にDTMFコマンドをカスタマイズするために使用します。</p>
+<p>    注意点は、このスクリプトは簡単ではありますが、エラーをさせないこと。エラーするとDTMFコマンドが効かなくなります。また個別の処理が終わったら exit 1 で終了することです。</p>
+<p>custom_on:<br/>    接続時に何か前処理をしたい時に使用するスクリプトです。例えば、接続状態で冷却ファンを廻すために aux1on を実行する、特別なアナウンスをするためにwavファイルをプレイするなど。デフォルトでは空です。</p>
+<p>    custom_onは、引数$1として接続相手のノード番号あるいはリフレクター番号が渡されます。また、custom_onが呼ばれる前にすでに$LOCAL/activeファイルが作成されますので、こちらの中を見ても相手先を知ることができます。</p>
+<p>custom_off:<br/>    切断時に何か前処理をしたい時に使用するスクリプトです。デフォルトでは空です。</p>
+<p>rc.irlp:<br/>    ノードPCをシャットダウンすることなく、IRLPシステムのみ再スタートするときに実行します。root権限が必要です。</p>
+<p>timeoutvalue:<br/>    ノート-to-ノード接続の際の非活動タイムアウトを秒単位で記述します。デフォルトでは1200秒です。無限には設定できません。接続相手がより少ない数値を設定している場合には、そちらのタイムアウトが先に効いて切断します。</p>
+<p>timing:<br/>    ２つの数値が記述されています。両方とも単位はミリ秒です。</p>
+<p>    最初の数値は、COS信号がドロップしてからネットワークへのデータ送信を止めるまでの時間を定義します。もし相手ノードでこちらの音声が尻切れになる場合には、数値を増やします。</p>
+<p>    2番目の数値は、COS信号を検知してから、ネットワークへのデータ送信を開始するまでの時間を定義します。この数値を増やすと、頭切れの可能性が増えますが、一方pulseを防止できます。この数値は必ずpulsecheckコマンドが返してくる数値に設定します。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="customenvironme.html">« $CUSTOM/environment</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="centos.html">CentOS »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

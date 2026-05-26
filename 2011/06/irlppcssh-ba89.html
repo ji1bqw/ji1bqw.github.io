@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sshリモートログインで認証の問題 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>sshリモートログインで認証の問題</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>私のIRLPノードPCはCentOS5.5機ですが，ディスプレイも無ければキーボードも無いダルマ状態です。必要な時は，ウィンドウズPCからVNCやputtyを使ってリモートログインして管理しています。</p>
+<p>震災以来節電の為ノードを落としているのですが，今日は久しぶりに電源ONしてみました。たまには動作確認したいのと，長くIRLPサーバーにアクセスしないとPGPキーが消されてしまう可能性もありますから。</p>
+<p>さてノードPCを起動して，いざputtyからリモートログインしようとしたら認証で失敗してつながらない。VNCではうまく行きます。</p>
+<p>私は，puttyはパスワード認証ではなく鍵認証で使っています。パスワードを入力する必要がないので便利ですし，より安全です。鍵自体と sshd.config に問題なければこの鍵認証で失敗する原因は大体決まっていて，ノードPC側の鍵ファイル自体のパーミッション属性と，鍵を置いてあるディレクトリの上位ディレクトリまで含めたパーミッションです。</p>
+<p>鍵ファイル自体は600，鍵を置くディレクトリ（.ssh）は700，そして.sshの上位ディレクトリにはユーザー以外のwriteパーミッションが入っていてはいけません（よって，755が一般的）。</p>
+<p>ということで確認したところ，鍵ファイルである authorized_keys とそれをおく /home/irlp/.ssh ディレクトリはOK。しかし，その上位である /home/irlp ディレクトリのパーミッションが 775 になっていました。つまり g+w になっているのです。/home下のディレクトリが775っておかしいなと思いながら手動で700に変更したところ，バッチリputtyで認証できました。</p>
+<p>ところが，これで直ったと思いきや，ノードPCを再起動したらまた同じ状態 /home/irlp が775 に戻ってしまったのです。</p>
+<p>これには頭を悩ましました。Linuxの仕組みのどこかで再起動時にパーミッションを変えているのか，それともIRLPか。Linux自体がそんなことしたかなと思いながら，あちこち見てもやはりそんなことをやっているような所はない。ではIRLPかと，また色々調べるが少なくとも明示的に chmod 775 みたいなことをやっているところはない。</p>
+<p>そんなこんなで，いろいろ見てみた結果 /home/irlp/rc.irlp を実行してみてやっとIRLPが自分で775に戻していることがわかりました。</p>
+<p>じゃ，この中の何がやっているのだろう。で，さらにいじっていると，ここから呼ばれている update files コマンドが変えていることがわかりました。</p>
+<p>update files は，世界中のノードのIRLP関連ファイルを常に最新に維持するために，サーバーとファイルを同期するコマンドです。これが /home/irlp ディレクトリ下のファイルだけでなく，このディレクトリのパーミッションまでサーバーと同期しているようです。サーバでのパーミッションが775になっているのですね。これが理由があってそうしているのかは不明です。しかし以前はこの問題が起きていなかったことを考えると，最近このように変更が入ったのだろうと思います。</p>
+<p>さて，こうなるとSSH鍵認証の問題解決は難しくなる。仕方ないので，公開鍵を置くディレクトリを /home/irlp 外にして勝手にパーミッションが変わらないようにすることで問題を迂回しました。</p>
+<p>どうして /home/irlp が775なのかなぁ。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../05/led-7fe4.html">« LED電球からノイズ</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="ssh-604f.html">sshリモートログイン認証問題の続き »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

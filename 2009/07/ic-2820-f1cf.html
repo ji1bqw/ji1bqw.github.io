@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IC-2820のクローニング失敗 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>IC-2820のクローニング失敗</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>IC-2820は，CS-2820というソフトウェアを使ってPCとクローニングをします。今まで順調にクローニングができていたのですが，ある日突然失敗するようになりました。</p>
+<p>COMポートは間違いなく正しい番号を指定しています。ID-80のクローニングは問題なくできているのでUSB&lt;-&gt;シリアル変換ケーブルも問題ないはず。CS-2820から「無線機情報」ボタンを押すと正しく無線機と接続された表示が出ます。しかし，「無線機からの読み込み」や「無線機への書き込み」を行うと，</p><blockquote><p>COM4にアクセスできません。<br/>次のことを確認して下さい。<br/>・・・</p></blockquote><p>というポップアップが表示され失敗します。何度やってもダメです。</p>
+<p>以前と何が違うのだろう，あるいはリグが壊れたかと，ひとしきり悩んだあげく思い出したのが，最近リグ背面のSP2コネクタに外部スピーカーを接続したこと。これはあまり関係ないだろうと思いつつスピーカーをはずして再トライしてみると，問題なくクローニングが成功しました。</p>
+<p>アイコムに問い合わせてみると早速回答があり，SP2の端子がクローニングの端子を兼ねており、モノプラグを差し込むとクローニングのラインがアースレベルとなるためとのことでした。さらにマニュアルにも記述されているとのこと。確認してみると確かにマニュアルに【ご注意】として書いてありました。</p>
+<p>なおSP1ではこの問題は生じません。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="in-sync.html">« in sync</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="a-look-inside-d.html">A Look Inside D-STAR Modulation »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

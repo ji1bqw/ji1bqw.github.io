@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-STARでDTMFって? - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>D-STARでDTMFって?</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>Yahooメーリングリストのdstar_digitalで年末から何やら盛り上がっている話題があるなと思ったら，D-STARでDTMFは送れるのか，どうやったら送れるのかというトピックでした。</p>
+<p>なぜD-STARでDTMFなの?と思ってざっと眺めてみたら，どうも海外D-STARレピーターで使われているD-PLUSをDTMFでコントロールできたら簡単だろう，という発想みたいです。</p>
+<p>D-PLUSはご存じのように，G2ゲートウェイのアドオンソフトウェアでレピーター同士を接続することでリフレクターなどを実現しています。この機能を使って，例えば REF001C にそのレピーターを接続したい場合には，手元のリグのRPT1にそのレピーターコールサイン，RPT2にそのレピーターのGW，そしてURフィールドに，REF001C Lと入れてPTTを押せば繋げてくれます。また，切断したい場合には，*******U (*はスペース）をURに入れてPTTを押します。あと，状況確認や，エコーバックなどの機能もあるようです。</p>
+<p>このように，手元のD-STARリグからレピーターに対してコマンドを送ることができる訳ですが，要はいちいちURフィールドに送りたいコマンドを手入力で入れたり，ダイヤルを廻してメモリー呼び出しをするのが面倒くさいので，（IRLPやEchoLinkのように）昔から慣れているDTMFでピッポッパッとやれないか，という話ですね。（あまり大差無い気もしますが）</p>
+<p>しかし，そこから議論が深まって，DTMFをアナログで入力しても，それはAMBEでうまくエンコード，デコードできないが，実はAMBEチップには仕様上DTMF信号のそれぞれに対応したビット列が用意されていて，それを検出すればfar endでDTMFを regenerate できるようになっている。そのビット系列をゲートウェイが理解すればコマンドとして使える，しかし今のICOMはその機能を使っていない，みたいなやりとりがなされています。</p>
+<p>読んでいて面白いことは面白いのですが，日本ではあまりピンと来ませんね。でもこのような議論から新しい機能が作られていく一面もあるでしょう。すでにircDDBではDTMFビット列を検出するコードはできているようです。海外GWでこの機能が追加されるのも遠くなさそうです。</p>
+<p>参考までに，最初の質問者が引用した，D-STARコーデックの音質についての考察です。<a href="http://utahvhfs.org/dstar_codec_behavior.html">http://utahvhfs.org/dstar_codec_behavior.html</a></p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../../2010/12/index.html">« 2010年12月</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../03/index.html">2011年3月 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

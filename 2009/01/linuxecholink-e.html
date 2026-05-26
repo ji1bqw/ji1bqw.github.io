@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinuxでEchoLink - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>LinuxでEchoLink</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>EchoLinkを動かす際のOSの選択肢は、他VoIP無線に比べて多いようですね。MS Windows だけでなく、Linux、Macでも動作実績があるようです。</p>
+<p>ノード局（EchoLinkで言うところのSysOpモード）を運用しようとした場合、コストや安定性の観点からLinuxを使いたいという要求も多いと思いますが、EchoLinkの場合Linuxベースの選択肢も以下のようにバラエティーに富んでいます。</p>
+<p>1. <a href="http://www.echoirlp.net/">EchoIRLP</a></p>
+<p>これはIRLPノードにアドオンとしてtbd (thebridge)を追加することで、そのノードをEchoLinkネットワークにも接続できるようにしたシステムです。無線機とのインターフェースはIRLPボードをそのまま利用します。IRLPシステムが前提のため、OSはLinuxとは言えIRLP用にカスタマイズされたCentOSです。ちなみにカンファレンスとしては動作せず、IRLPとEchoLink間のブリッジはできません。</p>
+<p>2. <a href="http://tech.groups.yahoo.com/group/rtpDir/">rtpDir</a></p>
+<p>これはEchoLink, IRLP, Asterisk, D-Starの各システムに接続、あるいは相互にブリッジするためのソフトウェアで、当局が導入しているシステムです。rtpDir単体ではEchoLinkシステムとして動作します。無線機インターフェースもシリアルポート経由でEchoLink用インターフェースが利用できます。DTMFデコードはrtpDirでソフトデコードもできますし、VA3TOインターフェースなどに装備されている外付けDTMFデコーダも利用できます。Linux DistroもCentOS, Fedora, SUSE, RedHat, Debian, Ubuntuで実績があるようです。GUI版とテキストモード版の両方が用意されています。</p>
+<p>3. <a href="http://app-rpt.qrvc.com/">Asterisk/app_rpt + chan_echolink</a> </p>
+<p>Asterisk/app_rptノードに、chan_echolinkというチャネルドライバを追加することでEchoLinkノードを構築することができます。これはEchoIRLPと同様にAsterisk/app_rptを前提として、その上にEchoLinkシステムを載せているようなイメージです。LinuxはCentOSですが、Asterisk/app_rptインストール用に作られたACID(Allstar CentOS
+Install Disk)というCDのisoイメージをフリーでダウンロードできます。このCDでインストールするとOSのインストールからAsterisk/app_rptのインストールまで一気にできます。確か最新版のACIDにはchan_echolinkも含まれていると思います（未確認）。無線機インターフェースはAsterisk/app_rptで使えるものに限られます（一般的にはUSBオーディオドングルの改造か市販品では<a href="http://www.dmkeng.com/">URI</a>）し、DTMFコマンド体系もAsterisk/app_rptのものになります。</p>
+<p>4. <a href="http://groups.yahoo.com/group/thelinkbox/">tlb (thelinkbox)</a></p>
+<p>EchoLinkカンファレンスを実現するtbd (thebridge)の拡張版です。EchoLinkだけではなく他VoIPシステム(IRLP, Asterisk, SpeakFreely)とのブリッジを可能としながら、さらに無線機コントロールの機能を追加しています。無線機インターフェースもEchoLinkで一般的なものから、IRLPボード、CM108ベースのUSBオーディオドングルをサポートしています。複数の無線機を異なるインターフェースで接続し、それぞれを個別にコントロールできます。GUIはなくテキストコマンドのみですが、コマンド体系もtbdの拡張です。</p>
+<p>5. <a href="http://cqinet.sourceforge.net/">EchoLinux</a><br/>6. <a href="http://svxlink.sourceforge.net/">SvxLink</a></p>
+<p>上記2つは未経験のため詳細不明ですが、他と比べるとEchoLink特化型のようです。EchoLinuxの方はしばらくアップデートされていないようですね。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../../2008/11/asterisk-chan_d.html">« Asterisk: chan_dstar</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="irlpirlp-e446.html">IRLPボードなしでIRLP »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

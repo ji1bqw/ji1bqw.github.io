@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AllStar Linkへの登録 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>AllStar Linkへの登録</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>久しぶりに Asterisk/app_rpt の話題です。</p>
+<p>以前からAllStar Link への登録局の全リストを見ることができています。<a href="http://allstarlink.org/">http://allstarlink.org/</a>の"List All Nodes"というボタンを押すとリストが表示されます。</p>
+<p>最近，このリストのノード番号欄の背景が色分けされました｡</p><blockquote><p>緑---AllStar Linkへ正しく登録できているノード<br/>灰---正しく登録できていないノード</p></blockquote><p>なんと正しく登録できているノードは，ざっと全体の1/4くらいしかいません。少々驚きました。</p>
+<p>Asterisk/app_rptのインストールや設定が一通り終え，AllStar Link に参加するためには，以下の設定が必要です。</p>
+<p>/etc/asterisk/iax.conf　ファイルの [general] セクション内に，</p><blockquote><p>register=A<em><strong>nnnn</strong></em>:<em><strong>pppppp</strong></em>@register.allstarlink.org</p></blockquote><p>を必ず設定します。ここで nnnn はノード番号，pppppp はノード固有のパスワードです。nnnnの前に 'A' ，そしてnnnnとppppppの間にピリオド ':' があります。私の場合には，ノードが2132と2234の2つありますので，以下のようになります。</p><blockquote><p>[general]<br/>register=A2132:pppppp@register.allstarlink.org<br/>register=A2234:pppppp@register.allstarlink.org<br/>...</p></blockquote><p>パスワードはノード番号を取得した際に通知されているもので，もし忘れた場合には <a href="http://allstarlink.org/">http://allstarlink.org/</a> から再発行依頼が可能です。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../09/index.html">« 2009年9月</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="../11/index.html">2009年11月 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

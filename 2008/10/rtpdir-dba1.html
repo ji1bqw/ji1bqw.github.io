@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rtpDirへの無線機の接続 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>rtpDirへの無線機の接続</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>私のrtpDirノードでは、無線機をIRLP I/Fカード経由と、URI経由で1台づつ接続しています。その中でもIRLPに接続されている方をメインに使用しています。それは、rtpDir導入前まで私のノードがIRLPであったためDTMFコマンド体系を継承したかったこと、そして何よりIRLPではスクリプトを書くことでコマンドを色々柔軟にカスタマイズができることが理由です。</p>
+<p>しかし、rtpDirのGUI版でもシリアルポート経由で、EchoLinkで一般的に利用されている無線機インターフェースを介して無線機を接続・コントロールすることが可能です。COS信号ではなく、ソフトウェアVOXを使ったコントロールも可能なので、最低限PTTとサウンドーカードの配線だけでできますね。</p>
+<p>ノードにrtpDir, IRLP, Asterisk/app_rptが入っているとして、可能な無線機接続の形態はどのソフトウェアが無線機をコントロールするかによって、以下のようにまとめることができます：</p>
+<ol><li>rtpDirがコントロール<br/>ノードPCのシリアルポート、サウンドカード、無線機インターフェースが必要</li>
+<li>IRLPがコントロール<br/>ノードPCのパラレルポート、IRLPインターフェースカード、サウンドカードが必要</li>
+<li>Asterisk/app_rptがコントロール<br/>URIが必要</li></ol>
+<p>となります。これらのうち、どれか一つでもあればその無線機からすべてのVoIPシステムと交信ができます。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="asteriskapp_rpt.html">« Asterisk/app_rptのネットワークインストール</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="uncomp-53dc.html">UNCOMP正式リリース »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【備忘録】 Asterisk/app_rpt -- usbradio.conf - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../index.html">&#8592; トップページへ</a></p>
+<h1>【備忘録】 Asterisk/app_rpt -- usbradio.conf</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>;<br/>; Usbradio channel driver Configuration File<br/>;</p>
+<p>[general]</p>
+<p>[usb2132]</p>
+<p>hdwtype=0<br/>rxboost=1<br/>txboost=1<br/>rxctcssrelax=1<br/>txctcssdefault=67.0<br/>rxctcssfreqs=67.0<br/>txctcssfreqs=67.0<br/>;rxctcssoverride=0<br/><span style="color: #0000ff;"><strong>carrierfrom=dsp<br/>ctcssfrom=dsp<br/>rxdemod=flat   <span style="color: #000000;">&lt;-- descriminatorからの場合</span><br/>txprelim=yes　　<span style="color: #000000;">&lt;-- modulator直接入力の場合</span></strong></span><br/>txlimonly=no<br/>txtoctype=notone<br/>txmixa=composite<br/>txmixb=no<br/>invertptt=0<br/>duplex=0<br/>rxondelay=20<br/>rxnoisefiltype=0<br/>eeprom=0</p>
+</div>
+</div>
+
+<footer>
+<p>JI1BQW CyberHAM | <a href="../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

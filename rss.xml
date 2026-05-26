@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:content="http://purl.org/rss/1.0/modules/content/"
+ version="2.0">
+<channel>
+<title>This is JI1BQW - CyberHAM</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/</link>
+<description>--- Internet Linked Radio Amateur ---</description>
+<language>ja-JP</language>
+<lastBuildDate>Sun, 15 Jan 2023 20:47:43 +0900</lastBuildDate>
+<generator>http://www.typepad.com/</generator>
+<item>
+<title>Some notes for installing VarAC on Raspberry Pi</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2023/01/post-0666d2.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2023/01/post-0666d2.html</guid>
+<description>Unlike VARA HF Modem, installing and run...</description>
+<content:encoded><![CDATA[<p>Unlike VARA HF Modem, installing and running VarAC on Raspberry Pi is tricky.  Here are some notes I took when I successfully had it run.  From my 10+ different attempts, this is the most reliable way to install VarAC and get it running.</p>
+<p>That being said, it should be taken as nothing more than an experiment.  I must admit I use Linux Mint for daily operations.</p>
+<p><strong><u>Prerequisites</u></strong></p>
+<ul>
+<li>RPi 4B with Raspberry Pi OS 32bit.  <a href="https://github.com/km4ack/pi-build" target="_top">KM4ACK's "build-a-pi"</a><span> </span>is a very good option to consider for a Ham purpose.</li>
+</ul>
+<p>Raspberry Pi OS 64bit may work, but I have yet to confirm it.</p>
+<p><strong><u>Run WheezyE's install script with vara_only option</u></strong></p>
+<p><a href="https://github.com/WheezyE/Winelink" target="_top" rel="noopener noreferrer nofollow ugc" rev="en_rl_none"><u>https://github.com/WheezyE/Winelink</u></a></p>
+<p><span>This will install box86, wine, winetricks, VARA HF and FM Modems and winklink-related components.  </span> If you only need VARA but no other winlink-related components, specify the vara_only option when you run the install script.</p>
+<p style="padding-left: 30px;"><em>$ curl -O https://raw.githubusercontent.com/WheezyE/Winelink/main/install_winelink.sh &amp;&amp; bash install_winelink.sh<span> </span><strong>vara_only</strong></em></p>
+<p><strong><u>Replace PDH (Performance Data Helper) in the wine prefix</u></strong></p>
+<p style="padding-left: 30px;"><em>$ cd $HOME/Downloads</em></p>
+<p style="padding-left: 30px;"><em>$ wget http://files.k6eta.com/pdh.dll.zip</em></p>
+<p style="padding-left: 30px;"><em>$ unzip pdh.dll.zip</em></p>
+<p style="padding-left: 30px;"><em>$ rm pdh.dll.zip</em></p>
+<p style="padding-left: 30px;"><em>$ mv pdh.dll $HOME/.wine/drive_c/windows/system32</em></p>
+<p>By now, you should be able to run VARA Modem standalone.</p>
+<p><strong><u>Install wine-mono</u></strong></p>
+<p style="padding-left: 30px;"><em>$ wget -q -P ~/.cache/wine https://dl.winehq.org/wine/wine-mono/7.2.0/wine-mono-7.2.0-x86.msi</em></p>
+<p style="padding-left: 30px;"><em>$ wine msiexec /i ~/.cache/wine/wine-mono-7.2.0-x86.msi</em></p>
+<p>Now winecfg shows something like below.</p>
+<p><img src="https://cdn-bio.qrz.com/w/ji1bqw/_.png?p=a2b3a9f10210e5ceb4bf37278c23f86a" /></p>
+<p><strong><u>Install VarAC</u></strong></p>
+<p>Unzip VarAC.zip under "~/.wine/drive_c/"</p>
+<p>It is highly recommended that VarAC.ini be copied from another working environment or carefully created by hand. This could reduce the likelihood of failures at startup.</p>
+<p>Don't forget to set "LinuxCompatibleMode=ON" in VarAC.ini.</p>
+<p><strong><u>Run VarAC.exe</u></strong></p>
+<p style="padding-left: 30px;"><em>$ wineserver -k</em></p>
+<p style="padding-left: 30px;"><em>$ wine VarAC.exe</em></p>
+<p>You will see tons of errors and warning messages, but let it go.</p>
+<p>After VarAC and VARA Modem are launched, in many cases TCP LED of VARA Modem stays red. Repeat "DISCONNECT MODEM"/"CONNECT MODEM" on VarAC UI until the LED turns green.</p>
+<p>Just in case, let's run "wineserver -k" to kill all wine related processes before launching VarAC.</p>
+<div data-pm-slice="1 1 []" data-en-clipboard="true"><strong><span style="text-decoration: underline;">Turn off Narrator on VarAC Settings</span></strong></div>
+<div>"Setting" -&gt; "Appearance and Sounds" -&gt; Uncheck all options at "Narrator (Text-to-Speech)"</div>
+<div></div>
+<div>This is important.  If you don't disable this, VarAC is most likely to freeze or crash when it narrates (e.g. when received a CQ call).</div>]]></content:encoded>
+
+
+<category>VARA/VarAC</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sun, 15 Jan 2023 20:47:43 +0900</pubDate>
+
+</item>
+<item>
+<title>VarAC on Raspberry Pi</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2023/01/post-e4270d.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2023/01/post-e4270d.html</guid>
+<description>Thanks to like-minded skillful HAMs arou...</description>
+<content:encoded><![CDATA[<p>Thanks to like-minded skillful HAMs around the world and the authors of the original software, VARA Modem and VarAC now run on Linux and Rasberry Pi allowing us to stay in a Windows-free environment.</p>
+<p><u>VARA HF Modem and VarAC running on Raspberry Pi 4B</u></p>
+<p>Built on top of <a href="https://github.com/km4ack/pi-build">KM4ACK's "build-a-pi"</a>.</p>
+<p><img src="https://cdn-bio.qrz.com/w/ji1bqw/VarAC_RPi_png.jpg?p=a5ca4420c9ca209ab0d3cc32ea49c3a4" /></p>
+<p><u>VARA HF Modem and VarAC running on Linux Mint 21</u></p>
+<p><img src="https://cdn-bio.qrz.com/w/ji1bqw/VarAC_Mint_png.jpg?p=a5ca4420c9ca209ab0d3cc32ea49c3a4" /></p>
+<p> </p>]]></content:encoded>
+
+
+<category>VARA/VarAC</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sun, 15 Jan 2023 20:35:10 +0900</pubDate>
+
+</item>
+<item>
+<title>PiRLPノードのSDカードバックアップ</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2013/07/raspberry-pisd-.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2013/07/raspberry-pisd-.html</guid>
+<description>Raspberry Piは，SDカードをHDDの代わりに使用していますので，以前...</description>
+<content:encoded><![CDATA[<p>Raspberry Piは，SDカードをHDDの代わりに使用していますので，以前のPCベースのIRLPノードのように backup_for_reinstall をしなくても，SDカードそのもののクローンを作っておけば，それを差し替えるだけで全く同じように動作します。万が一の場合のノード復旧が大幅に簡略化されますので，おすすめです。</p>
+
+<p>SDカードのクローンは，Windows PCでは Win32 Disk Imager，Linux であれば dd コマンドを使って簡単に作ることができます。（Raspberry Pi以外の別PCで行います。もちろんSDカードスロット付きPCか，無ければUSBアダプターを用意する必要あります。）</p>
+
+<p>ただし注意点が一点。</p>
+
+<p>SDカードはたとえ同じメーカー，同じ容量のもので揃えたとしても，個々に微妙な容量の差があるようです。もし，オリジナルのSDカードの容量が，クローン用のSDより微妙に大きい場合，上記ツールだけではうまくクローンを作れません。コピー先容量不足のエラーが出ます。特に，Raspeberry Piインストール後，raspi_configを使ってSDカードの容量をフルに使うような設定をした場合，こうなる可能性が高くなります。</p>
+
+<p>このような場合には，クローンを一サイズ上のSDカードに作るか（4GBなら8GB，8GBなら16GB)，あるいはオリジナルSDカード上のlinuxファイルシステムとそのパーティションを少し縮小する必要が出てきます。</p>
+
+<p>後者のlinuxファイルシステムとパーティションの縮小は，<a href="http://gparted.sourceforge.net/index.php">GParted</a>というフリーツールで簡単に行う事ができます。Live CDを利用すれば，このCDからブートしますので，どのPCでも利用可能。しかし，後述の理由から，別PCはLinuxを使った方が良いと思います。</p>
+
+<p>RaspbianのSDカード上には，FAT16の小さめのブートパーティションと，ext4の大きいlinuxパーティションの2つが作られています。(以下は fdisk の出力。）</p><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="font-size: 0.8em;color: #333333;"><span style="line-height: 19.234375px;">Number&nbsp; Start&nbsp; &nbsp;&nbsp; &nbsp;End&nbsp; &nbsp;&nbsp; &nbsp; Size&nbsp; &nbsp;&nbsp; &nbsp;Type&nbsp; &nbsp;&nbsp; File system&nbsp; Flags</span></span></p></blockquote><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="font-size: 0.8em;color: #333333;"><span style="line-height: 19.234375px;"> 1&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 4194kB&nbsp; 62.9MB&nbsp; 58.7MB&nbsp; primary&nbsp; &nbsp;fat16&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; lba</span></span></p></blockquote><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="font-size: 0.8em;color: #333333;"><span style="line-height: 19.234375px;"> 2&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 62.9MB&nbsp; 3806MB 3743MB&nbsp; primary&nbsp; &nbsp;ext4</span></span></p></blockquote><div></div>
+
+<p></p>
+
+<p>GPartedを使って，ブートパーティションの方は一切触らずに，linuxパーティションだけを少々（例えば200MB位。）減らしてあげます。その際，linuxパーティションの始めのfree spaceはいじらず（スタート位置はそのままに），後ろのfree spaceが増えるように（後ろから減らすように），全体サイズを減らします。Gpartedは，ファイルシステムとパーティションの両方を同時に減らしてくれますので，これだけでOK。</p>
+
+<p>その後，Linux上で dd コマンドを使ってクローンを作ります。</p><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="color: #333333;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19.234375px; background-color: rgb(252, 252, 252);">dd bs=1M if=/dev/sd<em>x</em> of=/tmp/sdcard.img　（オリジナルSDイメージをPCにコピー。その後SDカードを入れ替えます。）</span></span></p>
+
+<p><span style="color: #333333;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19.234375px; background-color: rgb(252, 252, 252);">dd bs=1M if=/tmp/sdcard.img of=/dev/sd<em>x</em>　（上でコピーしたオリジナルイメージをクローンにコピー。）</span></span></p></blockquote><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><p><span style="color: #333333;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 19.234375px; background-color: rgb(252, 252, 252);">(sd<em>x</em>の<em>x</em>は，使うPC環境で変わります。）</span></span></p></blockquote><p>2番目のddで（クローンに書込む時に）やはり容量不足のエラーが出るかも知れませんが，それは無視して最後まで続行します。エラーが出たときには，必要な部分は全てコピーが済んでいます。残念ながらWindows上のWin32 Disk Imagerではエラーが生じた時点でコピーが停止してしまってうまく行かないようです。</p>
+
+<p></p>]]></content:encoded>
+
+
+<category>IRLP構築日記</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sat, 06 Jul 2013 11:16:02 +0900</pubDate>
+
+</item>
+<item>
+<title>PiRLPネットワークが不安定だった原因</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2013/06/pirlp-9725.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2013/06/pirlp-9725.html</guid>
+<description>無線LAN，有線LANともに，どうもネットワークが不安定で，ノードやリフレクター...</description>
+<content:encoded><![CDATA[<p>無線LAN，有線LANともに，どうもネットワークが不安定で，ノードやリフレクターにうまく接続できない現象があったのですが，RFの回り込みが原因のようです。外部アンテナではなく，室内アンテナを利用していたのですが，試しにダミーロードに変えてみたら不安定さが全くなくなりました。Raspberry Pi本体がシールドされておらず，さらに無線機の近くに置いているからでしょうね。いよいよ無線機をQRPのハンディートランシーバーにすべき時が来ましたか。</p>]]></content:encoded>
+
+
+<category>IRLP構築日記</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sun, 09 Jun 2013 19:19:10 +0900</pubDate>
+
+</item>
+<item>
+<title>PiRLPノードを無線LANで使う</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2013/06/pirlplan-8f12.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2013/06/pirlplan-8f12.html</guid>
+<description>無線LANを利用することでさらにPiRLPノードをコンパクトに作ることができます...</description>
+<content:encoded><![CDATA[<p>無線LANを利用することでさらにPiRLPノードをコンパクトに作ることができます。</p>
+
+<div></div>
+
+<div>私の使っている無線LAN子機はUSBタイプ，BUFFALO社製のWLI-UC-GNM2で，1,000円しないものです。<br /><p><a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2013/06/09/s20130329_233758.jpg" onclick="window.open(this.href, '_blank', 'width=600,height=337,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img alt="S20130329_233758" title="S20130329_233758" src="http://bluebonnet.way-nifty.com/cyberham/images/2013/06/09/s20130329_233758.jpg" width="100" height="56" border="0" /></a></p></div>
+
+<div>基本的にこれをUSBに挿せば，OSはデバイスを認識します。しかし，このままでは動作しません。/etc/network/interfaces ファイルを以下のように書き換えます。<br /><br />【想定】<br /><ul><li>無線LAN子機はOSに wlan0 として認識されている。（子機を1個しか挿していなければwlan0です。iwconfigコマンドで確認できます。）</li>
+
+<li>親機はステルスモード。</li>
+
+<li>DHCP利用。</li>
+
+<li>認証，暗号化方式は，WPA2-PSK/AES。</li></ul></div>
+
+<div>以下が，/etc/network/interfacesファイルの内容です。</div><br />
+
+<div></div><blockquote style="margin: 0px 0px 0px 40px; border: none; padding: 0px;"><div><div>auto lo</div></div>
+
+<div></div>
+
+<div><div></div></div>
+
+<div><div>iface lo inet loopback</div></div>
+
+<div><div>iface eth0 inet dhcp</div></div>
+
+<div></div>
+
+<div></div>
+
+<div>auto wlan0</div>
+
+<div><div>allow-hotplug wlan0</div></div>
+
+<div><div>iface wlan0 inet dhcp</div></div>
+
+<div><div>wpa-ssid &quot;<em>SSID</em>&quot;<span class="Apple-tab-span" style="white-space: pre;">&nbsp;</span>　　&lt;-- &quot; &quot;の中には，SSIDを指定します。</div></div>
+
+<div><div>wpa-scan-ssid 1<span class="Apple-tab-span" style="white-space: pre;">&nbsp;</span>　　&lt;-- 親機がステルスモードの場合には 1。</div></div>
+
+<div><div>wpa-proto RSN<span class="Apple-tab-span" style="white-space: pre;">&nbsp;</span>　　　&lt;-- WPA2の場合</div></div>
+
+<div><div>wpa-pairwise CCMP<span class="Apple-tab-span" style="white-space: pre;">&nbsp;</span>&lt;-- AESの場合</div></div>
+
+<div><div>wpa-group CCMP<span class="Apple-tab-span" style="white-space: pre;">&nbsp;</span>　　&lt;-- AESの場合</div></div>
+
+<div><div>wpa-key-mgmt WPA-PSK<span class="Apple-tab-span" style="white-space: pre;">&nbsp;</span>　　&lt;-- WPA2-PSKの場合</div></div>
+
+<div><div>wpa-psk &quot;<em>keyword</em>&quot;<span class="Apple-tab-span" style="white-space: pre;">&nbsp;</span>　　&lt;-- &quot; &quot;の中には，WPA2-PSKのキーワードを指定します。</div></div>
+
+<div><div></div></div></blockquote><div><div></div>
+
+<div></div><br />
+
+<div>これで再起動してみましょう。うまくインターネットに接続されたら，IPアドレスを確認して，通常どおりルーターにport forwardingを設定しましょう。</div></div>
+
+<div></div>
+
+<div></div>
+
+<div></div>]]></content:encoded>
+
+
+<category>IRLP構築日記</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sun, 09 Jun 2013 19:11:18 +0900</pubDate>
+<enclosure url="http://bluebonnet.way-nifty.com/cyberham/images/2013/06/09/s20130329_233758.jpg" type="image/jpeg" length="5410" />
+
+</item>
+<item>
+<title>PiRLP (= Raspberry Pi IRLP) 構築完了</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2013/04/pirlp-raspberry.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2013/04/pirlp-raspberry.html</guid>
+<description>今はやりの Raspberry Pi を使ったIRLPノードを構築しました。小型...</description>
+<content:encoded><![CDATA[<p>今はやりの Raspberry Pi を使ったIRLPノードを構築しました。小型軽量エコ低コストです。何とPC電源は携帯電話の充電器です <img src="http://emojies.cocolog-nifty.com/emoticon/good.gif"> これでノード無線機をハンディーにすればかなりのミニIRLPノードができますね。</p>
+
+<div><p><a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2013/04/23/img_0231_2.jpg" onclick="window.open(this.href, '_blank', 'width=600,height=450,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img alt="Img_0231_2" title="Img_0231_2" src="http://bluebonnet.way-nifty.com/cyberham/images/2013/04/23/img_0231_2.jpg" width="100" height="75" border="0" /></a></p>
+
+<div>↑左のボードがおなじみIRLP V3 ボード，右がRaspberry Piです。</div>
+
+<div>サウンドはUSB，Raspberry PiのGPIO端子からリボンケーブルでIRLPボードのパラレルポートに接続しています。IRLPボードも3.3V駆動にするための簡単な改造を施し，Raspberry Piからのリボンケーブルで電源供給していますので5Vの別電源不要です。私はWireless LANにしましたので，LANケーブルもありません。かなり簡素化できています。</div>
+
+<div><p><a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2013/04/23/img_0228.jpg" onclick="window.open(this.href, '_blank', 'width=600,height=450,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"></a></p>
+
+<p></p>
+
+<p><a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2013/04/23/img_0228_2.jpg" onclick="window.open(this.href, '_blank', 'width=600,height=450,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img alt="Img_0228_2" title="Img_0228_2" src="http://bluebonnet.way-nifty.com/cyberham/images/2013/04/23/img_0228_2.jpg" width="100" height="75" border="0" /></a>
+</p>
+
+<p></p>
+
+<p></p>↑IRLPノードとしてはこれだけです（いや，無線機用電源とPC用携帯充電器が写ってませんね）。今は無線機が一番でかくて電気喰ってます <img src="http://emojies.cocolog-nifty.com/emoticon/despair.gif"></div></div>
+
+<div></div>]]></content:encoded>
+
+
+<category>IRLP構築日記</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Tue, 23 Apr 2013 23:02:21 +0900</pubDate>
+<enclosure url="http://bluebonnet.way-nifty.com/cyberham/images/2013/04/23/img_0231_2.jpg" type="image/jpeg" length="6116" />
+<enclosure url="http://bluebonnet.way-nifty.com/cyberham/images/2013/04/23/img_0228_2.jpg" type="image/jpeg" length="7139" />
+
+</item>
+<item>
+<title>2012 IRLP New Year QSOパーティ</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2012/01/2012-irlp-new-y.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2012/01/2012-irlp-new-y.html</guid>
+<description>明けましておめでとうございます。
+今年のIRLP New Yearパーティーは残...</description>
+<content:encoded><![CDATA[<p>明けましておめでとうございます。<br />
+今年のIRLP New Yearパーティーは残念ながら参加できませんでした。どうもネットワークの調子が悪いのです。受信音声が頻繁に途切れて実用に耐えません。またIRLPに接続中は他のPCのネット速度が極端に落ちます。インターネット回線は問題ないと思われますので，最近変えたWiFiルーターが原因かも知れません。正月休み中に見てみます。<br />
+　　　　↓↓↓<br />
+このWiFiルーターはBUFFALO製なのですが，その説明書を良く見てみたら，ムービーエンジンという動画サイトをきれいに再生させる機能が入っていることがわかりました。これを<strong>OFF</strong>にしてみたら，あっけなく問題解消しました。他PCでのネット速度も問題ありません。大げさな話にならず助かりました。（ちなみに，IRLPノードはWiFiではなく有線でこのルーターにつないでいます。）</p>
+
+<p>最近IRLPノードはめったに立ち上げないので，この問題には今まで全く気が付きませんでした。時々使わないとダメですね。</p>]]></content:encoded>
+
+
+<category>IRLP構築日記</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sun, 01 Jan 2012 15:01:25 +0900</pubDate>
+
+</item>
+<item>
+<title>HDDクラッシュ</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2011/08/hdd-d880.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2011/08/hdd-d880.html</guid>
+<description>久しぶりにD-STAR HOTSPOTを立ち上げようとPCオンしたら，HDDクラ...</description>
+<content:encoded><![CDATA[<p>久しぶりにD-STAR HOTSPOTを立ち上げようとPCオンしたら，HDDクラッシュ！　立ち上がらない。手持ちのHDDと交換して，Windows XP再インストール中。遅いPCだからインストールも時間がかかります。HOTSPOT用のプログラムは何が必要だったかな，思い出して再インストールしないと。</p>]]></content:encoded>
+
+
+<category>D-STAR</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sun, 21 Aug 2011 11:48:58 +0900</pubDate>
+
+</item>
+<item>
+<title>国内D-STARレピーター増えてます</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2011/08/d-star-e53d.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2011/08/d-star-e53d.html</guid>
+<description>最近増えてますね。リグのメモリー管理を頻繁にやってます。同じアイコムのリグでもメ...</description>
+<content:encoded><![CDATA[<p>最近増えてますね。リグのメモリー管理を頻繁にやってます。同じアイコムのリグでもメモリー管理ソフトが異なって，そのソフトウェア間でカット＆ペーストができないのが難点ですけれども。でもうれしい悲鳴？</p><blockquote dir="ltr"><p>話は違いますが，アイコムのメモリー管理ソフトはどうして可変ピッチフォントを使っているのでしょうね。8文字という文字数，文字の位置が重要な意味を持つD-STARでは，固定ピッチフォントを使ってくれればコールサイン入力がどんなに楽か。できればコールサインを入れるフィールドは，原稿用紙のように罫線を入れて欲しいくらい。</p></blockquote>]]></content:encoded>
+
+
+<category>D-STAR</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sun, 21 Aug 2011 09:11:18 +0900</pubDate>
+
+</item>
+<item>
+<title>ブルートゥースヘッドセットでCW</title>
+<link>http://bluebonnet.way-nifty.com/cyberham/2011/08/cw-c97c.html</link>
+<guid isPermaLink="true">http://bluebonnet.way-nifty.com/cyberham/2011/08/cw-c97c.html</guid>
+<description>携帯電話や音楽を聴くのにBTヘッドセットを使っているので，ついでにそれを無線機で...</description>
+<content:encoded><![CDATA[<p>携帯電話や音楽を聴くのにBTヘッドセットを使っているので，ついでにそれを無線機でも使えないかと，写真のようなBTオーディオ送信機を買ってみました。</p>
+
+<p>結論からいうと失敗。音のディレイがあって，特に自分の打っているサイドトーンが遅れるは，短点飛びするはで，全く使えませんでした。音楽やSSB音声のような連続オーディオならよいのでしょうが，CWではダメでした。BTヘッドセットが使えると少しスマートに運用できると思ったのですが，ちょっと残念。</p>
+
+<p><a onclick="window.open(this.href, '_blank', 'width=359,height=600,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false" href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2011/08/20/imag0028.jpg"><img title="Imag0028" border="0" alt="Imag0028" src="http://bluebonnet.way-nifty.com/cyberham/images/2011/08/20/imag0028.jpg" width="100" height="167" /></a> </p>]]></content:encoded>
+
+
+<category>アマチュア無線一般</category>
+
+<dc:creator>JI1BQW</dc:creator>
+<pubDate>Sat, 20 Aug 2011 08:44:26 +0900</pubDate>
+<enclosure url="http://bluebonnet.way-nifty.com/cyberham/images/2011/08/20/imag0028.jpg" type="image/jpeg" length="58905" />
+
+</item>
+
+</channel>
+</rss>

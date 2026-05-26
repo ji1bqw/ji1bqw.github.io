@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asterisk/app_rptでEchoLink - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>Asterisk/app_rptでEchoLink</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>私のノードでは，EchoLinkはEchoIRLPをずっと使っています。一方，Asterisk/app_rptにおいてもchan_echolinkと言う仕組みが入っており，EchoLinkノードとして動作します。</p>
+<p>EchoIRLPとの大きな違いは，chan_echolinkの場合には完全なクロスリンクが可能になることです。元々Asterisk/app_rptでは一つのノードに複数ノードを接続することができますので，自分のノードを他のAllStar Link ノードに接続しながら，EchoLinkノードに接続することで，それらのユーザー間で交信が可能となります。EchoIRLPでは，IRLPのポリシー上それを許していません。</p>
+<p>ただ最新のACIDに同梱されている chan_echolink は若干不安定でうまく動作しない場合もあるそうで，私のノードがまさにそうでした。外からの接続される場合(inbound connection)には全く問題なく接続・交信できるのですが，こちらから接続(outbound connection)ができませんでした。</p>
+<p>そこで開発者（WB6NIL)から直接アドバイスをもらい，chan_echolink.c というソースコードを最新のものに置き換え再ビルドしたところ，正常動作するようになりました。</p>
+<p>Asterisk/app_rptでは，EchoLinkノードは 3<em>nnnnnn</em> の7桁で認識されます。<em>nnnnnn</em>はEchoLinkノード番号で，もし6桁未満の場合には左を0で埋めて6桁にします。</p>
+<p>Asterisk/app_rptでのコネクトコマンドは*3ですから，例えば9999テストサーバーに接続するには，</p><blockquote dir="ltr"><p>*33009999</p></blockquote><p dir="ltr">のようなシーケンスになります。</p>
+<p dir="ltr">EchoLinkはしばらくこちらのAsterisk/app_rptで運用してみます。（と言っても，ルーターのポート転送をAsterisk/app_rpt用PCに向け直すだけで，EchoIRLPはそのまま動いています。）</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="sipallstar-4083.html">« SIPソフトフォンからAllStarノードへ接続</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="2m-0c6c.html">2m和文 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

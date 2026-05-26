@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linuxサウンドで一苦労 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>Linuxサウンドで一苦労</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>1台のLinux PCにEchoIRLPやAsterisk，DVTool，その他何でもかんでも載せているのが裏目に出てしまいました。</p>
+<p>先週は，フリーのD-STARレピーターソフトウェアを載せて，D-STARシンプレックスノード（ソフトウェアだけで作るHot-Stotのようなシステム）を作ってみようと色々やっていたのですが，何かしらの拍子にサウンドカードからの録音が一切できなくなってしまいました。D-STARレピーターの方は実験なので良いのですが，EchoIRLPが動かなくなってしまったのが痛い。とりあえず実験は置いておき，EchoIRLPの復活を優先します。</p>
+<p>サウンドカードは，</p><blockquote><p>[root@optiplex ~]# cat /proc/asound/cards<br/> 0 [CA0106         ]: CA0106 - CA0106<br/>                        Audigy SE [SB0570] at 0xece0 irq 177<br/> 1 [I82801DBICH4   ]: ICH4 - Intel 82801DB-ICH4<br/>                            Intel 82801DB-ICH4 with AD1981A at 0xffa00800, irq 201<br/> 2 [default        ]: USB-Audio - C-Media USB Headphone Set<br/>                      C-Media USB Headphone Set   at usb-0000:00:1d.1-1, full speed</p></blockquote><p>の3枚が入っており，EchoIRLPには　card#0のSoundBlaster Audigy（CA0106)を使います。ちなみに，card#1はオンボード，card#2はAsteriskで利用していたURI (USB Radio Interface)です。</p>
+<p>alsamixerで色々調整してもダメ。yum list installedを見てみると，<br/>alsa-lib，alsa-lib-devel，alsa-utils がそれぞれ，1.0.14 から 1.0.17 にアップデートされています。レピーターソフトに必要なコンポーネントをインストールしたとき，dependency の関係で自動的にアップデートされてしまったのでしょうか。ドライバは，alsa-drivers 1.0.12で変わっていないようです。</p>
+<p>さて，方針は2つ。</p>
+<ol><li>alsa-libは1.0.17のまま，サウンドドライバを最新バージョンの1.0.22にアップデートしてみる。</li>
+<li>ドライバは1.0.12のまま，alsa-lib, alsa-utils を1.0.14にダウングレードしてみる。</li></ol>
+<p>2.より1.の方が前向きのような気がしましたので，まずこれにトライ。<a href="http://www.alsa-project.org">ALSA Project</a>のHPから，最新の alsa-drivers 1.0.22.1をダウンロード，ビルド，インストール。しかし，カーネルに組み込む際modprobeでエラー。カーネルのバージョンと合わないのでしょうか。この方法はさっさとここであきらめ，次の方法に行くことにします。</p>
+<p><a href="http://www.alsa-project.org">ALSA Project</a>の Download から，<br/>alsa-driver 1.0.12　（また元に戻すため）<br/>alsa-lib 1.0.14<br/>alsa-utils 1.0.14<br/>をダウンロードして，それぞれビルド，インストールします。</p>
+<p>結論から言うと，これで無事録音ができるようになり，EchoIRLPノードが復活しました。丸々週末2日間を潰してしまいました。また壊すのは嫌なのでD-STARレピーターの実験はちょっと中断します。今後，ALSAのアップデートは慎重にしなければなりません。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="d-star-c5d7-1.html">« D-STAR ライブストリーミングの実験終了</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="alsa-ca51.html">【備忘録】 alsaのビルド »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

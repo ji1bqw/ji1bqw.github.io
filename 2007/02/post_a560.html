@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スクリプト作成上の留意点 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>スクリプト作成上の留意点</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>どこかに英文であったはず，と思いながらIRLP公式ページを眺めていたら見つけました。<a href="http://www.irlp.net/new-install/otherdocsv2.htm"><strong></strong></a>IRLPのスクリプトを書くときの留意点をまとめたものです(<a href="http://www.irlp.net/new-install/otherdocsv2.htm">Some notes on custom script building</a>)。簡単に翻訳しておきます。</p>
+<ol><li>まずは，既存のスクリプトを見て全体的な書き方を調べてみましょう。</li>
+<li>key/unkey/音再生などをする前には，ispeakerプロセスをkillしましょう。その後sfswrapperを使って，ispeakerを再起動しましょう。（callスクリプトが参考になります）</li>
+<li>$LOCAL/active, $LOCAL/enable ファイルを確認して，自ノードがエネーブルされているか，コネクトしているかを確認しましょう。</li>
+<li>自作スクリプトは $CUSTOMディレクトリーに保存しましょう。</li>
+<li>自作オーディオファイルは $AUDIO/customディレクトリーに保存しましょう。</li>
+<li>自作バイナリープログラムは$BINディレクトリーに保存しましょう。</li>
+<li>無線機の送信を継続するようなプログラム上のループは避けるようにしましょう。</li>
+<li>自作プログラムのプロセスは，irlp_resetでkillできるようにしましょう。</li>
+<li>自作プログラムは，repeaterユーザーで実行できるようにしましょう。</li>
+<li>自作プログラムがさほど頻繁に呼び出されない（1分に4回以下）場合，またファイル書き込みをする場合には，repeaterユーザーで実行していることをwhoamiでチェックしましょう。</li>
+<li>$CUSTOM/environmentで定義されている環境変数を有効利用しましょう。</li>
+<li>自作スクリプトからは必ず$CUSTOM/environment をsourceするようにしましょう。その自作スクリプトが呼ぶプログラムが必要とするかも知れません。</li></ol>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="centos.html">« CentOS</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="centos_aec3.html">CentOS続報 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

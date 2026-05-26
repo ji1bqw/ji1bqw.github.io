@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STARnet Digital - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>STARnet Digital</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>D-STARの世界では次々と新しいアイデアが生み出されて，それが急速に普及して行っています。この2011年4月に発表されたばかりなのが，<a href="http://k7ve.org/blog/category/amateur-radio/d-star/starnet-digital/">STARnet Digital</a>。K7VEによって発案され，各所のゲートウェイが導入を始めているようです。</p>
+<p>本人の<a href="http://k7ve.org/blog/category/amateur-radio/d-star/starnet-digital/">Blog</a>にもあるように，STARnet DigitalはCallsign routingを利用して，複数局間での交信を可能とするものです。その前提として，準リアルタイムでcallsign routingを可能とする <a href="http://www.ircddb.net/">ircDDB</a> が必要とのこと。</p>
+<p>複数局間での交信を可能にするものには以前からDPLUSがあり，海外ゲートウェイの大多数が導入してます。しかし資料を読み限り，STARnet DigitalはDPLUSのような ゲートウェイ間の"Linking" ではなく，複数局からなる"Group"という概念に基づいているようです。</p>
+<p>D-STAR無線機のURフィールドに，あらかじめ複数局で決めておいたグループ名（例えば，JAPANなど）を入れてPTTを押せば，STARnet Digitalサーバーがそのグループに登録してくれて，あとはcallsign routingの仕組みを使って同じグループ内の複数局にルーティングしてくれるため，そのグループ内で交信ができるということのようです。</p><blockquote dir="ltr"><p><span style="font-size: 0.8em;">ちなみに現実にはircDDBとの互換性の理由で，「JAPAN」のような勝手なグループ名は使えません。通常のコールサイン形式か定型のSTN001...STN999である必要があります。ただユーザーエキスペリエンス上，将来的には意味のあるグループ名が許されるようになるでしょう。</span></p></blockquote><p>電子メールのメーリングリストを，無線交信で行うようなイメージでしょうか。グループに登録すれば，そのグループ間の交信が聞こえ，かつ話をすることができる。そのグループへの登録解除すれば，そのグループ局との交信はできない。</p><blockquote dir="ltr"><p><span style="font-size: 0.8em;">登録解除しても，同じレピーター上で別の登録局がいればワッチだけはできそうですね。でも自分の声は相手に届かないのでしょうね。</span></p></blockquote><p>モービル移動中にアクセスするレピーターが変わっても，URに同じグループ名が入っていれば，ircDDBのおかげでそのまま携帯電話のようにシームレスに同じ交信を続けられると。</p>
+<p>日常の交信でもかなり便利になると思いますし，特に非常通信，緊急通信用のグループを国単位，県単位くらいで設けておけば，災害時にも役に立ちそうですね。</p>
+<p>このブログを書いている時点で，すでに50以上のグループがSTARnet Digitalのサーバー上に登録されています。</p>
+<p>興味ある方は，K7VEのブログにあるこの<a href="http://k7ve.org/blog/wp-content/uploads/2011/04/K7VE-Presentation.pdf">プレゼンテーション資料</a>は必見ですよ。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="cw-f452.html">« 久しぶりの和文CW</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="post-7aff.html">節電効果 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

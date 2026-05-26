@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRLPノードのIPアドレスもろもろ - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>IRLPノードのIPアドレスもろもろ</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>IRLPはピア・トゥ・ピアのシステムですので，あるノードが他ノードあるいはリフレクターに接続するためには，相手のIPアドレスが必要です。世界中全てのIRLPノードの最新IPアドレスは，IRLPサーバーで一元管理されています。各ノードが接続に行く時には，まず相手のノード番号あるいはリフレクター番号を使って，IRLPサーバーに相手のIPアドレスを毎回問い合わせに行きます。</p><blockquote><p><span style="font-size: 0.8em;">以前は，各ノードが全ノードのIPアドレスリストを持ってそれを参照していましたが，現在ではそれは使われていません。$CUSTOM/hostsや$LOCAL/hostsファイルがそれです。今でも以前の名残でupdate hostsコマンドを実行すると，これらのファイルが最新にアップデートされます。</span></p></blockquote>
+<p>IRLPノードのIPアドレスは，グローバルである必要はありますが，スタティックである必要はありません。時々変わっても全く問題なく動きます。これは，各ノードがcrontabを使って15分毎に自分のIPアドレスをチェックし，もし変更を検知すると自分で新しいIPアドレスをIRLPサーバーに通知しているからです。repeaterユーザーの crontab にある，</p><blockquote><p>*/15 * * * * (/home/irlp/scripts/ipupdate_cron &gt; /dev/null 2&gt;&amp;1)</p></blockquote><p>というエントリーがそれです。</p><blockquote><p><span style="font-size: 0.8em;">ipupdate_cronの内部には，IRLPサーバーへアクセスする前に，</span></p><blockquote><p><span style="font-size: 0.8em;">let "NUM=$STATIONNUM % 600"<br/>[ ! -z "$NUM" ] &amp;&amp; sleep "$NUM"</span></p></blockquote><p><span style="font-size: 0.8em;">という処理が入っています。すなわち，IRLPサーバーへの集中アクセスを防ぐため，実際には毎時00/15/30/45分から各ノード独自の秒数分ずらしています。当局の場合は，8437%600=37秒後になります。</span></p></blockquote><p>昨日，ISPの都合で当局のIPアドレスが変更になりました。工事が行われた時間帯に，当局のIRLPログ($LOG/messages)には以下のメッセージが記録されています。</p><blockquote><p>Nov 05 2009 04:00:39 +0900 ipupdate: The IP has changed from 203.82.120.180 to 110.134.240.226</p></blockquote><p>これは，11月5日朝の4:00にcrontabによって起動された
+ipupdate_cronスクリプト（実際には，ipupdate_cronから呼ばれる$SCRIPT/ipupdate）がIPアドレスの変更を検知してサーバーに伝えたことを示すメッセージです。</p>
+<p>このように，IRLPはノードが動的IPアドレスであることを前提に作られていますが，あまり頻繁に変更がかかることは避けた方が良いです。特に，リフレクター接続中にノードのIPアドレスが変わってしまうと，connectedの状態のまま音声が一切通らなくなります。</p>
+<p>またIRLPでは独自のドメインを持っていて，各ノードは以下のようなFQDNを持ちます。</p><blockquote><p>stn<strong><em>nnnn</em></strong>.ip.irlp.net</p></blockquote><p>ここで，nnnnはノード番号です。よって，私のノード(#8437)は，stn8437.ip.irlp.netになります。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../10/allstar-link-96.html">« AllStar Linkへの登録</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="d-star-c90c.html">D-STARが活発 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

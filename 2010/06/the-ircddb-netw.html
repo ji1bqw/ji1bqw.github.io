@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The ircDDB Network - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>The ircDDB Network</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>海外では，また新しいD-STARイニシャティブが動き始めたようです。</p>
+<p><a href="http://db0fhn.efi.fh-nuernberg.de/doku.php?id=projects:dstar:ircddb">The ircDDB Network</a>は，いわゆる Callsign Routing をより確実に，よりリアルタイムにできるようにしようというネットワーク側の仕組みです。</p>
+<p>Callsign Routingは，アマチュア無線ではD-STARで始めて導入された非常に強力な機能ですが，現在の実装ではUS TRUSTとGWが同期するまでに時間差があり，結果的にユーザーから見て必ずしも常にroutingができるとは限らないという若干信頼性の低い状態にあります（ましてや，日本ではJARL &lt;-&gt; US TRUST間の同期が1時間おきですから，もっと時間がかかりますね）。</p>
+<p>上記のホームページを見ると，Callsign Routingに必要な最小限の情報をIRC (Internet Relay Chat)のインフラを使ってトラストサーバーと各GW間でやりとりし，それぞれが持っている既存DBをアップデートします。</p>
+<p>既存G2ゲートウェイへのアドオンで動くようですが，前提がG2であることと，DPLUSで使われているDSTAR Monitor (dstarmon)を使って最新のrouting情報を入手することから，またもやこれも日本は蚊帳の外ですね。</p><blockquote><p><span style="font-size: 0.8em;">DStarMonitorは米国の個人が開発したG2用のアドオンJavaソフトで，基本的にUS TRUST傘下の全てのGWにインストールされています。そのGWの動きを見ていて，last heard情報をwww.dstaruser.orgに送ったり，DPLUSが必要な情報を提供したり，ユーザーからのGPS情報をAPRS網に転送したりしているモジュールです。</span></p></blockquote><p>すでにUS TRUSTチームとの調整は行われているようで，GW向けベータ版があるとのこと。</p>
+<p>XTRUSTもサポート対象にしたいようですが，こちらは未調整のようです。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="dstarclient.html">« DStarClient</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="mk-701-1a97.html">ハイモンド　MK-701　思いがけず入手 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

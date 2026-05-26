@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ノード無線機とのインターフェース - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>ノード無線機とのインターフェース</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>CM108ベースUSBドングル(URIも同様）とノード無線機のインターフェースは，他のVoIPと同様に無線機のパケット通信端子が利用可能です。しかし，Asterisk/app_rptではまず最初にノード無線機の受信信号に関する選択肢があります。</p>
+<ol dir="ltr" style="MARGIN-RIGHT: 0px"><li>ディスクリミネーターからの直接音声信号を使うか</li>
+<li>de-emphasis後の信号を使うか</li></ol>
+<p dir="ltr">前者の場合には，受信信号をノード無線機の9600bps出力から，後者の場合には1200bps出力（あるいはスピーカー出力）から取り，無線機をそれぞれにセットすればOKです。</p>
+<p dir="ltr">ではどちらを使うかですが，CTCSS（トーンスケルチ信号）の検出をノード無線機に任せるか，dsp(CM108)でやるかに依存します。</p>
+<p dir="ltr">CTCSS検出をdspでやる場合（と言っても構成ファイルで指定するだけ）には前者，ノード無線機に任せる場合には後者になります。</p><blockquote dir="ltr"><p dir="ltr"><span style="font-size: 0.8em;">他VoIPでは後者を使わないと音がキンキンしてしまうでしょう。Asterisk/app_rptでは前者を使ってもCM108でde-emphasisと同様の処理をしているのだと思います。</span></p></blockquote><p dir="ltr">さらにCTCSS検出をdspでやる場合には，当然COS（COR)検出もdspにやらせますので，ノード無線機とインターフェースの間の結線はCOR無しの4本（PTT, AF-In, AF-Out, GND）だけで済みます。</p>
+<p dir="ltr">ちなみに送信側は，無線機のパケット通信端子に送信信号を入れる端子は AF-In １本しかありませんからこちらに接続します。さらに受信側に合わせて構成ファイル(usbradio.conf)の中でmodulator直接入力かPre-emphasisを通すかを選択しなければなりません。</p>
+<p dir="ltr">私は現在前者でやっていますが，大変順調に動作しています。特に，TSQとCOR信号が同期しないような無線機を使う場合（私の手持ちの例で言うと，IC-706MKIIGやTM-833)には大変便利だと思います。</p>
+<p dir="ltr">この辺りの構成は，/etc/asterisk/usbradio.conf で変更します。<a href="https://allstarlink.org/usbradio.html#configuration">サポートページ</a>に丁寧に説明されています。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="irlpallstar-lin.html">« AllStar Linkノードの調整</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="irlpasteriskapp.html">IRLPボードでAsterisk/app_rpt »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AllStar Linkノードの調整 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>AllStar Linkノードの調整</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>AllStar Link用の中古PC（Pen4 2.8GHz/512MB)を安価で入手したので早速ノードを構築しました。今回は最新ACIDを使ったインストールでしたが，先日一度実験でやっていましたので何の問題もなくすんなりとインストールができ，構成ファイルもすぐにセットアップすることができました。</p>
+<p>インストール，構成の後は他のVoIPノード同様，音声レベルの調整が待っています。以前はこれも結構大変だったのですが，最新ACIDにはradio-tune-menuというツールが付いてきてとても簡単に調整ができるようになっています。本格的にはオシロスコープを使ってレベル調整することが推奨されていますが，簡易的にはこのツールで十分可能です。</p>
+<p>コマンドラインでこのツールを実行すると，まず以下のようなメニューが表示されます。</p><blockquote dir="ltr"><p><span style="font-size: 0.8em;">[root]# radio-tune-menu</span></p>
+<p><span style="font-size: 0.8em;">Active (command) USB Radio device is [usb2132]<br/>1) Select USB device<br/>2) Does not apply to thie USB device configuration<br/>3) Set Rx Voice Level (using display)<br/>4) Does not apply to thie USB device configuration<br/>5) Does not apply to thie USB device configuration<br/>6) Set Transmit Voice Level<br/>7) Set Transmit Aux Voice Level<br/>8) Set Transmit CTCSS Level<br/>9) Does not apply to thie USB device configuration<br/>E) Toggle Echo Mode (currently Disabled)<br/>F) Flash (Toggle PTT and Tone output several times)<br/>P) Print Current Parameter Values<br/>S) Swap Current USB device with another USB device<br/>T) Toggle Transmit Test Tone/Keying (currently Disabled)<br/>W) Write (Save) Current Parameter Values<br/>0) Exit Menu</span></p>
+<p><span style="font-size: 0.8em;">Please enter your selection now:</span></p></blockquote><p dir="ltr">まず，</p><blockquote dir="ltr"><p dir="ltr">3) Set Rx Voice Level (using display)</p></blockquote><p dir="ltr">を実行しHTからいくつかのDTMF信号や自分の声を入力しながら画面上に表示を見て受信信号音声レベルを調整します。そして今度は，</p><blockquote dir="ltr"><p dir="ltr">F) Flash (Toggle PTT and Tone output several times)</p></blockquote><p dir="ltr">で送信されるトーン信号や，</p><blockquote dir="ltr"><p dir="ltr">E) Toggle Echo Mode (currently Disabled)</p></blockquote><p dir="ltr">でエコーモードにして，自分でHTから送信した音声のエコーバックを聞きながら</p><blockquote dir="ltr"><p dir="ltr">6) Set Transmit Voice Level</p></blockquote><p dir="ltr">で送信レベルを調整します。</p>
+<p dir="ltr">もし，CTCSS（トーンスケルチ信号）送信をノード無線機ではなく，dsp（URIやサウンドFOB)に任せる場合には，</p><blockquote dir="ltr"><p dir="ltr">8) Set Transmit CTCSS Level</p></blockquote><p dir="ltr">でHTのTSQLが開くレベルに調整します。</p>
+<p dir="ltr">最後に，</p><blockquote dir="ltr"><p dir="ltr">W) Write (Save) Current Parameter Values</p></blockquote><p dir="ltr">で調整値を書き込んで　0) Exit Menu　で終了です。後は実際にQSOでレポートをもらって最終調整です。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../10/allstar-link--2.html">« AllStar Link Network Telephone Portal</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="post-c142.html">ノード無線機とのインターフェース »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

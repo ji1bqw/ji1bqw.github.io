@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-STAR海外交信時によく起きること - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>D-STAR海外交信時によく起きること</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>国内から海外のレピーターにアクセスしてQSOをしようした時，その海外レピーターがリフレクターに接続されている場合があります。</p><blockquote><p><span style="font-size: 0.8em;">（その海外レピーターがリフレクターに接続されているかどうかは，WebでDPLUS Dashboardを見なければわかりません。</span>）</p></blockquote><p>その時良く起きる現象があります。</p>
+<p>例えば，今海外で以下3局がそれぞれのレピーターをある一つのリフレクターに接続していると仮定します。</p><blockquote><p>MY: <strong>W1XYZ</strong><br/>UR: CQCQCQ<br/>RPT1: W1RPT_A<br/>RPT2: W1RPT_G</p>
+<p>MY: <strong>W2XYZ</strong><br/>UR: CQCQCQ<br/>RPT1: W2RPT_B<br/>RPT2: W2RPT_G</p>
+<p>MY: <strong>G3XYZ</strong><br/>UR: CQCQCQ<br/>RPT1: G3RPT_C<br/>RPT2: G3RPT_G</p></blockquote><p>上記3局は，自分のレピーターが同じリフレクターに接続されていますので，相互に自由にラウンドQSOができている状況です。</p><blockquote><p><span style="font-size: 0.8em;">（リフレクターで交信する場合には，UR=CQCQCQ，RPT2=自分のGWに設定します。</span>）</p></blockquote>
+<p>さて，ここで私(JI1BQW)がW1XYZと交信したいと思ったとします。そこで私は標準的な以下のような設定をします。</p><blockquote><p>MY: <strong>JI1BQW</strong><br/>UR: W1XYZ<br/>RPT1: JP1RPT_A<br/>RPT2: JP1RPT_G<br/><br/>（Gateway routingで，UR=/W1RPT_Aでも同様にOK。）</p></blockquote><p>この設定で呼び出すと，私の信号は</p><blockquote><p>JP1RPT_A -&gt; JP1RPT_G -&gt; インターネット -&gt; W1RPT_G -&gt; W1RPT_A</p></blockquote><p>のように経由して，W1XYZに聞こえるはずです。</p><blockquote><p><span style="font-size: 0.8em;">（私には3局がリフレクターでラウンドQSOをしていることはわからないので，いきなり割り込むことにもなりますが，これは仕方がないのでここでは置いておきます。</span>）</p></blockquote><p>さらにW1XYZが以下のようにUR=JI1BQWに設定すれば私と問題なく交信ができます。</p><blockquote><p>MY: W1XYZ<br/>UR: <strong>JI1BQW</strong><br/>RPT1: W1RPT_A<br/>RPT2: W1RPT_G<br/><br/>Gateway routingで，UR=/JP1RPTAでも同様にOKです。</p></blockquote><p>ここでW1RPT_Aはリフレクターに接続されておりますから，私とW1XYZのQSOは（両者の声は）DPlusからW2RPT_BとG3RPT_C経由でW2XYZとG3XYZにも届いています。</p>
+<p>さて，私とW1XYZの交信終了後G3XYZが私と交信したいと思ったとします。ここで最も頻繁に起きることは，G3XYZがいくら私を呼んでも，リフレクター上のW1XYZとW2XYZには聞こえますが，私には届かないことです。要はG3XYZの設定の問題なのですが，これには2つ理由が考えられます。</p><blockquote><p><u>１．G3XYZが設定を変更せずに，そのまま私を呼び出してしまった。</u></p></blockquote><blockquote><blockquote><p>MY: G3XYZ<br/>UR: <strong>CQCQCQ</strong><br/>RPT1: G3RPT_C<br/>RPT2: G3RPT_G</p></blockquote><p>UR=CQCQCQのままでは，私にroutingされないので私には全く届きません。G3XYZからすれば，普通に私の声が聞こえますからリフレクターに直接つながっていると思い，今までのラウンドQSOの流れで呼んでしまうのでしょうね。
+
+</p>
+<p><u>２．G3XYZが，One-Touchを使ってUR=JI1BQWを設定した。</u></p><blockquote><p>MY: G3XYZ<br/>UR: <strong>JI1BQW</strong><br/>RPT1: G3RPT_C<br/>RPT2: G3RPT_G</p></blockquote><p>これは一見良さそうですが，期待通りに動作しない場合もあります。</p>
+<p>それは，G3RPT_G上で，私(JI1BQW)の位置情報が正しく現在のレピーター(JP1RPT_A)に反映されていない場合です。例えば，私がW1XYZを呼び出す直前まで別のレピーター（JP1ABC_B)を使っていた場合など，恐らくG3RPT_GではJI1BQW=JP1ABC_Bになっており，よってG3XYZの呼び出しはJP1ABC_Bから出ていることでしょう。国内での位置情報の変化が海外GWに伝わるまで最低でも1時間かかります。</p>
+<p>一方，私が最初に呼び出したW1XYZは，One-Touchで問題無く私と交信できます。それは私が直接アクセスしたW1RPT_Gにおける私の位置情報は即時更新されるからです。しかし，私はG3RPT_Gにアクセスしていないので，ここでは即時更新されず位置情報更新まで時間がかかるのです。</p></blockquote>
+<p>G3XYZが私と交信したい時は，以下のようにGateway routing を使うと間違いありません。</p><blockquote><p>MY: G3XYZ<br/>UR: <strong>/JP1RPTG</strong><br/>RPT1: G3RPT_C<br/>RPT2: G3RPT_G</p></blockquote><p>DV Dongleでリフレクターを聞いていると，日本局がリフレクター接続のレピーターと知らずにCQを出し，それに応答しようとするリフレクター接続海外局の応答がその日本局に届かないという事が良く起こっています。</p>
+<p>実はこれに対して，国内からできることはあまり多くありません。あくまでD-Starは Source routing なので，送り側が正しく設定しなければならないのです。こちらでできるとすれば，あまり頻繁に使用レピーターを変えないこと，そして（たとえOne-Touchが可能になったとしても）自分の使っているレピーター名をはっきり伝え，正しくリグを設定をしてくれるようお願いすることでしょうか。</p>
+<p>なお，Routingを設定できない現在のDVToolでは，DV Dongle局は国内局に届かずQSOできません。</p>
+<p>
+<a href="http://bluebonnet.way-nifty.com/.shared/image.html?/photos/uncategorized/2009/08/21/dstar_connection_5.jpg" onclick="window.open(this.href, '_blank', 'width=800,height=600,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img alt="Dstar_connection_5" border="0" height="225" src="../../images/2009/08/21/dstar_connection_5.jpg" style="margin: 0px 5px 5px 0px; float: left;" title="Dstar_connection_5" width="300"/></a>
+<br/>
+</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="dv-dongle-tx.html">« DV Dongle TX</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="cw-55d1.html">和文CW »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

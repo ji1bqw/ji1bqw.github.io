@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cwtimer （続き） - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>cwtimer （続き）</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>cwtimerは，設定した時間間隔でIDを送出しますが，そのままでは時刻の設定ができないため，$LOCAL/id_triggerファイルをcronで作成(touch)することで実現することは前回書きました。</p>
+<p>この場合，cronからcwtimerが直接呼ばれるのではなく，まずcronが$LOCAL/id_triggerファイルを作成し，さらにこのファイルの存在をcwtimer自身がある一定間隔（スクリプトをみると約1秒）毎にチェックするという間接的な方法になっています。よってこのオーバーヘッドのため時間遅れが生じることが考えられます。</p>
+<p>それではその時間遅れがどのくらいなのか，readinputのアウトプットを見てみましょう。</p><blockquote><p><span style="font-size: 0.8em;">2007-09-26 </span><span style="font-size: 0.8em;color: #3300cc;">18:30:02.981 AUX1 ACTIVE</span><span style="font-size: 0.8em;"><br/>2007-09-26 18:30:09.482 AUX1 INACTIVE<br/>2007-09-26 </span><span style="font-size: 0.8em;color: #3300cc;">19:00:03.142 AUX1 ACTIVE</span><span style="font-size: 0.8em;"><br/>2007-09-26 19:00:09.643 AUX1 INACTIVE<br/>2007-09-26 </span><span style="font-size: 0.8em;color: #3300cc;">19:30:04.043 AUX1 ACTIVE</span><span style="font-size: 0.8em;"><br/>2007-09-26 19:30:10.545 AUX1 INACTIVE<br/>2007-09-26 </span><span style="font-size: 0.8em;color: #3300cc;">20:00:03.100 AUX1 ACTIVE</span><span style="font-size: 0.8em;"><br/>2007-09-26 20:00:09.601 AUX1 INACTIVE<br/>2007-09-26 </span><span style="font-size: 0.8em;color: #3300cc;">20:30:03.123 AUX1 ACTIVE</span><span style="font-size: 0.8em;"><br/>2007-09-26 20:30:09.623 AUX1 INACTIVE<br/>2007-09-26 </span><span style="font-size: 0.8em;color: #3300cc;">21:00:03.118 AUX1 ACTIVE</span><span style="font-size: 0.8em;"><br/>2007-09-26 21:00:09.618 AUX1 INACTIVE<br/>2007-09-26 </span><span style="font-size: 0.8em;color: #3300cc;">21:30:03.373 AUX1 ACTIVE</span><span style="font-size: 0.8em;"><br/>2007-09-26 21:30:09.878 AUX1 INACTIVE</span></p></blockquote><p>前回も書いたようにAUX1をPTTとwired-ORしていますので，AUX1 ACTIVEがID送出を意味しています。また，当局では毎時00分と30分にIDを送出しています。上をみると，大体PCの時計がそれぞれ00分，30分を示した後3秒後にはIDを送出していることがわかります。IDの精度としては十分以上ですね。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="cwtimer.html">« cwtimer</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="txfan.html">txfan »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

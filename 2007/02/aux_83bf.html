@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUX端子をコントロールするコマンド - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>AUX端子をコントロールするコマンド</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>ご存知のように，IRLPVer3.0ボードには，3つの外部制御端子がついており，DB-9コネクタのPin3(aux1), Pin4(aux2), Pin5(aux3)に接続されています。ハードウェアの観点では，MOSFETのオープンドレインでActive Lowです。すなわち，onにすることで，これらの端子がGNDに落ちます。MOSFET自体は2Aまで流せるそうですが、実際には0.5A以下で使えとは設計者の言です。</p>
+<p>さて，これらの端子をon/offするのが以下のコマンドです<br/>$BIN/aux?on (where ? is 1, 2, 3):<br/>    それぞれのAUX端子をonにします（GNDに落とします）。</p>
+<p>$BIN/aux?off (where ? is 1, 2, 3):<br/>    それぞれのAUX端子をoffにします（端子を開放します）。外からプルアップしていれば，その電圧になります。</p>
+<p>自由にプログラムができますから，リモート管理コンソールからでもon/offできますし，モービルからDTMFでコントロールすることもできます。いろいろな用途が考えられますね。先日も書いたように，ノードのリアルタイム状況に応じてLEDを発光させる。ノード無線機の冷却ファンを廻す。ノード無線機の緊急遮断をする。レピーター接続ノードはこれを使ってレピーターをコントロールできます。家の明かりをつける。自宅監視ウェブカメラを操作する。犬のえさをやる・・・無線から離れてきました。</p>
+<p>例えば，コネクト中にLEDを1つ点灯させたい場合には，custom_on スクリプトの中に，<br/>$BIN/aux1on<br/>を，custom_offスクリプトの中に<br/>$BIN/aux1off<br/>をそれぞれ一行入れるだけです。（readinput見ながら，実際に試してみてください。）後は，LEDをプルアップ抵抗を介して電源とaux1端子の間につなげてあげるだけで良いと思います。</p>
+<p>さらに例えば，接続相手先がノードとリフレクターで異なるLEDを点灯させたいなら，custom_onスクリプトの中で，$LOCAL/activeファイルの中を調べ，そのストリングが refで始まるか，stnで始まるかで，aux1, aux2 を切り替えれば良いはずですね。</p>
+<p>ノードPCのパラレルポートの動作の違いから，PC電源立上げ時などの過渡状態においてaux端子もばらついた動きをする場合があるようです。ここは実際に検証が必要です。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="post_8837.html">« 無線機の送信をコントロールするコマンド</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="dtmf_57fd.html">DTMF関係のプログラム »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

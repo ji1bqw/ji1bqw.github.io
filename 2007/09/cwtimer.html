@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cwtimer - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>cwtimer</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>CWによるID送出スクリプトを，<a href="http://rob.pectol.com/irlp/content/view/2/1/">cwtimer</a>に移行しました。今まで使用していたスクリプトは，ID自体をwavファイルで作成しなければなりませんでしたが，cwtimerは$CALLSIGNから自動的に作ってくれます。送出CWの速度や音量、トーンも調整が可能です。さらに，mixingが可能なサウンドカードを使っていれば，相手局の声に重ねてIDを載せることができます。</p>
+<p>今回のcwtimerへの移行に合わせて，リグ接続ケーブルのDB9コネクタ内で AUX1端子とPTT端子をwired-ORとしました（と言っても，隣合わせのpin2と3をショートするだけ）。cwtimerでは設定によってPTTコントロールにAUX端子を使うことができます（すなわちリグを送信状態にしたい時， key/unkeyやforcekey/forceunkeyを使うのではなく，aux?on/aux?offを使う）。こうすることによって，IRLPシステム自体のPTT制御を邪魔することなく，アドオン ソフトウェアがリグのPTTをオン・オフすることができます（たとえば，IRLPシステム自体が送信し続けているのに，他のソフトウェアがunkeyすることで送信を止めてしまうような事態を避けられる）。</p><blockquote><p><span style="font-size: 0.8em;">注）AUXを使って送信する場合には，PTT Lockタイマー（5分）が効きません。無線機のTOT設定は必須だと思います。</span></p></blockquote>
+<p>一方，cwtimerはそのままではID送出の間隔は設定できるのですが，毎時00分などの時刻設定ができません。cronに以下を追加することで可能になります。</p>
+<p>    /bin/touch  /home/irlp/local/id_trigger</p>
+<p>cwtimerスクリプトは，$LOCAL/id_triggerファイルを見つけると即座にIDを送出します。ID送出後$LOCAL/id_triggerファイルは削除されます。</p>
+<p>インストールも非常に簡単ですしお勧めです。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="../07/thebridge085.html">« thebridge-0.85</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="cwtimer_80c0.html">cwtimer （続き） »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

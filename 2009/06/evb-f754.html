@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【備忘録】　EVBを止める - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>【備忘録】　EVBを止める</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>EVBベースのasteriskをインストールしたPCで，asterisk/app_rptを動かしたくないとき。
+
+</p>
+<p>実行中にasterisk関連プロセスを停止する方法：</p><blockquote><ul><li>amportal kill</li>
+<li>killall asterisk</li>
+<li>killall -u asterisk</li>
+<li>killall rc.updatenodelist</li>
+<li>service httpd stop</li>
+<li>service zaptel stop</li></ul></blockquote><p>PC再起動の際のEVB/asterisk自動起動を止める方法：<br/>/etc/rc.localの中の</p><blockquote><ul><li>/etc/EVB/EVBrun</li>
+<li>/usr/local/bin/rc.updatenodelist&amp;</li>
+<li>/usr/local/bin/app_rpt_helper</li></ul></blockquote><p>をコメントアウトする。さらに，</p><blockquote><ul><li>chkconfig zaptel off</li>
+<li>chkconfig httpd off</li></ul></blockquote>
+<p>ログインメッセージ（以下）は/etc/EVB/EVB.txtに記述されており，/etc/bashrc内からcatで表示されている(/etc/motdではない）。</p><blockquote><p>Running EasyVoxBox - http://www.easyvoxbox.org<br/>        Asterisk   - http://www.asterisk.org<br/>        app_rpt    - http://www.xelatec.com/asterisk</p></blockquote><p>最小限でAsterisk/app_rptを再動作させる時：</p>
+<ul><li>/usr/local/bin/rc.updatenodelist &amp;</li>
+<li>chkconfig zaptel on</li>
+<li>service zaptel start</li>
+<li>asterisk -r &amp;</li></ul>
+<p></p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="d-star-hot_poin.html">« D-STAR Hot-Point</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="nifty-e-z-guide.html">Nifty E-Z Guide to D-STAR Operation »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

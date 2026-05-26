@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-STARリフレクター XRF001への接続 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>D-STARリフレクター XRF001への接続</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>2週間ほど前に入手しようと決心した<a href="http://www.dvdongle.com">D-Star DVDongle</a>が昨日届きました。2週間というのは、入手を決心して、メールで見積もりを貰い、銀行振り込みをして手元に届くまでの時間です。</p><blockquote><p><span style="font-size: 0.8em;">（クリジットカードが使えればよいのですが、DVDongleを扱っている米国のショップでは海外注文は銀行振り込みのみ可能ということでした。）</span></p></blockquote><p>さて、rtpDirからDVDongleを使ってD-Starゲートウェイあるいはリフレクタに接続するにはdextra_cliというアドオンソフトウェアを導入します。このソフトウェア自体は設定項目も少なく、実行はとても簡単です。DVDongleをノードPCのUSBに差して、dextra_cliとrtpDirを同時に実行するだけです。dextra_cliがDVDongleを使ってAMBEのコーティング・デコーディングをし、さらにrtpDirが他VoIPシステムとのインターフェースを行います。</p>
+<p>dextra_cliを利用してD-Starネットワークに接続するには、接続先のD-Starゲートウェイあるいはリフレクタがそれぞれdextra_srvあるいはdextra_reflectを動かしている必要があります。これはD-Starで一般的に使われているDplusの代替です。但しdextra_cliはDplusとは接続できません。ゲートウェイ側ではDplusと同時に動かすことは出来るようです。DextraはまだDplusほど世の中に浸透していないので、現時点ではXRF001というリフレクターが使えるだけのようです。</p>
+<p>今日初めて"XRF001 B"リフレクターに接続していたら、rtpDir/dextra_srv/dextra_reflect/dextra_cliの作者であるKI4LKFから呼ばれて初交信を楽しみました。途中からはVKからの参加もあり日米豪交信となりました。私自身は通常のアナログ無線機から自分のIRLPノードにアクセスして、rtpDir経由でXRF001にアクセスという形になります。</p>
+<p>ちなみにDextraはrtpDirなどを使った他アナログVoIPシステムとのクロスリンクを前提に作られています。現在の主流であるDplusに比べるとDextraは発展途上でありますし（まだ実験段階）、それゆえ浸透という意味でもまだまだのようですが、今後アナログシステムとのクロスリンクに理解のあるゲートウェイオーナーがDextraを導入してくる例も増えてくるでしょう。その時が楽しみですね。</p>
+<p>私のrtpDirがXRF001に接続している時なら、EchoLinkのJI1BQW-L、あるいはIRLPの8437に接続すれば、XRF001にいる局の交信に参加可能です。</p>
+<p>D-Starといってもこれはあくまでアナログアクセスという傍流なので、私としては近い将来にD-Star無線機を入手してキチンと主流、基本を理解・経験しておかないといけないなと感じています。</p>
+<p>ところで不思議なのは日本のD-Starでは現在Dplusさえも導入されていないということ。DVDongleも使えないし、リフレクターもできないようですね。何故なのかしら。（レピーターもゲートウェイもJARLが設置しているから？）これからレピーターの数がますます増えてくれば当然欲しくなってくる機能ですね。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="irlpirlp-e446.html">« IRLPボードなしでIRLP</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="irlp-c80a.html">IRLPとのクロスリンクを停止しました »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

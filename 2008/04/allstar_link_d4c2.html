@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AllStar Link ノード番号 - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>AllStar Link ノード番号</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>AllStar Link のノード番号は<a href="http://allstarlink.org/">AllStar LinkのHP</a>から申請します。私は2132が割り当てられました。またDMK EngineeringからURIが届きました。注文してから10日くらいです。</p>
+<p>ソフトウェアの設定が結構複雑そうです。設定ファイルは大体 /etc/asterisk にあるようですが、rpt.conf, app_rpt.conf, usbradio.conf といったいくつかの設定ファイルをviなどのエディタでいじる必要があります。サンプルファイルはあるのですが、それぞれの設定ファイルの各項目の説明が充分ではありません。これから理解していかなければなりません。</p>
+<p>もうひとつやらなければならないこと。それはURIと無線機の接続です。URI側のコネクタは、DUB25ピンメスになっています。URIには様々な入出力信号線が出ていますが、とりあえず最低限IRLPと同様に、audio in/out, PTT, COS があれば何とかなりそうです。ということは無線機側はデータ端子で行けそうです。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="easyvoxbox_e2f1.html">« EasyVoxBoxのインストール</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="asteriskapp_rpt_3e72.html">Asterisk/app_rptノード構築状況 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>

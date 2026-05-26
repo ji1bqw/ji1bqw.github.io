@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rtpDirにおけるイベントハンドリング - JI1BQW CyberHAM</title>
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
+<style>
+body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 1em; }
+h1 { font-size: 1.4em; border-bottom: 2px solid #666; }
+.date { color: #666; font-size: 0.9em; }
+.entry-body { margin: 1em 0; line-height: 1.8; }
+.entry-nav { margin: 1em 0; font-size: 0.9em; }
+footer { margin-top: 2em; border-top: 1px solid #ccc; font-size: 0.8em; color: #666; }
+</style>
+</head>
+<body>
+<p><a href="../../index.html">&#8592; トップページへ</a></p>
+<h1>rtpDirにおけるイベントハンドリング</h1>
+<p class="date">--- Internet Linked Radio Amateur ---</p>
+<div class="entry-body">
+<div class="entry-body-text">
+<p>rtpDirは、開始時、終了時、接続時、切断時にイベントハンドラーをコールバックすることができます。イベントハンドラーを使用するには、5198.confファイルで、</p><blockquote><p>events=yes<br/>eventpgm=イベントハンドラー</p></blockquote><p>を設定します。eventpgmはデフォルトで/root/rtpDir/evt.shになっていますが、自由に設定可能です。</p>
+<p>イベントハンドラーには、イベントに応じた値が引数として渡されます。（左から第1引数～です）</p><blockquote><p>開始時：　Started at rtpDir動作開始時間<br/>終了時：　Shudown at rtpDir動作終了時時間<br/>接続時：　Connected ノード at 接続時間<br/>切断時：　Disconnected ノード at 切断時間</p></blockquote><p>当局ではIRLPと他VoIPの接続を排他的に行うために、このイベントハンドラーを使っています。アイドル時には全種類のノードとの接続を許しますが、接続したノードがIRLPノードあるいはリフレクタであれば他VoIPをdisableし、逆に他VoIPが接続した場合にはIRLPをdisableしています。接続/切断ノードの種類はConnected/Disconnectedに続く第2引数の最初の3文字を見ればわかります。</p><blockquote><p>stnxxxx：　IRLPノード<br/>refxxxx：　IRLPリフレクター<br/>astxxxx：　AllStarノード (Asterisk)<br/>XRFxxx：　D-Star XRFリフレクター<br/>上記以外：　EchoLinkノードのコールサイン、コンファレンス名</p>
+<p><span style="font-size: 0.8em;">(xxxxはノード番号）</span></p></blockquote><p>よって必要に応じて、より細かな制御も可能です。</p>
+<p>rtpDirの本来の主旨は複数VoIPを繋ぐことなのですが、IRLPのクロスリンクポリシーがあるため、このような制限をかける必要が出てきます。</p>
+</div>
+</div>
+<div class="entry-nav">
+<p align="right">
+<a href="irlp-experiment.html">« IRLP Experimental Node</a> |
+
+<a href="../../index.html">トップページ</a>
+| <a href="dv-dongle-e2a2.html">DV Dongleの本来の(?)使い方 »</a>
+</p>
+</div>
+<footer>
+<p>JI1BQW CyberHAM | <a href="../../index.html">トップページ</a></p>
+</footer>
+</body>
+</html>
